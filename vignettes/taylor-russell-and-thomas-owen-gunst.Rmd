@@ -1,0 +1,121 @@
+---
+title: "Taylor-Russell and the Thomas-Owen-Gunst multivariate extension"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Taylor-Russell and the Thomas-Owen-Gunst multivariate extension}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+```
+
+
+## The classificatory problem
+
+Taylor and Russell (1939) ask a classificatory question: **what proportion of selected applicants will be successful, given a base rate, a selection ratio, and a validity coefficient?** In modern diagnostic language, the central quantity is a positive predictive value (PPV): `P(success | selected)`.
+
+```{r}
+library(personnelSelectionUtility)
+tr_classic(base_rate = .50, selection_ratio = .20, validity = .35)
+```
+
+The output includes true positives, false positives, false negatives, and true negatives. The key value is `ppv`, also called the success ratio among selected applicants.
+
+## Solving unknown Taylor-Russell inputs
+
+The original tables were forward-looking: given the base rate, selection ratio, and validity, they give the success ratio. In practice, one often asks the inverse question: **what validity is required to achieve a target PPV?** The function `tr_solve()` follows this logic and is intentionally similar to the flexible solver implemented in Waller's `TaylorRussell` package.
+
+```{r}
+tr_solve(base_rate = .50, selection_ratio = .20, validity = NULL, ppv = .70)
+```
+
+You can also solve for the selection ratio implied by a desired PPV and a known validity.
+
+```{r}
+tr_solve(base_rate = .50, selection_ratio = NULL, validity = .35, ppv = .70)
+```
+
+## Why the univariate model is not enough
+
+The univariate Taylor-Russell model can handle a single predictor, or a composite that has already collapsed several predictors into one score. But many real systems do not operate as a single composite. Applicants may need to pass multiple independent cutoffs: for example, minimum cognitive score and minimum interview score.
+
+Thomas, Owen, and Gunst (1977) generalized the Taylor-Russell logic to multiple cutoffs. Their paper shows that multiple cutoff scores are, in principle, a natural extension of the single-test case, but computation was historically difficult because it requires multivariate normal probabilities. Modern implementations use numerical multivariate normal integration, for example through `mvtnorm`.
+
+## Multivariate Taylor-Russell with specified marginal cutoffs
+
+The matrix `R` must include predictors first and the criterion last. The following example has two predictors and one criterion.
+
+```{r}
+R <- matrix(c(
+  1.00, .30, .40,
+  .30, 1.00, .35,
+  .40, .35, 1.00
+), nrow = 3, byrow = TRUE)
+
+tr_multivariate(selection_ratios = c(.50, .50), base_rate = .50, R = R)
+```
+
+The output contains both the marginal selection ratios supplied by the user and the implied `joint_selection_ratio`. These are not the same thing. If each predictor has a marginal selection ratio of .50, the joint selected proportion can be much smaller than .50 because applicants must pass both cutoffs.
+
+## Equal-cutoff tables and target joint selection ratio
+
+The historical Thomas-Owen-Gunst tables are indexed by the **joint** proportion selected under equal cutoffs. That is why the package includes `tr_multivariate_equal_cutoff()`.
+
+```{r}
+R_tog <- matrix(c(
+  1.00, .50, .70,
+  .50, 1.00, .70,
+  .70, .70, 1.00
+), nrow = 3, byrow = TRUE)
+
+tog <- tr_multivariate_equal_cutoff(
+  joint_selection_ratio = .20,
+  base_rate = .60,
+  R = R_tog
+)
+
+tog
+```
+
+This reproduces the logic of the Thomas-Owen-Gunst example: when the population base rate is .60, the predictor intercorrelation is .50, and both predictor-criterion validities are .70, selecting the joint top 20% through equal cutoffs yields a success ratio close to .972 and a marginal pass rate near .354 on each test.
+
+```{r}
+c(
+  marginal_selection_ratio = tog$solved_marginal_selection_ratio,
+  joint_selection_ratio = tog$joint_selection_ratio,
+  ppv = tog$ppv
+)
+```
+
+## Finite sampling
+
+Thomas, Owen, and Gunst (1977) also discuss finite cohorts: once the expected success ratio is known, a finite selected group can be summarized using a binomial distribution. For example, if 20 applicants are selected and the PPV is .91, what is the probability that at least 18 are successful?
+
+```{r}
+finite <- tr_binomial_success_probability(n_selected = 20, ppv = .91, at_least = 18)
+finite
+attr(finite, "probability_at_least")
+```
+
+## How to proceed in applied work
+
+1. Use `tr_classic()` when the system is genuinely one-dimensional or when a defensible composite has already been formed.
+2. Use `tr_multivariate()` when the actual decision is conjunctive: applicants must pass multiple simultaneous cutoffs.
+3. Use `tr_multivariate_equal_cutoff()` when the overall joint selected proportion is fixed and the marginal equal cutoff must be solved.
+4. Always inspect whether the joint selected proportion is operationally realistic; multiple marginal cutoffs can become extremely selective.
+5. Treat the multivariate normal assumption as a modeling assumption, not a fact. If the empirical distributions are skewed or truncated, report sensitivity analyses.
+6. If success is not naturally dichotomous, consider Naylor-Shine, BCG, or Boudreau-style continuous utility instead of forcing a dichotomous criterion.
+
+## References
+
+Cascio, W. F. (1980). Responding to the demand for accountability: A critical analysis of three utility models. *Organizational Behavior and Human Performance*, 25, 32--45.
+
+Genz, A., & Bretz, F. (2009). *Computation of multivariate normal and t probabilities*. Springer.
+
+Taylor, H. C., & Russell, J. T. (1939). The relationship of validity coefficients to the practical effectiveness of tests in selection. *Journal of Applied Psychology*, 23, 565--578.
+
+Thomas, J. G., Owen, D. B., & Gunst, R. F. (1977). Improving the use of educational tests as selection tools. *Journal of Educational Statistics*, 2(1), 55--77.
+
+Waller, N. G. (2024). *TaylorRussell: A Taylor-Russell function for multiple predictors* (R package version 1.2.1). CRAN.

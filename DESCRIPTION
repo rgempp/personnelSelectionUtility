@@ -1,0 +1,39 @@
+Package: personnelSelectionUtility
+Title: Utility Analysis Methods for Personnel Selection
+Version: 0.5.18
+Authors@R: c(
+    person(given = "René", family = "Gempp", email = "rene.gempp@udp.cl",
+           role = c("aut", "cre", "cph"),
+           comment = c(ORCID = "0000-0002-0427-6894",
+                       affiliation = "Facultad de Administración y Economía, Universidad Diego Portales",
+                       web = "https://gempp.cl"))
+    )
+Description: Implements classical and contemporary utility-analysis methods for
+    personnel selection. The package covers Taylor-Russell classification models,
+    the Thomas-Owen-Gunst multivariate extension for conjunctive multiple-hurdle
+    selection, equal-cutoff solutions for target joint selection ratios, finite
+    binomial sampling probabilities, Naylor-Shine expected criterion gains,
+    Brogden-Cronbach-Gleser monetary utility, Schmidt-Hunter-Pearlman intervention
+    utility, Boudreau-style discounted utility, Sturman-style incremental validity
+    for multiple predictors and multiple outcomes, composite effect sizes,
+    simulation tools for compensatory and staged multiple-hurdle systems,
+    sensitivity analysis, multi-attribute utility, Pareto frontiers, basic
+    adverse-impact summaries, AUC-to-effect-size conversion helpers, SDy
+    estimation helpers, and diagnostic utilities.
+License: MIT + file LICENSE
+URL: https://gempp.cl, https://github.com/rgempp/personnel-selection-utility, https://rgempp.github.io/personnel-selection-utility/
+BugReports: https://github.com/rgempp/personnel-selection-utility/issues
+Depends: R (>= 4.1.0)
+Imports:
+    mvtnorm,
+    stats
+Suggests:
+    knitr,
+    rmarkdown,
+    testthat (>= 3.0.0)
+VignetteBuilder: knitr
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 8.0.0
+Config/testthat/edition: 3
+Config/roxygen2/version: 8.0.0

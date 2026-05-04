@@ -1,0 +1,12 @@
+^dev$
+^README\.Rmd$
+^\.github$
+^docs$
+^cran-comments\.md$
+^personnelSelectionUtility\.Rproj$
+^\.Rproj\.user$
+
+^_pkgdown\.yml$
+^pkgdown$
+^\.positai$
+^\.claude$

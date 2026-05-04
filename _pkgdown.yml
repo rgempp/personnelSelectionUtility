@@ -1,0 +1,115 @@
+url: https://rgempp.github.io/personnel-selection-utility/
+
+template:
+  bootstrap: 5
+  bootswatch: flatly
+  bslib:
+    pkgdown-nav-height: 70px
+
+navbar:
+  title: personnelSelectionUtility
+  left:
+  - icon: fa-home fa-lg
+    aria-label: Home
+    href: index.html
+  - text: Reference
+    href: reference/index.html
+  - text: Vignettes
+    menu:
+    - text: Utility-analysis taxonomy
+      href: articles/utility-analysis-taxonomy.html
+    - text: Taylor-Russell and Thomas-Owen-Gunst
+      href: articles/taylor-russell-and-thomas-owen-gunst.html
+    - text: Continuous and monetary utility
+      href: articles/continuous-monetary-utility-bcg-boudreau-sturman.html
+    - text: Compensatory versus multiple-hurdle simulation
+      href: articles/compensatory-vs-multiple-hurdle-simulation.html
+  - text: News
+    href: news/index.html
+  right:
+  - icon: fa-github fa-lg
+    aria-label: GitHub
+    href: https://github.com/rgempp/personnel-selection-utility
+
+articles:
+- title: Methodological guides
+  navbar: ~
+  contents:
+  - utility-analysis-taxonomy
+  - taylor-russell-and-thomas-owen-gunst
+  - continuous-monetary-utility-bcg-boudreau-sturman
+  - compensatory-vs-multiple-hurdle-simulation
+
+reference:
+- title: Package orientation
+  contents:
+  - model_taxonomy
+  - argument_glossary
+- title: Classification utility
+  contents:
+  - tr_classic
+  - tr_solve
+  - tr_multivariate
+  - tr_multivariate_equal_cutoff
+  - tr_binomial_success_probability
+- title: Continuous and monetary utility
+  contents:
+  - selected_mean_z
+  - naylor_shine
+  - bcg_utility
+  - shp_utility
+  - boudreau_utility
+  - inflation_adjusted_rate
+  - employee_flow
+  - probation_adjustment
+  - probation_utility
+- title: SDy, diagnostics, and psychometric helpers
+  contents:
+  - sdy_observed
+  - sdy_superior_equivalents
+  - sdy_percentile
+  - sdy_proportional
+  - sdy_rbn
+  - sdy_cost_accounting
+  - sdy_crepid
+  - coefficient_of_determination
+  - forecasting_efficiency
+  - correct_r_direct_range_restriction
+  - utility_regression_diagnostics
+  - d_to_cor
+  - cor_to_d
+  - composite_d
+- title: AUC and effect-size conversions
+  contents:
+  - auc_to_rank_biserial
+  - auc_to_d_equal_variance
+  - d_to_point_biserial
+  - auc_to_point_biserial
+  - auc_to_r
+- title: Incremental validity and selection systems
+  contents:
+  - restricted_canonical_validity
+  - incremental_validity
+  - relative_weights
+  - selection_utility_from_z
+  - compensatory_selection
+  - multiple_hurdle_selection
+  - multiple_hurdle_selection_staged
+  - compare_selection_systems
+  - compare_selection_systems_staged
+- title: Uncertainty, sensitivity, and decision support
+  contents:
+  - utility_monte_carlo
+  - sensitivity_grid
+  - break_even_validity
+  - multiattribute_utility
+  - pareto_frontier
+  - utility_fairness_frontier
+  - adverse_impact_ratio
+  - group_tr_multivariate
+  - selection_table
+  - risk_adjusted_utility
+
+authors:
+  René Gempp:
+    href: https://gempp.cl

@@ -1,0 +1,8 @@
+bibentry(
+  bibtype = "Manual",
+  title = "personnelSelectionUtility: Utility Analysis Methods for Personnel Selection",
+  author = personList(person("René", "Gempp")),
+  year = "2026",
+  note = "R package version 0.5.16. Facultad de Administración y Economía, Universidad Diego Portales. Web: https://gempp.cl.",
+  url = "https://github.com/rgempp/personnel-selection-utility"
+)

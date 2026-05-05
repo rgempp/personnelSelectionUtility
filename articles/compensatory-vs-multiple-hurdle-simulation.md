@@ -1,0 +1,568 @@
+# Compensatory versus multiple-hurdle selection simulation
+
+## The design question
+
+A compensatory system applies a cutoff to a predictor composite: high
+scores on some predictors compensate for low scores on others, and
+applicants are ranked top-down on the composite. A multiple-hurdle
+system applies sequential cutoffs: an applicant must pass the cutoff on
+each predictor, or each stage, before reaching the next. Ock and Oswald
+(2018) formalise the trade-off between the two designs: compensatory
+systems often preserve more information and produce higher expected
+criterion performance, whereas multiple-hurdle systems can reduce
+administration costs because expensive stages are administered only to
+applicants who survive earlier stages. The cost-reliability trade-off is
+the substantive decision facing the analyst.
+
+``` r
+
+library(personnelSelectionUtility)
+```
+
+## A four-predictor example
+
+Following the type of simulation design used by Ock and Oswald (2018)
+and informed by the meta-analytic input matrices of Roth, Switzer, Van
+Iddekinge, and Oh (2011), suppose the predictors are cognitive ability,
+structured interview, conscientiousness, and biodata. The criterion is
+job performance.
+
+``` r
+
+Rxx <- matrix(c(
+  1.00, .31, .03, .37,
+  .31, 1.00, .13, .16,
+  .03, .13, 1.00, .51,
+  .37, .16, .51, 1.00
+), 4, 4, byrow = TRUE)
+validities <- c(.37, .35, .16, .23)
+```
+
+The intercorrelations and validities are illustrative rather than
+reproductions of any single published meta-analysis. The qualitative
+pattern, however, mirrors what most contemporary meta-analyses report:
+cognitive ability has the highest validity but moderate correlation with
+the structured interview, conscientiousness is largely independent of
+cognitive ability, and biodata correlates substantially with
+conscientiousness while contributing additional incremental validity.
+
+## Compensatory selection
+
+In the compensatory system, all applicants complete all predictors and
+are selected top-down on a composite. The expected criterion gain
+follows the Naylor-Shine (1965) logic, with the validity coefficient
+replaced by the composite validity computed from the predictor
+intercorrelations and the weighting scheme. With predictor correlation
+matrix $`\mathbf{R}_{XX}`$, predictor-criterion validities
+$`\mathbf{r}_{XY}`$, and weight vector $`\mathbf{w}`$, the
+composite-criterion correlation follows the Lord and Novick (1968)
+formula
+
+``` math
+r_{C,Y} \;=\; \frac{\mathbf{w}^{\top} \mathbf{r}_{XY}}{\sqrt{\mathbf{w}^{\top} \mathbf{R}_{XX}\, \mathbf{w}}}.
+```
+
+``` r
+
+comp <- compensatory_selection(
+  predictor_cor      = Rxx,
+  validities         = validities,
+  weights            = rep(1, 4),
+  selection_ratio    = .20,
+  n_applicants       = 500,
+  cost_per_applicant = 1000,
+  sdy                = 60000
+)
+comp
+#> <psu_comparison>
+#>   Model: Compensatory top-down selection
+#>   composite_validity: 0.418943
+#>   selection_ratio: 0.2
+#>   selected_mean_z: 1.39981
+#>   expected_criterion_z: 0.58644
+#>   n_applicants: 500
+#>   applicant_n: 500
+#>   n_selected: 100
+#>   cost_per_applicant: 1000
+#>   total_cost: 5e+05
+#>   sdy: 60000
+#>   net_utility: 3018640
+```
+
+Equal weighting is rarely optimal, but it is a reasonable default when
+validity differences are small or uncertain (Bobko, Roth, & Buster,
+2007; Wainer, 1976). When validities are well established, weighting by
+validity (or by the optimal regression weights derived from the full
+predictor-criterion correlation matrix) yields a higher composite
+validity at the cost of greater sample-to-sample weight instability.
+
+## Staged multiple-hurdle selection
+
+Now suppose the first stage is a cheaper composite of cognitive ability,
+conscientiousness, and biodata. The second stage is a structured
+interview administered only to applicants who pass the first stage. The
+first stage retains $`25\%`$ of applicants; the interview retains
+$`80\%`$ of those, giving an expected joint selection ratio near
+$`.20`$. This staged logic was examined formally by Sackett and Roth
+(1996) and is a natural representation of the operational reality in
+many high-volume selection contexts.
+
+``` r
+
+R <- rbind(cbind(Rxx, validities), c(validities, 1))
+
+hurdle <- multiple_hurdle_selection_staged(
+  stage_predictors       = list(c(1, 3, 4), 2),
+  stage_selection_ratios = c(.25, .80),
+  R                      = R,
+  n_sim                  = 5000,
+  seed                   = 123,
+  n_applicants           = 500,
+  cost_per_stage         = c(100, 900),
+  sdy                    = 60000
+)
+hurdle
+#> <psu_comparison>
+#>   Model: Staged multiple-hurdle selection with composites
+#>   joint_selection_ratio: 0.2
+#>   expected_criterion_z: 0.569705
+#>   n_sim: 5000
+#>   selected_simulated: 1000
+#>   n_applicants: 500
+#>   applicant_n: 500
+#>   n_selected: 100
+#>   total_cost: 162500
+#>   sdy: 60000
+#>   net_utility: 3255730
+```
+
+The Monte Carlo implementation generates simulated applicants from the
+multivariate normal distribution defined by `R` and applies the staged
+cutoffs; the realised joint selection ratio and expected criterion
+performance are estimated from the simulation. Larger `n_sim` reduces
+simulation error at the cost of computation time. The vignette uses
+small values for illustrative speed; in production analyses values of
+$`50,000`$ or higher are recommended.
+
+## Direct comparison
+
+The convenience wrapper
+[`compare_selection_systems_staged()`](https://rgempp.github.io/personnelSelectionUtility/reference/compare_selection_systems_staged.md)
+performs both calculations with the same inputs and returns a comparison
+object.
+
+``` r
+
+comparison <- compare_selection_systems_staged(
+  predictor_cor                  = Rxx,
+  validities                     = validities,
+  compensatory_weights           = rep(1, 4),
+  compensatory_selection_ratio   = .20,
+  stage_predictors               = list(c(1, 3, 4), 2),
+  stage_selection_ratios         = c(.25, .80),
+  n_sim                          = 5000,
+  seed                           = 123,
+  n_applicants                   = 500,
+  compensatory_cost_per_applicant = 1000,
+  hurdle_cost_per_stage          = c(100, 900),
+  sdy                            = 60000
+)
+comparison
+#> <psu_comparison>
+#>   Model: Compensatory versus staged multiple-hurdle comparison
+#>   expected_criterion_z_difference: 0.0167344
+#>   selection_ratio_difference: 0
+#>   net_utility_difference: -237094
+#> 
+#>   Compensatory subsystem:
+#>     composite_validity: 0.418943
+#>     selection_ratio: 0.2
+#>     selected_mean_z: 1.39981
+#>     expected_criterion_z: 0.58644
+#>     n_applicants: 500
+#>     applicant_n: 500
+#>     n_selected: 100
+#>     cost_per_applicant: 1000
+#>     total_cost: 5e+05
+#>     sdy: 60000
+#>     net_utility: 3018640
+#> 
+#>   Multiple-hurdle subsystem:
+#>     joint_selection_ratio: 0.2
+#>     expected_criterion_z: 0.569705
+#>     n_sim: 5000
+#>     selected_simulated: 1000
+#>     n_applicants: 500
+#>     applicant_n: 500
+#>     n_selected: 100
+#>     total_cost: 162500
+#>     sdy: 60000
+#>     net_utility: 3255730
+```
+
+The comparison object reports differences in expected criterion
+performance, joint selection ratio, and net utility.
+
+``` r
+
+c(
+  expected_z_difference  = comparison$expected_criterion_z_difference,
+  net_utility_difference = comparison$net_utility_difference
+)
+#>  expected_z_difference net_utility_difference 
+#>           1.673436e-02          -2.370938e+05
+```
+
+## Cost-reliability trade-off
+
+The substantive decision is not which system has higher expected
+performance but whether the performance advantage of the more complete
+compensatory system offsets its additional cost. Ock and Oswald (2018)
+recommend exploring conditions rather than relying on a single point
+estimate. One way to study this is to vary $`SD_y`$ (which determines
+the dollar value of each unit of expected gain) and the relative cost of
+the hurdle system.
+
+``` r
+
+sdy_values <- c(20000, 40000, 60000)
+hurdle_stage2_cost <- c(200, 500, 900)
+
+out <- expand.grid(sdy = sdy_values, interview_cost = hurdle_stage2_cost)
+out$net_utility_difference <- NA_real_
+
+for (i in seq_len(nrow(out))) {
+  cmp <- compare_selection_systems_staged(
+    predictor_cor                  = Rxx,
+    validities                     = validities,
+    compensatory_selection_ratio   = .20,
+    stage_predictors               = list(c(1, 3, 4), 2),
+    stage_selection_ratios         = c(.25, .80),
+    n_sim                          = 3000,
+    seed                           = 100 + i,
+    n_applicants                   = 500,
+    compensatory_cost_per_applicant = 1000,
+    hurdle_cost_per_stage          = c(100, out$interview_cost[i]),
+    sdy                            = out$sdy[i]
+  )
+  out$net_utility_difference[i] <- cmp$net_utility_difference
+}
+
+out
+#>     sdy interview_cost net_utility_difference
+#> 1 20000            200             -215469.59
+#> 2 40000            200             -200153.83
+#> 3 60000            200              -16610.17
+#> 4 20000            500             -198337.78
+#> 5 40000            500               44669.64
+#> 6 60000            500             -116994.78
+#> 7 20000            900             -177825.88
+#> 8 40000            900              197097.17
+#> 9 60000            900              429377.05
+```
+
+Positive values indicate that the compensatory system has higher net
+utility. Negative values indicate that the hurdle system is favoured
+under that cost and $`SD_y`$ scenario. The pattern is the one Ock and
+Oswald (2018) emphasise: at low $`SD_y`$ and high stage-2 cost, the
+hurdle system can dominate on net utility despite producing lower
+expected per-hire performance.
+
+## Offer rejection: Murphy (1986)
+
+A correction frequently omitted from utility analyses is the effect of
+rejected job offers. Murphy (1986), building on Hogarth and Einhorn
+(1976), showed that when top candidates reject offers, the utility of
+selection tests is overstated because the actually hired group has a
+lower expected predictor score than the offered group. The function
+[`offer_rejection_adjustment()`](https://rgempp.github.io/personnelSelectionUtility/reference/offer_rejection_adjustment.md)
+implements three modes consistent with Murphy’s analysis: uniform random
+rejection, rejection correlated with predictor score, and selectively
+higher rejection at the top of the distribution.
+
+``` r
+
+# First compute the expected standardised score among offered candidates:
+z_offered <- selected_mean_z(.20)
+
+# Adverse selection (correlated mode): top candidates are more likely to decline,
+# captured by a negative correlation between standardised quality and acceptance.
+offer_rejection_adjustment(
+  expected_z_offered     = z_offered,
+  mode                   = "correlated",
+  acceptance_rate        = .70,
+  rho_quality_acceptance = -0.20,
+  n_offered              = 100
+)
+#> <psu_offer_rejection>
+#>   expected_z_offered: 1.39981
+#>   expected_z_accepted: 1.30047
+#>   acceptance_rate: 0.7
+#>   effective_validity_loss: 0.0993407
+#>   expected_n_accepted: 70
+```
+
+The substantive case for the *correlated* mode is well established
+empirically: candidates with stronger profiles tend to have more outside
+options, so the probability of accepting a given offer correlates
+negatively with the predictor score. Sturman (2001) used
+$`\rho_{\text{quality, acceptance}} = -0.20`$ and an acceptance rate of
+$`.70`$ in his comprehensive model. Under these conditions, the realised
+mean predictor score among the *hired* group is materially lower than
+the inverse-Mills mean among the *offered* group, and the utility
+estimate must be adjusted downward.
+
+## Adverse impact and the validity-diversity dilemma
+
+Selection systems that maximise composite validity may produce subgroup
+hire-rate differences that violate the four-fifths threshold articulated
+in the Uniform Guidelines on Employee Selection Procedures (1978).
+Pyburn, Ployhart, and Kravitz (2008) framed this as the
+*validity-diversity dilemma*: the predictors with the highest validity
+for job performance also tend to produce the largest mean differences
+between demographic subgroups. The function
+[`adverse_impact_ratio()`](https://rgempp.github.io/personnelSelectionUtility/reference/adverse_impact_ratio.md)
+computes the four-fifths comparison from group-specific selection
+ratios.
+
+``` r
+
+# adverse_impact_ratio() takes individual-level selection outcomes and group labels;
+# it computes the selection rate per group and the four-fifths ratio relative to
+# the group with the highest rate.
+selected <- c(1, 1, 0, 1, 0, 1, 0, 1, 0,
+              1, 0, 0, 1, 0, 0, 0, 1, 0)
+group    <- c(rep("Reference", 9), rep("Focal", 9))
+adverse_impact_ratio(selected, group)
+#>       group n selected selection_rate reference_group adverse_impact_ratio
+#> 1     Focal 9        3      0.3333333       Reference                  0.6
+#> 2 Reference 9        5      0.5555556       Reference                  1.0
+```
+
+De Corte, Lievens, and Sackett (2007) developed the Pareto-optimal
+solution to this trade-off: rather than choosing one weighting scheme,
+the analyst characterises the entire frontier of weighting schemes that
+are Pareto-optimal in the validity-diversity plane, leaving the final
+choice to organisational stakeholders. The package implements this
+through
+[`pareto_frontier()`](https://rgempp.github.io/personnelSelectionUtility/reference/pareto_frontier.md)
+and the related
+[`utility_fairness_frontier()`](https://rgempp.github.io/personnelSelectionUtility/reference/utility_fairness_frontier.md).
+
+``` r
+
+# pareto_frontier() is a general Pareto-membership indicator: given a matrix of
+# objectives (rows = alternatives, columns = objectives to maximise), it returns
+# a logical vector flagging the non-dominated alternatives. The validity-diversity
+# trade-off in selection systems is one application; below we evaluate six candidate
+# weighting schemes on composite validity and four-fifths fairness.
+candidates <- data.frame(
+  scheme   = c("CA only", "CA + interview",
+               "Equal weights", "Validity weights",
+               "Pareto-optimal #1", "Pareto-optimal #2"),
+  validity = c(.51, .55, .50, .56, .53, .54),
+  fairness = c(.62, .68, .73, .65, .76, .80)
+)
+candidates$pareto <- pareto_frontier(
+  objectives = candidates[, c("validity", "fairness")],
+  maximize   = TRUE
+)
+candidates
+#>              scheme validity fairness pareto
+#> 1           CA only     0.51     0.62  FALSE
+#> 2    CA + interview     0.55     0.68   TRUE
+#> 3     Equal weights     0.50     0.73  FALSE
+#> 4  Validity weights     0.56     0.65   TRUE
+#> 5 Pareto-optimal #1     0.53     0.76  FALSE
+#> 6 Pareto-optimal #2     0.54     0.80   TRUE
+```
+
+The robustness and shrinkage properties of Pareto-optimal solutions
+across cross-validation samples were studied by Song, Wee, and Newman
+(2017) and De Corte, Sackett, and Lievens (2020); the analyst should
+report both the in-sample frontier and an out-of-sample shrinkage
+estimate when sample sizes are modest.
+
+## Multi-attribute utility
+
+When the criterion is genuinely multi-attribute (task performance,
+contextual performance, and counterproductive work behaviour, for
+example, following the taxonomies of Borman and Motowidlo (1993) and
+Rotundo and Sackett (2002)) the appropriate framework is multi-attribute
+utility analysis (Roth, 1994; Roth & Bobko, 1997), which decomposes
+overall utility as a weighted sum of attribute-specific utilities under
+the assumption of mutual preferential independence (Keeney & Raiffa,
+1976).
+
+``` r
+
+# Two candidate selection systems evaluated on three attributes (task,
+# contextual, CWB avoidance), with values on a common 0-100 scale:
+values <- matrix(c(
+  80, 60, 90,
+  70, 75, 70
+), nrow = 2, byrow = TRUE,
+   dimnames = list(c("System A", "System B"),
+                   c("task", "contextual", "cwb_avoidance")))
+
+multiattribute_utility(
+  values  = values,
+  weights = c(.50, .30, .20)
+)
+#> [1] 76.0 71.5
+```
+
+The substantive case for multi-attribute utility analysis, formalised by
+Roth and Bobko (1997), is that aggregating dollar values of
+heterogeneous outcomes into a single $`SD_y`$ disguises the underlying
+preference structure of the organisation. Reporting attribute-specific
+utilities preserves the information needed to negotiate trade-offs
+explicitly.
+
+## Risk-adjusted utility
+
+Bhattacharya and Wright (2005) introduced risk-adjustment to selection
+utility, treating future utility flows as stochastic and pricing the
+risk through a real-options or certainty-equivalent framework. The
+function
+[`risk_adjusted_utility()`](https://rgempp.github.io/personnelSelectionUtility/reference/risk_adjusted_utility.md)
+adjusts the expected utility by a risk premium that reflects the
+variance of the per-period utility flows over the planning horizon.
+
+``` r
+
+# The mean-variance risk-adjusted score subtracts a penalty proportional to the
+# variance of utility. Because monetary utilities are often in the millions, the
+# risk_aversion parameter is typically very small (e.g., 1e-6 to 1e-5). The
+# example below uses the compensatory net utility computed earlier.
+risk_adjusted_utility(
+  expected_utility = comparison$compensatory$net_utility,
+  utility_sd       = abs(comparison$compensatory$net_utility) * .30,
+  risk_aversion    = 1e-6
+)
+#> [1] 2608590
+```
+
+Risk adjustment is most consequential for long planning horizons,
+uncertain validity coefficients, and volatile labour markets. For
+analyses spanning a single year, the risk premium is typically small
+relative to point-estimate uncertainty in $`SD_y`$ and validity, and
+reporting a Monte Carlo posterior distribution through
+[`utility_monte_carlo()`](https://rgempp.github.io/personnelSelectionUtility/reference/utility_monte_carlo.md)
+will usually convey the same information more transparently.
+
+## How to proceed in applied work
+
+1.  Define the actual stages used by the organisation; do not collapse a
+    real multiple-hurdle system into a compensatory model for
+    computational convenience.
+2.  Estimate costs separately by stage. A single average cost per
+    applicant misrepresents the cost-reliability trade-off when early
+    stages are inexpensive screens and late stages are expensive
+    assessments.
+3.  Use realistic validity coefficients corrected for measurement error
+    and range restriction *before* utility analysis.
+4.  Compare expected criterion performance and monetary utility; the two
+    can diverge under cost differentials, and Ock and Oswald (2018)
+    document that hurdle systems can dominate on net utility while
+    losing on per-hire performance.
+5.  Vary $`SD_y`$, costs, and selection ratios. A result that changes
+    sign under plausible inputs should be reported as fragile;
+    sensitivity analysis is mandatory rather than optional.
+6.  Use larger `n_sim` values for final analyses; the vignette examples
+    use small values for execution speed.
+7.  Adjust for offer rejection using
+    [`offer_rejection_adjustment()`](https://rgempp.github.io/personnelSelectionUtility/reference/offer_rejection_adjustment.md)
+    whenever competitive labour markets make the assumption of universal
+    acceptance untenable.
+8.  Report the validity-diversity Pareto frontier, not a single
+    weighting, when the decision has legal or fairness implications. The
+    frontier preserves the trade-off information needed for
+    organisational negotiation.
+9.  Use
+    [`multiattribute_utility()`](https://rgempp.github.io/personnelSelectionUtility/reference/multiattribute_utility.md)
+    when the criterion is multi-attribute and the organisation has
+    explicit weights, rather than aggregating into a single $`SD_y`$.
+10. Report risk-adjusted utility or, equivalently, a Monte Carlo
+    posterior distribution of $`\Delta U`$ for long planning horizons or
+    volatile inputs.
+
+## References
+
+Bhattacharya, M., & Wright, P. M. (2005). Managing human assets in an
+uncertain world: Applying real options theory to HRM. *International
+Journal of Human Resource Management*, *16*, 929–948.
+
+Bobko, P., Roth, P. L., & Buster, M. A. (2007). The usefulness of unit
+weights in creating composite scores: A literature review, application
+to content validity, and meta-analysis. *Organizational Research
+Methods*, *10*, 689–709.
+
+Borman, W. C., & Motowidlo, S. J. (1993). Expanding the criterion domain
+to include elements of contextual performance. In N. Schmitt, W. C.
+Borman, & Associates (Eds.), *Personnel selection in organizations*
+(pp. 71–98). Jossey-Bass.
+
+De Corte, W., Lievens, F., & Sackett, P. R. (2007). Combining predictors
+to achieve optimal trade-offs between selection quality and adverse
+impact. *Journal of Applied Psychology*, *92*, 1380–1393.
+
+De Corte, W., Sackett, P. R., & Lievens, F. (2020). Robustness,
+sensitivity, and sampling variability of Pareto-optimal selection system
+solutions to address the quality-diversity trade-off. *Organizational
+Research Methods*, *23*, 511–535.
+
+Hogarth, R. M., & Einhorn, H. J. (1976). Optimal strategies for
+personnel selection when candidates can reject job offers. *Journal of
+Business*, *49*, 479–495.
+
+Keeney, R. L., & Raiffa, H. (1976). *Decisions with multiple objectives:
+Preferences and value tradeoffs*. Wiley.
+
+Murphy, K. R. (1986). When your top choice turns you down: Effect of
+rejected offers on the utility of selection tests. *Psychological
+Bulletin*, *99*, 133–138.
+
+Naylor, J. C., & Shine, L. C. (1965). A table for determining the
+increase in mean criterion score obtained by using a selection device.
+*Journal of Industrial Psychology*, *3*, 33–42.
+
+Ock, J., & Oswald, F. L. (2018). The utility of personnel selection
+decisions: Comparing compensatory and multiple-hurdle selection models.
+*Journal of Personnel Psychology*, *17*(4), 172–182.
+
+Pyburn, K. M., Ployhart, R. E., & Kravitz, D. A. (2008). The
+diversity-validity dilemma: Overview and legal context. *Personnel
+Psychology*, *61*, 143–151.
+
+Roth, P. L. (1994). Multi-attribute utility analysis using the PROMES
+approach. *Journal of Business and Psychology*, *9*, 69–80.
+
+Roth, P. L., & Bobko, P. (1997). A research agenda for multi-attribute
+utility analysis in human resource management. *Human Resource
+Management Review*, *7*, 341–368.
+
+Roth, P. L., Switzer, F. S., Van Iddekinge, C. H., & Oh, I. S. (2011).
+Toward better meta-analytic matrices: How input values can affect
+research conclusions in human resource management simulations.
+*Personnel Psychology*, *64*, 899–935.
+
+Rotundo, M., & Sackett, P. R. (2002). The relative importance of task,
+citizenship, and counterproductive performance to global ratings of job
+performance: A policy-capturing approach. *Journal of Applied
+Psychology*, *87*, 66–80.
+
+Sackett, P. R., & Roth, L. (1996). Multi-stage selection strategies: A
+Monte Carlo investigation of effects on performance and minority hiring.
+*Personnel Psychology*, *49*, 549–572.
+
+Song, Q. C., Wee, S., & Newman, D. A. (2017). Diversity shrinkage:
+Cross-validating Pareto-optimal weights to enhance diversity via hiring
+practices. *Journal of Applied Psychology*, *102*, 1636–1657.
+
+Sturman, M. C. (2001). Utility analysis for multiple selection devices
+and multiple outcomes. *Journal of Human Resource Costing and
+Accounting*, *6*(2), 9–28.
+
+Wainer, H. (1976). Estimating coefficients in linear models: It don’t
+make no nevermind. *Psychological Bulletin*, *83*, 213–217.

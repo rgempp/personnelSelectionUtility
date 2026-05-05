@@ -116,6 +116,17 @@ incremental_validity <- function(predictor_cor, predictor_criterion_cor,
       stop("Provide `added_predictors` or `focal_predictors`.", call. = FALSE)
     }
   }
+  if (length(added_predictors) == 0L) {
+    stop("`added_predictors` is empty: nothing to add to the baseline system. ",
+         "Use `restricted_canonical_validity()` directly to evaluate the ",
+         "baseline alone.", call. = FALSE)
+  }
+  added_predictors <- setdiff(added_predictors, baseline_predictors)
+  if (length(added_predictors) == 0L) {
+    stop("All elements of `added_predictors` are already in ",
+         "`baseline_predictors`: incremental validity is undefined.",
+         call. = FALSE)
+  }
   if (!is.null(focal_predictors) && !setequal(sort(unique(c(baseline_predictors, added_predictors))), focal_predictors)) {
     warning("Both `added_predictors` and `focal_predictors` were supplied; using `added_predictors`.", call. = FALSE)
   }

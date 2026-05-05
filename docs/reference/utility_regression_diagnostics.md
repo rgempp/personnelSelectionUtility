@@ -60,7 +60,7 @@ utility_regression_diagnostics(1:10, c(2, 3, 3, 5, 4, 6, 7, 8, 8, 10))
 #> 
 #>  Shapiro-Wilk normality test
 #> 
-#> data:  y
+#> data:  z
 #> W = 0.95381, p-value = 0.7136
 #> 
 #> 
@@ -68,7 +68,7 @@ utility_regression_diagnostics(1:10, c(2, 3, 3, 5, 4, 6, 7, 8, 8, 10))
 #> 
 #>  Shapiro-Wilk normality test
 #> 
-#> data:  res
+#> data:  z
 #> W = 0.91894, p-value = 0.3482
 #> 
 #> 

@@ -1,4 +1,4 @@
-url: https://rgempp.github.io/personnel-selection-utility/
+url: https://rgempp.github.io/personnelSelectionUtility/
 
 template:
   bootstrap: 5
@@ -24,12 +24,14 @@ navbar:
       href: articles/continuous-monetary-utility-bcg-boudreau-sturman.html
     - text: Compensatory versus multiple-hurdle simulation
       href: articles/compensatory-vs-multiple-hurdle-simulation.html
+    - text: Reproducing canonical examples
+      href: articles/reproductions.html
   - text: News
     href: news/index.html
   right:
   - icon: fa-github fa-lg
     aria-label: GitHub
-    href: https://github.com/rgempp/personnel-selection-utility
+    href: https://github.com/rgempp/personnelSelectionUtility
 
 articles:
 - title: Methodological guides
@@ -39,6 +41,7 @@ articles:
   - taylor-russell-and-thomas-owen-gunst
   - continuous-monetary-utility-bcg-boudreau-sturman
   - compensatory-vs-multiple-hurdle-simulation
+  - reproductions
 
 reference:
 - title: Package orientation
@@ -59,6 +62,7 @@ reference:
   - bcg_utility
   - shp_utility
   - boudreau_utility
+  - sturman_comprehensive
   - inflation_adjusted_rate
   - employee_flow
   - probation_adjustment
@@ -75,10 +79,15 @@ reference:
   - coefficient_of_determination
   - forecasting_efficiency
   - correct_r_direct_range_restriction
+  - correct_r_lawley
+  - disattenuate_correlation
   - utility_regression_diagnostics
   - d_to_cor
   - cor_to_d
   - composite_d
+  - fuse_validity
+  - fuse_reliability
+  - fuse_composite_cor
 - title: AUC and effect-size conversions
   contents:
   - auc_to_rank_biserial
@@ -91,6 +100,7 @@ reference:
   - restricted_canonical_validity
   - incremental_validity
   - relative_weights
+  - dominance_analysis
   - selection_utility_from_z
   - compensatory_selection
   - multiple_hurdle_selection
@@ -109,6 +119,7 @@ reference:
   - group_tr_multivariate
   - selection_table
   - risk_adjusted_utility
+  - offer_rejection_adjustment
 
 authors:
   René Gempp:

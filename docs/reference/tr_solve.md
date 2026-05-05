@@ -4,7 +4,9 @@ Solves for one missing Taylor-Russell parameter among base rate,
 selection ratio, validity, and PPV. Exactly one of the four arguments
 must be `NULL`. The default validity interval is non-negative to match
 the classical Taylor-Russell table convention and the defensive behavior
-of the `TaylorRussell::TR()` implementation.
+of the
+[`TaylorRussell::TR()`](https://rdrr.io/pkg/TaylorRussell/man/TR.html)
+implementation.
 
 ## Usage
 

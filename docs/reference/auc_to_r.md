@@ -1,14 +1,14 @@
 # Superseded AUC-to-r conversion
 
 `auc_to_r()` is retained as a backward-compatible alias for
-[`auc_to_point_biserial()`](https://rgempp.github.io/personnel-selection-utility/reference/auc_to_point_biserial.md)
+[`auc_to_point_biserial()`](https://rgempp.github.io/personnelSelectionUtility/reference/auc_to_point_biserial.md)
 with `base_rate = .50`. New code should use the more explicit conversion
 family:
-[`auc_to_rank_biserial()`](https://rgempp.github.io/personnel-selection-utility/reference/auc_to_rank_biserial.md),
-[`auc_to_d_equal_variance()`](https://rgempp.github.io/personnel-selection-utility/reference/auc_to_d_equal_variance.md),
-[`d_to_point_biserial()`](https://rgempp.github.io/personnel-selection-utility/reference/d_to_point_biserial.md),
+[`auc_to_rank_biserial()`](https://rgempp.github.io/personnelSelectionUtility/reference/auc_to_rank_biserial.md),
+[`auc_to_d_equal_variance()`](https://rgempp.github.io/personnelSelectionUtility/reference/auc_to_d_equal_variance.md),
+[`d_to_point_biserial()`](https://rgempp.github.io/personnelSelectionUtility/reference/d_to_point_biserial.md),
 and
-[`auc_to_point_biserial()`](https://rgempp.github.io/personnel-selection-utility/reference/auc_to_point_biserial.md).
+[`auc_to_point_biserial()`](https://rgempp.github.io/personnelSelectionUtility/reference/auc_to_point_biserial.md).
 
 ## Usage
 

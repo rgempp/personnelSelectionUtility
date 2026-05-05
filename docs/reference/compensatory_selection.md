@@ -79,6 +79,7 @@ Journal of Personnel Psychology, 17(4), 172-182.
 Rxx <- matrix(c(1, .30, .30, 1), 2, 2)
 compensatory_selection(Rxx, validities = c(.40, .30), selection_ratio = .20)
 #> <psu_comparison>
+#>   Model: Compensatory top-down selection
 #>   composite_validity: 0.440567
 #>   selection_ratio: 0.2
 #>   selected_mean_z: 1.39981
@@ -106,6 +107,7 @@ compensatory_selection(
   sdy = 60000
 )
 #> <psu_comparison>
+#>   Model: Compensatory top-down selection
 #>   composite_validity: 0.494975
 #>   selection_ratio: 0.2
 #>   selected_mean_z: 1.39981

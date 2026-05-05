@@ -1,7 +1,2 @@
-.Rproj.user
-.Rhistory
-.RData
-.httr-oauth
-.DS_Store
-.quarto
-.positai
+/doc/
+/Meta/

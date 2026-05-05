@@ -21,7 +21,7 @@ boudreau_utility(
   variable_value_convention = c("paper_plus", "cost_rate"),
   tax_rate = 0,
   discount_rate = 0,
-  cost_by_period = 0,
+  cost_by_period = NULL,
   discount_costs = TRUE,
   n_t = NULL,
   cost_t = NULL

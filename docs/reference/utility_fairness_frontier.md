@@ -1,7 +1,7 @@
 # Utility-fairness Pareto frontier
 
 Convenience wrapper around
-[`pareto_frontier()`](https://rgempp.github.io/personnel-selection-utility/reference/pareto_frontier.md)
+[`pareto_frontier()`](https://rgempp.github.io/personnelSelectionUtility/reference/pareto_frontier.md)
 for selection-system alternatives evaluated on utility, fairness, and
 optionally validity.
 

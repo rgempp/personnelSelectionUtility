@@ -90,6 +90,7 @@ diag(R) <- 1
 multiple_hurdle_selection_staged(list(1:3, 4), c(.25, .80), R,
                                  n_sim = 1000, seed = 1)
 #> <psu_comparison>
+#>   Model: Staged multiple-hurdle selection with composites
 #>   joint_selection_ratio: 0.2
 #>   expected_criterion_z: 0.336167
 #>   n_sim: 1000
@@ -121,6 +122,7 @@ multiple_hurdle_selection_staged(
   sdy = 60000
 )
 #> <psu_comparison>
+#>   Model: Staged multiple-hurdle selection with composites
 #>   joint_selection_ratio: 0.2
 #>   expected_criterion_z: 0.557481
 #>   n_sim: 5000

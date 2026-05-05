@@ -2,28 +2,37 @@
 
 ## Purpose
 
-The package is organized around a diagnostic question: **what kind of
-selection problem are you analyzing?** Many disagreements in utility
-analysis arise because a method designed for one type of problem is used
-for another. Taylor and Russell (1939) framed utility as a
-classificatory success-ratio problem. Naylor and Shine (1965) moved the
-focus to expected criterion gain in standard-deviation units. Brogden
-(1946, 1949) and Cronbach and Gleser (1965) developed the
-decision-theoretic monetary formulation. Boudreau (1983, 1991), Holling
-(1998), Sturman (2001), Thomas, Owen, and Gunst (1977), and Ock and
-Oswald (2018) each added important corrections or extensions.
+The package is organised around a diagnostic question: **what kind of
+selection problem are you analysing?** Many disagreements in the
+utility-analysis literature arise because a method designed for one type
+of problem is applied to another. Taylor and Russell (1939) framed
+utility as a classificatory success-ratio problem. Naylor and Shine
+(1965) moved the focus to expected criterion gain in standard-deviation
+units. Brogden (1946, 1949) and Cronbach and Gleser (1965) developed the
+decision-theoretic monetary formulation. Boudreau (1983, 1991) added
+economic realism through discounting, taxes, and employee flows. Holling
+(1998), Sturman (2000, 2001), Thomas, Owen, and Gunst (1977), and Ock
+and Oswald (2018) each contributed substantive corrections or
+extensions. The taxonomy used here is intended to make the model-problem
+match explicit before any number is reported.
 
-The taxonomy used here crosses two dimensions:
+``` r
+
+library(personnelSelectionUtility)
+```
+
+## The two-by-two taxonomy
+
+The taxonomy crosses two dimensions:
 
 1.  **Criterion scale**: is the criterion treated as
-    continuous/monetary, or dichotomized into success/failure?
+    continuous/monetary, or dichotomised into success/failure?
 2.  **Selection structure**: is selection compensatory, based on a
     composite score, or conjunctive/multiple-hurdle, based on passing
     multiple cutoffs or stages?
 
 ``` r
 
-library(personnelSelectionUtility)
 model_taxonomy()
 #>               criterion_scale
 #> 1 classification/dichotomized
@@ -67,31 +76,40 @@ This yields four practical cells.
 
 | Criterion scale | Compensatory selection | Multiple-hurdle selection |
 |----|----|----|
-| Dichotomized / classificatory | Taylor-Russell on one predictor or a composite | Thomas-Owen-Gunst multivariate Taylor-Russell |
-| Continuous / monetary | Naylor-Shine, BCG, Boudreau, Sturman incremental validity | Simulation or stage-wise utility calculations |
+| Dichotomised / classificatory | Taylor-Russell on one predictor or a composite | Thomas-Owen-Gunst multivariate Taylor-Russell |
+| Continuous / monetary | Naylor-Shine, Brogden-Cronbach-Gleser, Boudreau, Sturman incremental validity | Stage-wise utility or simulation-based comparisons |
 
-## Why this matters
+The four cells are not interchangeable. A selection system can have the
+same predictors but a different appropriate utility model depending on
+the decision rule. If cognitive ability, conscientiousness, biodata, and
+interview ratings are added into one composite and applicants are
+selected top-down, the system is compensatory. If applicants must first
+pass a cheap screening composite and only then a more expensive
+interview stage, the system is staged multiple-hurdle. The distinction
+is not cosmetic. Ock and Oswald (2018) emphasise the cost-reliability
+trade-off: a compensatory composite typically uses more information and
+yields higher expected criterion performance, whereas a multiple-hurdle
+system can be cheaper because expensive stages are administered only to
+applicants who survive earlier screens.
 
-A selection system can have the same predictors but a different utility
-model depending on the decision rule. If cognitive ability,
-conscientiousness, biodata, and interview ratings are added into one
-composite and applicants are selected top-down, the model is
-compensatory. If applicants must first pass a cheap screening composite
-and only then pass an interview stage, the model is staged
-multiple-hurdle.
+## Why the choice of cell matters
 
-The distinction is not cosmetic. Ock and Oswald (2018) emphasize the
-cost-reliability trade-off: a compensatory composite often uses more
-information and yields higher expected criterion performance, whereas a
-multiple-hurdle system can be cheaper because expensive stages are
-administered only to applicants who survive earlier screens. Sturman
-(2001) adds a second major warning: classical utility analyses often
-compare a new procedure to random selection, even though the realistic
-baseline is usually an existing selection system.
+A simple thought experiment makes the point. Suppose two predictors
+$`X_1`$ and $`X_2`$ correlate $`.30`$ with each other and have
+validities of $`.40`$ and $`.30`$ against a job-performance criterion.
+If selection is compensatory and applicants are ranked on the equally
+weighted sum, the implied composite validity follows the canonical
+correction for predictor intercorrelation. If selection is conjunctive
+on the same two predictors with marginal cutoffs at the top $`50\%`$
+each, the operative quantity is the *joint* selection ratio, which is
+materially smaller than $`.50`$ and has a different positive predictive
+value. Reporting one number when the other is operationally relevant
+misrepresents the system. The package therefore encourages the analyst
+to specify the cell first and choose the function second.
 
-## Argument naming
+## Argument naming and conventions
 
-The package uses readable R argument names while keeping close
+The package uses readable R argument names while preserving close
 correspondence with the notation used in the literature.
 
 ``` r
@@ -138,13 +156,13 @@ head(argument_glossary(), 12)
 #> 12           Preferred name in v0.4.0; applicant_n is accepted as a legacy alias.
 ```
 
-The most important names are:
+The most frequent names are:
 
 `base_rate`: population proportion successful before selection;
-Taylor-Russell notation often uses `BR`.
+classical Taylor-Russell notation often uses $`BR`$ or $`\phi`$.
 
 `selection_ratio`: proportion selected by a single cutoff or composite;
-classical notation uses `SR`.
+classical notation uses $`SR`$.
 
 `selection_ratios`: vector of marginal selection ratios in
 multiple-predictor or multiple-stage models.
@@ -152,16 +170,21 @@ multiple-predictor or multiple-stage models.
 `joint_selection_ratio`: overall conjunctive selection ratio after all
 cutoffs.
 
-`validity`: predictor-criterion validity coefficient, usually `r_xy`.
+`validity`: predictor-criterion validity coefficient, usually
+$`r_{xy}`$.
 
 `validities`: vector of predictor-criterion correlations.
 
 `sdy`: standard deviation of job performance in monetary or criterion
-units, usually `SD_y`.
+units, usually $`SD_y`$.
 
-`n_applicants`: number of applicants assessed by a system.
+`baseline_validity`: validity of the operating system that the focal
+procedure is being compared against (Sturman, 2000, 2001).
 
-`n_selected`: number selected or treated.
+`n_applicants`, `n_selected`: sample sizes of assessed and selected
+groups.
+
+`tenure`: time horizon, usually in years.
 
 ## Recommended workflow
 
@@ -169,48 +192,83 @@ units, usually `SD_y`.
 
 Start by writing down the rule used in practice. Is selection based on a
 single test, a composite, several simultaneous cutoffs, or a staged
-process? Do not choose a utility formula before specifying the rule.
+process? Do not choose a utility formula before specifying the rule. A
+common error is to apply Brogden-Cronbach-Gleser to a problem that is
+operationally a multiple-hurdle decision, which masks both the joint
+selection ratio and the cost differential between stages.
 
 ### Step 2: Specify the criterion scale
 
-If the criterion is success/failure, use Taylor-Russell style functions.
-If the criterion is continuous or monetary, use Naylor-Shine, BCG,
-Boudreau, or simulation functions.
+If the criterion is success/failure, use Taylor-Russell-style functions:
+[`tr_classic()`](https://rgempp.github.io/personnelSelectionUtility/reference/tr_classic.md),
+[`tr_multivariate()`](https://rgempp.github.io/personnelSelectionUtility/reference/tr_multivariate.md),
+or
+[`tr_multivariate_equal_cutoff()`](https://rgempp.github.io/personnelSelectionUtility/reference/tr_multivariate_equal_cutoff.md).
+If the criterion is continuous or monetary, use
+[`naylor_shine()`](https://rgempp.github.io/personnelSelectionUtility/reference/naylor_shine.md),
+[`bcg_utility()`](https://rgempp.github.io/personnelSelectionUtility/reference/bcg_utility.md),
+or
+[`boudreau_utility()`](https://rgempp.github.io/personnelSelectionUtility/reference/boudreau_utility.md).
+The choice should be driven by how the organisation actually evaluates
+job performance, not by computational convenience.
 
 ### Step 3: Specify the baseline
 
-Following Sturman (2001), avoid treating random selection as the default
-comparator unless it is genuinely the decision alternative. Use
-`baseline_validity` in
-[`bcg_utility()`](https://rgempp.github.io/personnel-selection-utility/reference/bcg_utility.md)
-or
-[`boudreau_utility()`](https://rgempp.github.io/personnel-selection-utility/reference/boudreau_utility.md)
-when the organization already has an operating procedure.
+Following Sturman (2000, 2001), the realistic comparator is rarely
+random selection. Almost every organisation already operates with some
+procedure: reference checks, unstructured interviews, biodata. Treating
+random selection as the implicit baseline inflates the estimated utility
+of a new procedure by approximately $`60\%`$ on average (Sturman, 2000,
+2001). Use `baseline_validity` in
+[`bcg_utility()`](https://rgempp.github.io/personnelSelectionUtility/reference/bcg_utility.md)
+and
+[`boudreau_utility()`](https://rgempp.github.io/personnelSelectionUtility/reference/boudreau_utility.md)
+whenever the operating procedure is identifiable.
 
-### Step 4: Estimate or triangulate `SD_y`
+### Step 4: Estimate or triangulate $`SD_y`$
 
-Holling (1998) highlights that `SD_y` is often the weakest link in
-monetary utility analysis. Use multiple estimates when possible:
-observed criterion data, percentile judgments, proportional rules, or
-job-analysis-based estimates.
+Holling (1998) shows that $`SD_y`$ is the central vulnerability of
+monetary utility analysis. The package implements the four families
+documented by Holling: cost accounting
+([`sdy_cost_accounting()`](https://rgempp.github.io/personnelSelectionUtility/reference/sdy_cost_accounting.md)),
+global percentile judgements
+([`sdy_percentile()`](https://rgempp.github.io/personnelSelectionUtility/reference/sdy_percentile.md)),
+proportional rules
+([`sdy_proportional()`](https://rgempp.github.io/personnelSelectionUtility/reference/sdy_proportional.md),
+[`sdy_rbn()`](https://rgempp.github.io/personnelSelectionUtility/reference/sdy_rbn.md)),
+and individualised job-analysis methods
+([`sdy_crepid()`](https://rgempp.github.io/personnelSelectionUtility/reference/sdy_crepid.md),
+[`sdy_superior_equivalents()`](https://rgempp.github.io/personnelSelectionUtility/reference/sdy_superior_equivalents.md)).
+Triangulating two or three of these, rather than relying on a single
+estimate, is the practice supported by the empirical comparisons
+reported in Bobko, Karren, and Parkington (1983), Becker and Huselid
+(1992), and Hakstian, Wooley, Woolsey, and Kryger (1991).
 
 ### Step 5: Report uncertainty and sensitivity
 
-Ock and Oswald (2018) show that utility estimates can vary substantially
-across samples. Use
-[`utility_monte_carlo()`](https://rgempp.github.io/personnel-selection-utility/reference/utility_monte_carlo.md),
-[`sensitivity_grid()`](https://rgempp.github.io/personnel-selection-utility/reference/sensitivity_grid.md),
+Ock and Oswald (2018) demonstrate via Monte Carlo simulation that
+utility estimates exhibit sample-to-sample variability of the same order
+of magnitude as the mean effect. A point estimate without an interval is
+therefore not a complete report. The package includes
+[`utility_monte_carlo()`](https://rgempp.github.io/personnelSelectionUtility/reference/utility_monte_carlo.md)
+for full uncertainty propagation,
+[`sensitivity_grid()`](https://rgempp.github.io/personnelSelectionUtility/reference/sensitivity_grid.md)
+for exploring how the estimate varies under perturbations of the inputs,
 and
-[`break_even_validity()`](https://rgempp.github.io/personnel-selection-utility/reference/break_even_validity.md)
-to avoid reporting a single deterministic point estimate.
+[`break_even_validity()`](https://rgempp.github.io/personnelSelectionUtility/reference/break_even_validity.md)
+for computing the validity required to break even at given costs.
+Cronshaw, Alexander, Wiesner, and Barrick (1987) introduced sensitivity
+and break-even analysis to selection utility precisely because point
+estimates of $`\Delta U`$ tend to be reported with implausible
+precision.
 
 ## Minimal examples by model family
 
 ### Dichotomous success criterion
 
-For a single predictor or a composite summarized by one validity
-coefficient, use
-[`tr_classic()`](https://rgempp.github.io/personnel-selection-utility/reference/tr_classic.md).
+For a single predictor or a composite that has already collapsed several
+predictors into one score, use
+[`tr_classic()`](https://rgempp.github.io/personnelSelectionUtility/reference/tr_classic.md).
 
 ``` r
 
@@ -233,8 +291,12 @@ tr_classic(base_rate = .50, selection_ratio = .20, validity = .35)
 #>   digits: 3
 ```
 
-For multiple simultaneous cutoffs, use
-[`tr_multivariate()`](https://rgempp.github.io/personnel-selection-utility/reference/tr_multivariate.md).
+The output includes the full $`2 \times 2`$ table (true positives, false
+positives, true negatives, false negatives), the positive predictive
+value, sensitivity, and specificity. For multiple simultaneous cutoffs,
+use
+[`tr_multivariate()`](https://rgempp.github.io/personnelSelectionUtility/reference/tr_multivariate.md)
+with the predictor-criterion correlation matrix.
 
 ``` r
 
@@ -260,44 +322,10 @@ tr_multivariate(selection_ratios = c(.50, .50), base_rate = .50, R = R)
 #>   digits: 3
 ```
 
-### AUC and effect-size conversions
+### Continuous criterion
 
-In contemporary selection research, especially when using algorithmic or
-classification models, predictive performance may be reported as AUC
-rather than as a validity coefficient. The package therefore separates
-three conceptually distinct conversions. First,
-[`auc_to_rank_biserial()`](https://rgempp.github.io/personnel-selection-utility/reference/auc_to_rank_biserial.md)
-returns the dominance or rank-biserial summary `2 * AUC - 1`, which
-follows from the interpretation of AUC as the probability of a favorable
-ordering of one positive and one negative case (Hanley & McNeil, 1982;
-Kerby, 2014). Second,
-[`auc_to_d_equal_variance()`](https://rgempp.github.io/personnel-selection-utility/reference/auc_to_d_equal_variance.md)
-converts AUC to Cohen’s `d` under the equal-variance binormal model
-(Rice & Harris, 2005; Salgado, 2018). Third,
-[`auc_to_point_biserial()`](https://rgempp.github.io/personnel-selection-utility/reference/auc_to_point_biserial.md)
-converts that `d` to a point-biserial correlation for a specified
-`base_rate`, making the base-rate dependence explicit.
-
-``` r
-
-auc_to_rank_biserial(.75)
-#> [1] 0.5
-auc_to_d_equal_variance(.75)
-#> [1] 0.9538726
-auc_to_point_biserial(.75, base_rate = c(.50, .30, .20, .10))
-#> [1] 0.4304822 0.4005260 0.3564821 0.2751188
-```
-
-Use these conversions as bridges between reported classification
-performance and utility-analysis inputs, not as assumption-free
-substitutes for validation studies. If the selection criterion is binary
-and the available evidence is AUC, report which conversion was used and
-whether a base rate was assumed.
-
-### Continuous or monetary criterion
-
-For expected standardized criterion gain without money, use
-[`naylor_shine()`](https://rgempp.github.io/personnel-selection-utility/reference/naylor_shine.md).
+For expected standardised criterion gain without a monetary unit, use
+[`naylor_shine()`](https://rgempp.github.io/personnelSelectionUtility/reference/naylor_shine.md).
 
 ``` r
 
@@ -315,9 +343,9 @@ naylor_shine(validity = .35, selection_ratio = .20)
 #>   net_utility: 0.489933
 ```
 
-For monetary utility, use
-[`bcg_utility()`](https://rgempp.github.io/personnel-selection-utility/reference/bcg_utility.md)
-as a transparent baseline model.
+For monetary utility,
+[`bcg_utility()`](https://rgempp.github.io/personnelSelectionUtility/reference/bcg_utility.md)
+provides a transparent baseline model.
 
 ``` r
 
@@ -347,9 +375,9 @@ bcg_utility(
 #>   net_utility: 7274000
 ```
 
-If you need discounting, costs by period, taxes, contribution margin, or
-employee flows, use
-[`boudreau_utility()`](https://rgempp.github.io/personnel-selection-utility/reference/boudreau_utility.md).
+If the analysis spans several periods or requires discounting, taxes,
+contribution margins, or employee flows, use
+[`boudreau_utility()`](https://rgempp.github.io/personnelSelectionUtility/reference/boudreau_utility.md).
 
 ``` r
 
@@ -375,20 +403,101 @@ boudreau_utility(
 #>   net_present_value: 465045
 ```
 
+### Effect-size conversions
+
+In contemporary selection research, particularly when classification or
+algorithmic models are involved, predictive performance is sometimes
+reported as the area under the ROC curve (AUC) rather than as a validity
+coefficient. The package separates three conceptually distinct
+conversions, following Hanley and McNeil (1982), Rice and Harris (2005),
+and Salgado (2018). First,
+[`auc_to_rank_biserial()`](https://rgempp.github.io/personnelSelectionUtility/reference/auc_to_rank_biserial.md)
+returns the dominance summary $`2 \cdot AUC - 1`$, which follows from
+interpreting AUC as the probability of a favourable ordering of one
+positive and one negative case (Hanley & McNeil, 1982; Kerby, 2014).
+Second,
+[`auc_to_d_equal_variance()`](https://rgempp.github.io/personnelSelectionUtility/reference/auc_to_d_equal_variance.md)
+converts AUC to Cohen’s $`d`$ under the equal-variance binormal model
+(Rice & Harris, 2005; Salgado, 2018). Third,
+[`auc_to_point_biserial()`](https://rgempp.github.io/personnelSelectionUtility/reference/auc_to_point_biserial.md)
+converts that $`d`$ to a point-biserial correlation for a specified base
+rate, making the base-rate dependence explicit.
+
+``` r
+
+auc_to_rank_biserial(.75)
+#> [1] 0.5
+auc_to_d_equal_variance(.75)
+#> [1] 0.9538726
+auc_to_point_biserial(.75, base_rate = c(.50, .30, .20, .10))
+#> [1] 0.4304822 0.4005260 0.3564821 0.2751188
+```
+
+These conversions should be used as bridges between reported
+classification performance and utility-analysis inputs, not as
+assumption-free substitutes for validation studies. If the selection
+criterion is binary and the available evidence is AUC, the reporting
+analyst should state which conversion was used and whether a base rate
+was assumed.
+
 ## Reporting checklist
 
-A complete utility analysis should report: the selection rule, the
-criterion scale, the base rate if a classificatory model is used, the
-selection ratio, all validity coefficients and their sources, how `SD_y`
-was estimated, whether validity and `SD_y` were corrected or not, the
-baseline comparator, costs, time horizon, discounting, uncertainty
-intervals, and sensitivity analyses.
+A complete utility analysis should report: (i) the selection rule, (ii)
+the criterion scale, (iii) the base rate when a classificatory model is
+used, (iv) the selection ratio, (v) all validity coefficients and their
+sources, (vi) how $`SD_y`$ was estimated and whether it was
+triangulated, (vii) whether validity and $`SD_y`$ were corrected for
+unreliability or range restriction and which corrections were applied,
+(viii) the baseline comparator (random or operating procedure), (ix)
+costs disaggregated by period and stage when relevant, (x) the time
+horizon and discount rate, (xi) uncertainty intervals through Monte
+Carlo or bootstrap, and (xii) sensitivity and break-even analyses for
+the most uncertain inputs. Items (viii) and (xi) are the two most
+frequently omitted in the empirical literature, and their omission is
+the principal source of the practitioner scepticism documented by Latham
+and Whyte (1994), Whyte and Latham (1997), and König, Bösch, Reshef, and
+Winkler (2013).
+
+## How to proceed in applied work
+
+1.  Specify the selection rule before opening the package: single test,
+    composite, simultaneous cutoffs, or staged process.
+2.  Locate your problem in the $`2 \times 2`$ taxonomy and use
+    [`model_taxonomy()`](https://rgempp.github.io/personnelSelectionUtility/reference/model_taxonomy.md)
+    as a checklist.
+3.  Use
+    [`argument_glossary()`](https://rgempp.github.io/personnelSelectionUtility/reference/argument_glossary.md)
+    to map your existing notation to the package argument names before
+    writing code.
+4.  Specify the operating baseline; if it cannot be identified, report
+    this limitation explicitly and treat random-selection results as
+    upper bounds.
+5.  Triangulate $`SD_y`$ across at least two methods; report the range,
+    not a single value.
+6.  Propagate uncertainty using
+    [`utility_monte_carlo()`](https://rgempp.github.io/personnelSelectionUtility/reference/utility_monte_carlo.md)
+    or
+    [`sensitivity_grid()`](https://rgempp.github.io/personnelSelectionUtility/reference/sensitivity_grid.md);
+    do not report a deterministic point estimate.
+7.  Use
+    [`break_even_validity()`](https://rgempp.github.io/personnelSelectionUtility/reference/break_even_validity.md)
+    to identify the validity floor at which the new procedure breaks
+    even, and compare it to the lower bound of the validity confidence
+    interval.
 
 ## References
 
+Becker, B. E., & Huselid, M. A. (1992). Direct estimates of $`SD_y`$ and
+the implications for utility analysis. *Journal of Applied Psychology*,
+*77*, 227–233.
+
+Bobko, P., Karren, R., & Parkington, J. J. (1983). Estimation of
+standard deviations in utility analyses: An empirical test. *Journal of
+Applied Psychology*, *68*, 170–176.
+
 Boudreau, J. W. (1983). Economic considerations in estimating the
 utility of human resource productivity improvement programs. *Personnel
-Psychology*, 36, 551–576.
+Psychology*, *36*, 551–576.
 
 Boudreau, J. W. (1991). Utility analysis for decisions in human resource
 management. In M. D. Dunnette & L. M. Hough (Eds.), *Handbook of
@@ -397,51 +506,76 @@ Consulting Psychologists Press.
 
 Brogden, H. E. (1946). On the interpretation of the correlation
 coefficient as a measure of predictive efficiency. *Journal of
-Educational Psychology*, 37, 65–76.
+Educational Psychology*, *37*, 65–76.
 
-Brogden, H. E. (1949). When testing pays off. *Personnel Psychology*, 2,
-171–183.
+Brogden, H. E. (1949). When testing pays off. *Personnel Psychology*,
+*2*, 171–183.
 
 Cronbach, L. J., & Gleser, G. C. (1965). *Psychological tests and
 personnel decisions* (2nd ed.). University of Illinois Press.
 
+Cronshaw, S. F., Alexander, R. A., Wiesner, W. H., & Barrick, M. R.
+(1987). Incorporating risk into selection utility: Two models for
+sensitivity analysis and risk simulation. *Organizational Behavior and
+Human Decision Processes*, *40*, 270–286.
+
+Hakstian, A. R., Wooley, R. M., Woolsey, L. K., & Kryger, B. R. (1991).
+Management selection by multiple-domain assessment: II. Utility to the
+organisation. *Educational and Psychological Measurement*, *51*,
+899–911.
+
 Hanley, J. A., & McNeil, B. J. (1982). The meaning and use of the area
 under a receiver operating characteristic (ROC) curve. *Radiology*,
-143(1), 29–36.
-
-Kerby, D. S. (2014). The simple difference formula: An approach to
-teaching nonparametric correlation. *Comprehensive Psychology*, 3,
-11.IT.3.1.
-
-Rice, M. E., & Harris, G. T. (2005). Comparing effect sizes in follow-up
-studies: ROC area, Cohen’s d, and r. *Law and Human Behavior*, 29(5),
-615–620.
-
-Salgado, J. F. (2018). Transforming the area under the normal curve
-(AUC) into Cohen’s d, Pearson’s r_pb, odds-ratio, and natural log
-odds-ratio: Two conversion tables. *The European Journal of Psychology
-Applied to Legal Context*, 10(1), 35–47.
+*143*(1), 29–36.
 
 Holling, H. (1998). Utility analysis of personnel selection: An overview
 and empirical study based on objective performance measures. *Methods of
-Psychological Research Online*, 3(1), 5–24.
+Psychological Research Online*, *3*(1), 5–24.
+
+Kerby, D. S. (2014). The simple difference formula: An approach to
+teaching nonparametric correlation. *Comprehensive Psychology*, *3*,
+11.IT.3.1.
+
+König, C. J., Bösch, F., Reshef, A., & Winkler, S. (2013). Human
+resource managers’ attitudes toward utility analysis. *Journal of
+Personnel Psychology*, *12*, 152–156.
+
+Latham, G. P., & Whyte, G. (1994). The futility of utility analysis.
+*Personnel Psychology*, *47*, 31–46.
 
 Naylor, J. C., & Shine, L. C. (1965). A table for determining the
 increase in mean criterion score obtained by using a selection device.
-*Journal of Industrial Psychology*, 3, 33–42.
+*Journal of Industrial Psychology*, *3*, 33–42.
 
 Ock, J., & Oswald, F. L. (2018). The utility of personnel selection
 decisions: Comparing compensatory and multiple-hurdle selection models.
-*Journal of Personnel Psychology*, 17(4), 172–182.
+*Journal of Personnel Psychology*, *17*(4), 172–182.
+
+Rice, M. E., & Harris, G. T. (2005). Comparing effect sizes in follow-up
+studies: ROC area, Cohen’s $`d`$, and $`r`$. *Law and Human Behavior*,
+*29*(5), 615–620.
+
+Salgado, J. F. (2018). Transforming the area under the normal curve
+(AUC) into Cohen’s $`d`$, Pearson’s $`r_{pb}`$, odds-ratio, and natural
+log odds-ratio: Two conversion tables. *The European Journal of
+Psychology Applied to Legal Context*, *10*(1), 35–47.
+
+Sturman, M. C. (2000). Implications of utility analysis adjustments for
+estimates of human resource intervention value. *Journal of Management*,
+*26*, 281–299.
 
 Sturman, M. C. (2001). Utility analysis for multiple selection devices
 and multiple outcomes. *Journal of Human Resource Costing and
-Accounting*, 6(2), 9–28.
+Accounting*, *6*(2), 9–28.
 
 Taylor, H. C., & Russell, J. T. (1939). The relationship of validity
 coefficients to the practical effectiveness of tests in selection.
-*Journal of Applied Psychology*, 23, 565–578.
+*Journal of Applied Psychology*, *23*, 565–578.
 
 Thomas, J. G., Owen, D. B., & Gunst, R. F. (1977). Improving the use of
 educational tests as selection tools. *Journal of Educational
-Statistics*, 2(1), 55–77.
+Statistics*, *2*(1), 55–77.
+
+Whyte, G., & Latham, G. P. (1997). The futility of utility analysis
+revisited: When even an expert fails. *Personnel Psychology*, *50*,
+601–610.

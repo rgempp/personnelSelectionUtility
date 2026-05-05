@@ -105,9 +105,33 @@ compare_selection_systems_staged(Rxx, validities = c(.40, .35, .20, .30),
   compensatory_selection_ratio = .20, stage_predictors = list(1:3, 4),
   stage_selection_ratios = c(.25, .80), n_sim = 1000, seed = 1)
 #> <psu_comparison>
+#>   Model: Compensatory versus staged multiple-hurdle comparison
 #>   expected_criterion_z_difference: 0.13934
 #>   selection_ratio_difference: 0
 #>   net_utility_difference: NA
+#> 
+#>   Compensatory subsystem:
+#>     composite_validity: 0.514621
+#>     selection_ratio: 0.2
+#>     selected_mean_z: 1.39981
+#>     expected_criterion_z: 0.720371
+#>     n_applicants: NA
+#>     applicant_n: NA
+#>     n_selected: NA
+#>     cost_per_applicant: 0
+#>     total_cost: NA
+#>     net_utility: NA
+#> 
+#>   Multiple-hurdle subsystem:
+#>     joint_selection_ratio: 0.2
+#>     expected_criterion_z: 0.581032
+#>     n_sim: 1000
+#>     selected_simulated: 200
+#>     n_applicants: NA
+#>     applicant_n: NA
+#>     n_selected: NA
+#>     total_cost: NA
+#>     net_utility: NA
 
 # Substantive Ock-Oswald-style staged comparison.
 compare_selection_systems_staged(
@@ -125,7 +149,33 @@ compare_selection_systems_staged(
   sdy = 60000
 )
 #> <psu_comparison>
+#>   Model: Compensatory versus staged multiple-hurdle comparison
 #>   expected_criterion_z_difference: 0.0366914
 #>   selection_ratio_difference: 0
 #>   net_utility_difference: -117351
+#> 
+#>   Compensatory subsystem:
+#>     composite_validity: 0.494106
+#>     selection_ratio: 0.2
+#>     selected_mean_z: 1.39981
+#>     expected_criterion_z: 0.691654
+#>     n_applicants: 500
+#>     applicant_n: 500
+#>     n_selected: 100
+#>     cost_per_applicant: 1000
+#>     total_cost: 5e+05
+#>     sdy: 60000
+#>     net_utility: 3649920
+#> 
+#>   Multiple-hurdle subsystem:
+#>     joint_selection_ratio: 0.2
+#>     expected_criterion_z: 0.654963
+#>     n_sim: 5000
+#>     selected_simulated: 1000
+#>     n_applicants: 500
+#>     applicant_n: 500
+#>     n_selected: 100
+#>     total_cost: 162500
+#>     sdy: 60000
+#>     net_utility: 3767280
 ```

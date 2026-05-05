@@ -4,7 +4,7 @@ Thomas, Owen, and Gunst's printed tables are indexed by the overall
 proportion selected under two equal cutoffs. This helper solves the
 common marginal selection ratio that yields a target conjunctive
 selection ratio for any predictor correlation matrix, then calls
-[`tr_multivariate()`](https://rgempp.github.io/personnel-selection-utility/reference/tr_multivariate.md).
+[`tr_multivariate()`](https://rgempp.github.io/personnelSelectionUtility/reference/tr_multivariate.md).
 
 ## Usage
 
@@ -50,7 +50,7 @@ tr_multivariate_equal_cutoff(
 ## Value
 
 A `psu_tr` object from
-[`tr_multivariate()`](https://rgempp.github.io/personnel-selection-utility/reference/tr_multivariate.md)
+[`tr_multivariate()`](https://rgempp.github.io/personnelSelectionUtility/reference/tr_multivariate.md)
 with the solved marginal selection ratio, the target joint selection
 ratio, the computed joint selection ratio, and the numerical
 joint-selection error added.

@@ -4,9 +4,10 @@ pkgdown_sha: ~
 articles:
   compensatory-vs-multiple-hurdle-simulation: compensatory-vs-multiple-hurdle-simulation.html
   continuous-monetary-utility-bcg-boudreau-sturman: continuous-monetary-utility-bcg-boudreau-sturman.html
+  reproductions: reproductions.html
   taylor-russell-and-thomas-owen-gunst: taylor-russell-and-thomas-owen-gunst.html
   utility-analysis-taxonomy: utility-analysis-taxonomy.html
-last_built: 2026-05-04T04:20Z
+last_built: 2026-05-05T22:14Z
 urls:
-  reference: https://rgempp.github.io/personnel-selection-utility/reference
-  article: https://rgempp.github.io/personnel-selection-utility/articles
+  reference: https://rgempp.github.io/personnelSelectionUtility/reference
+  article: https://rgempp.github.io/personnelSelectionUtility/articles

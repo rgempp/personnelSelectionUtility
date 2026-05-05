@@ -206,6 +206,12 @@ utility_regression_diagnostics <- function(x, y) {
   y <- y[ok]
   fit <- stats::lm(y ~ x)
   res <- stats::residuals(fit)
+  shapiro_safe <- function(z) {
+    if (length(z) < 3 || length(z) > 5000) return(NA)
+    v <- stats::var(z)
+    if (!is.finite(v) || v < .Machine$double.eps^0.5) return(NA)
+    tryCatch(stats::shapiro.test(z), error = function(e) NA)
+  }
   list(
     n = length(y),
     validity = stats::cor(x, y),
@@ -214,8 +220,8 @@ utility_regression_diagnostics <- function(x, y) {
     intercept = stats::coef(fit)[["(Intercept)"]],
     mean_residual = mean(res),
     residual_sd = stats::sd(res),
-    shapiro_y = if (length(y) >= 3 && length(y) <= 5000) stats::shapiro.test(y) else NA,
-    shapiro_residuals = if (length(res) >= 3 && length(res) <= 5000) stats::shapiro.test(res) else NA,
+    shapiro_y = shapiro_safe(y),
+    shapiro_residuals = shapiro_safe(res),
     model = fit
   )
 }

@@ -79,11 +79,11 @@ educational tests as selection tools. \emph{Journal of Educational Statistics},
 \code{\link[=compare_selection_systems_staged]{compare_selection_systems_staged()}}, \code{\link[=auc_to_point_biserial]{auc_to_point_biserial()}}.
 }
 \author{
-\strong{Maintainer}: René Gempp \email{rene.gempp@udp.cl} (\href{https://orcid.org/0000-0002-0427-6894}{ORCID}) (affiliation: Facultad de Administración y Economía, Universidad Diego Portales, web: https://gempp.cl) [copyright holder]
+\strong{Maintainer}: René Gempp \email{rene.gempp@udp.cl} (\href{https://orcid.org/0000-0002-0427-6894}{ORCID}) [copyright holder]
 
 Authors:
 \itemize{
-  \item René Gempp \email{rene.gempp@udp.cl} (\href{https://orcid.org/0000-0002-0427-6894}{ORCID}) (affiliation: Facultad de Administración y Economía, Universidad Diego Portales, web: https://gempp.cl) [copyright holder]
+  \item René Gempp \email{rene.gempp@udp.cl} (\href{https://orcid.org/0000-0002-0427-6894}{ORCID}) [copyright holder]
 }
 
 }

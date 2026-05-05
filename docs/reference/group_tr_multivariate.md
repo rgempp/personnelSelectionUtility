@@ -1,7 +1,7 @@
 # Multigroup multivariate Taylor-Russell summaries
 
 Applies
-[`tr_multivariate()`](https://rgempp.github.io/personnel-selection-utility/reference/tr_multivariate.md)
+[`tr_multivariate()`](https://rgempp.github.io/personnelSelectionUtility/reference/tr_multivariate.md)
 separately by group. This is useful for sensitivity analyses in which
 base rates or correlation matrices differ across demographic groups. It
 does not by itself establish legal compliance or fairness.

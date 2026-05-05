@@ -280,11 +280,16 @@ boudreau_utility <- function(delta_z_y = NULL, validity = NULL, selection_ratio 
                              sdy, n_by_period = NULL, variable_value = 0,
                              contribution_margin = NULL,
                              variable_value_convention = c("paper_plus", "cost_rate"),
-                             tax_rate = 0, discount_rate = 0, cost_by_period = 0,
+                             tax_rate = 0, discount_rate = 0, cost_by_period = NULL,
                              discount_costs = TRUE, n_t = NULL, cost_t = NULL) {
-  if (is.null(n_by_period)) n_by_period <- n_t
+  # Resolve legacy aliases symmetrically: error when both supplied disagree,
+  # otherwise the modern argument wins.
+  n_by_period <- resolve_legacy_alias(n_by_period, n_t,
+                                      "n_by_period", "n_t")
   if (is.null(n_by_period)) stop("Supply `n_by_period`.", call. = FALSE)
-  if (!is.null(cost_t)) cost_by_period <- cost_t
+  cost_by_period <- resolve_legacy_alias(cost_by_period, cost_t,
+                                         "cost_by_period", "cost_t",
+                                         modern_default = 0)
   validate_nonnegative(sdy, "sdy")
   validate_nonnegative(n_by_period, "n_by_period")
   variable_value_convention <- match.arg(variable_value_convention)

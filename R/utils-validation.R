@@ -60,6 +60,33 @@ safe_divide <- function(num, den) {
   ifelse(abs(den) < .Machine$double.eps, NA_real_, num / den)
 }
 
+# -----------------------------------------------------------------------------
+# Resolve a (modern, legacy) pair of aliases with consistent semantics.
+# - If both are NULL/NA, return modern_default if supplied, else NULL.
+# - If only one is supplied, return that one.
+# - If both are supplied and equal (under all.equal()), return the modern one.
+# - If both are supplied and disagree, abort with an informative error.
+# -----------------------------------------------------------------------------
+resolve_legacy_alias <- function(modern, legacy,
+                                 modern_name, legacy_name,
+                                 modern_default = NULL) {
+  is_missing <- function(x) {
+    is.null(x) || (length(x) == 1L && is.numeric(x) && is.na(x))
+  }
+  modern_missing <- is_missing(modern)
+  legacy_missing <- is_missing(legacy)
+  if (legacy_missing) {
+    if (modern_missing && !is.null(modern_default)) return(modern_default)
+    return(modern)
+  }
+  if (modern_missing) return(legacy)
+  if (!isTRUE(all.equal(modern, legacy))) {
+    stop("Use only one of `", modern_name, "` or legacy alias `",
+         legacy_name, "`; values disagree.", call. = FALSE)
+  }
+  modern
+}
+
 as_psu <- function(x, class) {
   class(x) <- c(class, "psu_utility", class(x))
   x
@@ -112,4 +139,30 @@ print.psu_incremental_validity <- print.psu_utility
 #' @export
 print.psu_monte_carlo <- print.psu_utility
 #' @export
-print.psu_comparison <- print.psu_utility
+print.psu_comparison <- function(x, ...) {
+  cls <- class(x)[1L]
+  cat("<", cls, ">\n", sep = "")
+  if (!is.null(x$model)) cat("  Model: ", x$model, "\n", sep = "")
+  scalar_top <- vapply(x, function(z) is.numeric(z) && length(z) == 1L,
+                       logical(1))
+  for (nm in names(x)[scalar_top]) {
+    cat("  ", nm, ": ", format(signif(x[[nm]], 6)), "\n", sep = "")
+  }
+  if (!is.null(x$compensatory)) {
+    cat("\n  Compensatory subsystem:\n")
+    sub <- x$compensatory
+    sc <- vapply(sub, function(z) is.numeric(z) && length(z) == 1L,
+                 logical(1))
+    for (nm in names(sub)[sc])
+      cat("    ", nm, ": ", format(signif(sub[[nm]], 6)), "\n", sep = "")
+  }
+  if (!is.null(x$multiple_hurdle)) {
+    cat("\n  Multiple-hurdle subsystem:\n")
+    sub <- x$multiple_hurdle
+    sc <- vapply(sub, function(z) is.numeric(z) && length(z) == 1L,
+                 logical(1))
+    for (nm in names(sub)[sc])
+      cat("    ", nm, ": ", format(signif(sub[[nm]], 6)), "\n", sep = "")
+  }
+  invisible(x)
+}

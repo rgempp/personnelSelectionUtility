@@ -71,6 +71,7 @@ Journal of Personnel Psychology, 17(4), 172-182.
 R <- matrix(c(1, .30, .40, .30, 1, .30, .40, .30, 1), 3, 3)
 multiple_hurdle_selection(c(.50, .50), R, n_sim = 1000, seed = 1)
 #> <psu_comparison>
+#>   Model: Conjunctive multiple-hurdle selection
 #>   joint_selection_ratio: 0.287
 #>   expected_criterion_z: 0.584623
 #>   n_sim: 1000
@@ -92,6 +93,7 @@ multiple_hurdle_selection(
   sdy = 60000
 )
 #> <psu_comparison>
+#>   Model: Conjunctive multiple-hurdle selection
 #>   joint_selection_ratio: 0.2452
 #>   expected_criterion_z: 0.565539
 #>   n_sim: 5000

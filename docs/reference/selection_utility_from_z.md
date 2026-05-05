@@ -73,6 +73,7 @@ Educational Psychology, 37, 65-76.
 selection_utility_from_z(1.25, sdy = 50000, n_selected = 20,
                          n_applicants = 100, cost_per_applicant = 200)
 #> <psu_comparison>
+#>   Model: Utility from expected criterion z
 #>   expected_criterion_z: 1.25
 #>   sdy: 50000
 #>   n_selected: 20

@@ -15,8 +15,7 @@
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
-<meta property="og:title" content="Continuous and monetary utility: Naylor-Shine, BCG, Boudreau, and Sturman">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Continuous and monetary utility: Naylor-Shine, BCG, Boudreau, and Sturman">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -26,7 +25,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">personnelSelectionUtility</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.18</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,12 +43,13 @@
     <li><a class="dropdown-item" href="../articles/taylor-russell-and-thomas-owen-gunst.html">Taylor-Russell and Thomas-Owen-Gunst</a></li>
     <li><a class="dropdown-item" href="../articles/continuous-monetary-utility-bcg-boudreau-sturman.html">Continuous and monetary utility</a></li>
     <li><a class="dropdown-item" href="../articles/compensatory-vs-multiple-hurdle-simulation.html">Compensatory versus multiple-hurdle simulation</a></li>
+    <li><a class="dropdown-item" href="../articles/reproductions.html">Reproducing canonical examples</a></li>
   </ul>
 </li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">News</a></li>
       </ul>
 <ul class="navbar-nav">
-<li class="nav-item"><a class="external-link nav-link" href="https://github.com/rgempp/personnel-selection-utility" aria-label="GitHub"><span class="fa fa-github fa-lg"></span></a></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/rgempp/personnelSelectionUtility" aria-label="GitHub"><span class="fa fa-github fa-lg"></span></a></li>
       </ul>
 </div>
 
@@ -65,7 +65,7 @@
       <img src="../logo.svg" class="logo" alt=""><h1>Continuous and monetary utility: Naylor-Shine, BCG, Boudreau, and Sturman</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/rgempp/personnel-selection-utility/blob/HEAD/vignettes/continuous-monetary-utility-bcg-boudreau-sturman.Rmd" class="external-link"><code>vignettes/continuous-monetary-utility-bcg-boudreau-sturman.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/rgempp/personnelSelectionUtility/blob/HEAD/vignettes/continuous-monetary-utility-bcg-boudreau-sturman.Rmd" class="external-link"><code>vignettes/continuous-monetary-utility-bcg-boudreau-sturman.Rmd</code></a></small>
       <div class="d-none name"><code>continuous-monetary-utility-bcg-boudreau-sturman.Rmd</code></div>
     </div>
 
@@ -74,12 +74,15 @@
 <div class="section level2">
 <h2 id="from-success-ratios-to-continuous-performance">From success ratios to continuous performance<a class="anchor" aria-label="anchor" href="#from-success-ratios-to-continuous-performance"></a>
 </h2>
-<p>Taylor-Russell utility dichotomizes the criterion. Naylor and Shine
-(1965) keep the criterion continuous and compute expected criterion gain
-in standard deviation units. This is usually a better match when
-performance is a continuous construct.</p>
+<p>Taylor-Russell utility dichotomises the criterion. Naylor and Shine
+(1965) keep the criterion continuous and compute the expected criterion
+gain in standard-deviation units. This is usually a better match when
+performance is itself a continuous construct, which is the modal case in
+industrial-organisational research on job-performance taxonomies (Borman
+&amp; Motowidlo, 1993; Campbell, 1990; Rotundo &amp; Sackett, 2002).</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://gempp.cl" class="external-link">personnelSelectionUtility</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rgempp/personnelSelectionUtility" class="external-link">personnelSelectionUtility</a></span><span class="op">)</span></span>
+<span></span>
 <span><span class="fu"><a href="../reference/naylor_shine.html">naylor_shine</a></span><span class="op">(</span>validity <span class="op">=</span> <span class="fl">.35</span>, selection_ratio <span class="op">=</span> <span class="fl">.20</span><span class="op">)</span></span>
 <span><span class="co">#&gt; &lt;psu_ns&gt;</span></span>
 <span><span class="co">#&gt;   validity: 0.35</span></span>
@@ -92,27 +95,63 @@ performance is a continuous construct.</p>
 <span><span class="co">#&gt;   cost: 0</span></span>
 <span><span class="co">#&gt;   gross_utility: 0.489933</span></span>
 <span><span class="co">#&gt;   net_utility: 0.489933</span></span></code></pre></div>
-<p>The expected gain has two steps:</p>
-<ol style="list-style-type: decimal">
-<li>compute the expected standardized predictor score among selected
-applicants;</li>
-<li>multiply it by the validity coefficient.</li>
-</ol>
+<p>The expected gain has two components. First,
+<code><a href="../reference/selected_mean_z.html">selected_mean_z()</a></code> returns the expected standardised
+predictor score among selected applicants, which under the normal model
+is the inverse Mills ratio. Second, this is multiplied by the validity
+coefficient to obtain the expected standardised criterion gain:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mover><mi>Z</mi><mo accent="true">‾</mo></mover><msub><mi>x</mi><mi>s</mi></msub></msub><mspace width="0.278em"></mspace><mo>=</mo><mspace width="0.278em"></mspace><mfrac><mrow><mi>φ</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>z</mi><mi>c</mi></msub><mo stretchy="false" form="postfix">)</mo></mrow><mrow><mn>1</mn><mo>−</mo><mi mathvariant="normal">Φ</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>z</mi><mi>c</mi></msub><mo stretchy="false" form="postfix">)</mo></mrow></mfrac><mspace width="0.278em"></mspace><mo>=</mo><mspace width="0.278em"></mspace><mfrac><mrow><mi>λ</mi><mo stretchy="false" form="prefix">(</mo><mi>S</mi><mi>R</mi><mo stretchy="false" form="postfix">)</mo></mrow><mrow><mi>S</mi><mi>R</mi></mrow></mfrac><mo>,</mo><mspace width="2.0em"></mspace><msub><mover><mi>Z</mi><mo accent="true">‾</mo></mover><msub><mi>y</mi><mi>s</mi></msub></msub><mspace width="0.278em"></mspace><mo>=</mo><mspace width="0.278em"></mspace><msub><mi>r</mi><mrow><mi>x</mi><mi>y</mi></mrow></msub><mo>⋅</mo><msub><mover><mi>Z</mi><mo accent="true">‾</mo></mover><msub><mi>x</mi><mi>s</mi></msub></msub><mo>,</mo></mrow><annotation encoding="application/x-tex">
+\bar{Z}_{x_s} \;=\; \frac{\varphi(z_c)}{1 - \Phi(z_c)} \;=\; \frac{\lambda(SR)}{SR}, \qquad \bar{Z}_{y_s} \;=\; r_{xy} \cdot \bar{Z}_{x_s},
+</annotation></semantics></math></p>
+<p>where
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>z</mi><mi>c</mi></msub><mo>=</mo><msup><mi mathvariant="normal">Φ</mi><mrow><mi>−</mi><mn>1</mn></mrow></msup><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>−</mo><mi>S</mi><mi>R</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">z_c = \Phi^{-1}(1 - SR)</annotation></semantics></math>
+is the cutoff in standardised units and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mo stretchy="false" form="prefix">(</mo><mi>⋅</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\lambda(\cdot)</annotation></semantics></math>
+denotes the standard normal density.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/selected_mean_z.html">selected_mean_z</a></span><span class="op">(</span><span class="fl">.20</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 1.39981</span></span>
 <span><span class="fl">.35</span> <span class="op">*</span> <span class="fu"><a href="../reference/selected_mean_z.html">selected_mean_z</a></span><span class="op">(</span><span class="fl">.20</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0.4899334</span></span></code></pre></div>
+<p>Naylor-Shine is the natural starting point when the analysis stops at
+expected criterion gain in standard-deviation units. The transition to
+monetary utility is governed by Brogden’s (1949) demonstration that,
+under linearity and normality, the expected criterion gain in dollars
+equals
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>r</mi><mrow><mi>x</mi><mi>y</mi></mrow></msub><mo>⋅</mo><mi>S</mi><msub><mi>D</mi><mi>y</mi></msub><mo>⋅</mo><msub><mover><mi>Z</mi><mo accent="true">‾</mo></mover><msub><mi>x</mi><mi>s</mi></msub></msub></mrow><annotation encoding="application/x-tex">r_{xy} \cdot SD_y \cdot \bar{Z}_{x_s}</annotation></semantics></math>.</p>
 </div>
 <div class="section level2">
 <h2 id="brogden-cronbach-gleser-monetary-utility">Brogden-Cronbach-Gleser monetary utility<a class="anchor" aria-label="anchor" href="#brogden-cronbach-gleser-monetary-utility"></a>
 </h2>
-<p>Brogden (1946, 1949) and Cronbach and Gleser (1965) convert the
-standardized criterion gain into utility by multiplying by
-<code>SD_y</code>, the standard deviation of job performance value.
-Schmidt, Hunter, McKenzie, and Muldrow (1979) popularized the
-organizational implications of this formulation for personnel
-selection.</p>
+<p>Brogden (1946, 1949) and Cronbach and Gleser (1965) convert
+standardised criterion gain into monetary utility by multiplying by
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><msub><mi>D</mi><mi>y</mi></msub></mrow><annotation encoding="application/x-tex">SD_y</annotation></semantics></math>,
+the standard deviation of job performance value. The expected
+incremental utility for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>N</mi><mi>s</mi></msub><annotation encoding="application/x-tex">N_s</annotation></semantics></math>
+applicants selected with validity
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>r</mi><mrow><mi>x</mi><mi>y</mi></mrow></msub><annotation encoding="application/x-tex">r_{xy}</annotation></semantics></math>
+at selection ratio
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mi>R</mi></mrow><annotation encoding="application/x-tex">SR</annotation></semantics></math>
+over a tenure horizon
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>T</mi><annotation encoding="application/x-tex">T</annotation></semantics></math>,
+net of total cost
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>C</mi><annotation encoding="application/x-tex">C</annotation></semantics></math>,
+is</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Δ</mi><mi>U</mi><mspace width="0.278em"></mspace><mo>=</mo><mspace width="0.278em"></mspace><msub><mi>N</mi><mi>s</mi></msub><mo>⋅</mo><mi>T</mi><mo>⋅</mo><msub><mi>r</mi><mrow><mi>x</mi><mi>y</mi></mrow></msub><mo>⋅</mo><mi>S</mi><msub><mi>D</mi><mi>y</mi></msub><mo>⋅</mo><msub><mover><mi>Z</mi><mo accent="true">‾</mo></mover><msub><mi>x</mi><mi>s</mi></msub></msub><mspace width="0.278em"></mspace><mo>−</mo><mspace width="0.278em"></mspace><mi>C</mi><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\Delta U \;=\; N_s \cdot T \cdot r_{xy} \cdot SD_y \cdot \bar{Z}_{x_s} \;-\; C.
+</annotation></semantics></math></p>
+<p>When the comparator is an operating procedure with validity
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>r</mi><mtext mathvariant="normal">baseline</mtext></msub><annotation encoding="application/x-tex">r_{\text{baseline}}</annotation></semantics></math>
+rather than random selection, the focal validity is replaced by the
+difference
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>r</mi><mrow><mi>x</mi><mi>y</mi></mrow></msub><mo>−</mo><msub><mi>r</mi><mtext mathvariant="normal">baseline</mtext></msub></mrow><annotation encoding="application/x-tex">r_{xy} - r_{\text{baseline}}</annotation></semantics></math>
+(Sturman, 2000, 2001). Schmidt, Hunter, McKenzie, and Muldrow (1979)
+popularised the organisational implications of this formulation in their
+analysis of the Programmer Aptitude Test (PAT). Their estimates of
+multi-million-dollar utility gains generated the modern utility-analysis
+literature, and a stripped-down version of their calculation is the
+canonical pedagogical example.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/bcg_utility.html">bcg_utility</a></span><span class="op">(</span></span>
 <span>  validity <span class="op">=</span> <span class="fl">.35</span>,</span>
@@ -138,15 +177,39 @@ selection.</p>
 <span><span class="co">#&gt;   cost: 75000</span></span>
 <span><span class="co">#&gt;   gross_utility: 7349000</span></span>
 <span><span class="co">#&gt;   net_utility: 7274000</span></span></code></pre></div>
+<p>The Schmidt et al. (1979) PAT calculation uses different inputs
+(notably
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><msub><mi>D</mi><mi>y</mi></msub></mrow><annotation encoding="application/x-tex">SD_y</annotation></semantics></math>
+in 1979 dollars, a much larger cohort, and a longer tenure horizon) and
+is reproduced in detail in the <em>Reproducing canonical examples</em>
+vignette. The simplified call above illustrates the structure: the gross
+utility is the product of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>N</mi><annotation encoding="application/x-tex">N</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>T</mi><annotation encoding="application/x-tex">T</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>r</mi><mrow><mi>x</mi><mi>y</mi></mrow></msub><annotation encoding="application/x-tex">r_{xy}</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><msub><mi>D</mi><mi>y</mi></msub></mrow><annotation encoding="application/x-tex">SD_y</annotation></semantics></math>,
+and the inverse-Mills selection-intensity term
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mover><mi>Z</mi><mo accent="true">‾</mo></mover><msub><mi>x</mi><mi>s</mi></msub></msub><annotation encoding="application/x-tex">\bar{Z}_{x_s}</annotation></semantics></math>,
+minus total cost.</p>
 </div>
 <div class="section level2">
 <h2 id="the-baseline-problem">The baseline problem<a class="anchor" aria-label="anchor" href="#the-baseline-problem"></a>
 </h2>
-<p>The classical expression compares against random selection. Sturman
-(2001) argues that the realistic baseline is often another selection
-system, not random choice. The package represents this with
-<code>baseline_validity</code> and
-<code>baseline_selection_ratio</code>.</p>
+<p>The classical Brogden-Cronbach-Gleser expression compares the focal
+selection procedure against random selection. Sturman (2000, 2001)
+argued forcefully that the realistic baseline is rarely random choice.
+Almost every organisation already operates with some procedure:
+reference checks (used by
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>97</mn><mi>%</mi></mrow><annotation encoding="application/x-tex">97\%</annotation></semantics></math>
+of organisations according to Gatewood and Feild, 2001), unstructured
+interviews
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>81</mn><mi>%</mi></mrow><annotation encoding="application/x-tex">81\%</annotation></semantics></math>),
+or biodata. The package implements this critique through the
+<code>baseline_validity</code> and <code>baseline_selection_ratio</code>
+arguments. Setting <code>baseline_validity</code> to the validity of the
+operating procedure shifts the comparison from “test versus random” to
+“test versus current system”, which is the operationally relevant
+difference.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">random_baseline</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/bcg_utility.html">bcg_utility</a></span><span class="op">(</span></span>
 <span>  validity <span class="op">=</span> <span class="fl">.35</span>,</span>
@@ -167,44 +230,259 @@ system, not random choice. The package represents this with
 <span>  cost <span class="op">=</span> <span class="fl">75000</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>random <span class="op">=</span> <span class="va">random_baseline</span><span class="op">$</span><span class="va">net_utility</span>,</span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>random   <span class="op">=</span> <span class="va">random_baseline</span><span class="op">$</span><span class="va">net_utility</span>,</span>
 <span>  operating <span class="op">=</span> <span class="va">operating_baseline</span><span class="op">$</span><span class="va">net_utility</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    random operating </span></span>
 <span><span class="co">#&gt;   7274000   3074572</span></span></code></pre></div>
+<p>The shift from random to operating baseline reduces the estimated
+utility by approximately
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>40</mn><mi>%</mi></mrow><annotation encoding="application/x-tex">40\%</annotation></semantics></math>
+in this example, consistent with the average reduction of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>59</mn><mi>%</mi></mrow><annotation encoding="application/x-tex">59\%</annotation></semantics></math>
+that Sturman (2000) documented across the published utility-analysis
+literature. The decision to adopt the new procedure may be unchanged,
+since the incremental utility remains positive, but the <em>expected
+return</em> communicated to organisational decision-makers is materially
+different.</p>
 </div>
 <div class="section level2">
-<h2 id="estimating-sd_y">Estimating <code>SD_y</code><a class="anchor" aria-label="anchor" href="#estimating-sd_y"></a>
+<h2 id="estimating-sd_y-the-four-families">Estimating
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><msub><mi>D</mi><mi>y</mi></msub></mrow><annotation encoding="application/x-tex">SD_y</annotation></semantics></math>:
+the four families<a class="anchor" aria-label="anchor" href="#estimating-sd_y-the-four-families"></a>
 </h2>
-<p>Holling (1998) shows why <code>SD_y</code> is a central vulnerability
-in utility analysis. Small changes in <code>SD_y</code>, especially when
-objective performance distributions are skewed or outliers are present,
-can change monetary utility dramatically. The package includes several
-helpers.</p>
-<p>Percentile judgments use the familiar 15th-to-85th percentile
-approximation.</p>
+<p>Because
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><msub><mi>D</mi><mi>y</mi></msub></mrow><annotation encoding="application/x-tex">SD_y</annotation></semantics></math>
+enters the Brogden-Cronbach-Gleser expression linearly, any error in its
+magnitude propagates one-for-one into the final
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Δ</mi><mi>U</mi></mrow><annotation encoding="application/x-tex">\Delta U</annotation></semantics></math>
+figure: doubling
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><msub><mi>D</mi><mi>y</mi></msub></mrow><annotation encoding="application/x-tex">SD_y</annotation></semantics></math>
+exactly doubles the reported utility, all else equal. As Holling (1998)
+documents empirically, plausible alternative methods can yield
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><msub><mi>D</mi><mi>y</mi></msub></mrow><annotation encoding="application/x-tex">SD_y</annotation></semantics></math>
+estimates that differ by a factor of two or more (with the corresponding
+doubling of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Δ</mi><mi>U</mi></mrow><annotation encoding="application/x-tex">\Delta U</annotation></semantics></math>),
+so the choice of estimation method is not a technicality but a
+substantive decision that should be justified and triangulated.</p>
+<p>Holling (1998) classifies the methods for estimating
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><msub><mi>D</mi><mi>y</mi></msub></mrow><annotation encoding="application/x-tex">SD_y</annotation></semantics></math>
+into four families. The package implements representative members of
+each.</p>
+<div class="section level3">
+<h3 id="cost-accounting">Cost accounting<a class="anchor" aria-label="anchor" href="#cost-accounting"></a>
+</h3>
+<p>The cost-accounting approach assigns a monetary value to each unit of
+measurable production, originating in Roche (1961, cited in Cronbach
+&amp; Gleser, 1965). It is conceptually the most defensible method when
+production is genuinely measurable, but is operationally restricted to
+jobs with quantifiable output.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># 5 employees, 2 output types (e.g., transactions completed and customer-service</span></span>
+<span><span class="co"># hours); unit_values gives the monetary value of one unit of each type.</span></span>
+<span><span class="fu"><a href="../reference/sdy_cost_accounting.html">sdy_cost_accounting</a></span><span class="op">(</span></span>
+<span>  units <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2400</span>,  <span class="fl">18</span>,</span>
+<span>                   <span class="fl">3100</span>,  <span class="fl">22</span>,</span>
+<span>                   <span class="fl">1800</span>,  <span class="fl">14</span>,</span>
+<span>                   <span class="fl">2700</span>,  <span class="fl">25</span>,</span>
+<span>                   <span class="fl">2200</span>,  <span class="fl">20</span><span class="op">)</span>,</span>
+<span>                 ncol <span class="op">=</span> <span class="fl">2</span>, byrow <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>  unit_values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">25</span>, <span class="fl">80</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; $y</span></span>
+<span><span class="co">#&gt; [1] 61440 79260 46120 69500 56600</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $sdy</span></span>
+<span><span class="co">#&gt; [1] 12590.67</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="global-percentile">Global percentile<a class="anchor" aria-label="anchor" href="#global-percentile"></a>
+</h3>
+<p>Schmidt et al. (1979) proposed the percentile-judgement method:
+experts estimate the dollar value of performance at the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>15</mn><annotation encoding="application/x-tex">15</annotation></semantics></math>th,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>50</mn><annotation encoding="application/x-tex">50</annotation></semantics></math>th,
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>85</mn><annotation encoding="application/x-tex">85</annotation></semantics></math>th
+percentiles, and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><msub><mi>D</mi><mi>y</mi></msub></mrow><annotation encoding="application/x-tex">SD_y</annotation></semantics></math>
+is approximated as
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><msub><mi>P</mi><mn>85</mn></msub><mo>−</mo><msub><mi>P</mi><mn>15</mn></msub><mo stretchy="false" form="postfix">)</mo><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">(P_{85} - P_{15}) / 2</annotation></semantics></math>
+under the normal-model assumption. This method has been the most widely
+applied historically but has been criticised for between-judge
+dispersion, anchoring effects, and cognitive difficulty (Bobko, Karren,
+&amp; Parkington, 1983).</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/sdy_percentile.html">sdy_percentile</a></span><span class="op">(</span>p15 <span class="op">=</span> <span class="fl">60000</span>, p85 <span class="op">=</span> <span class="fl">140000</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 40000</span></span></code></pre></div>
-<p>Proportional rules express <code>SD_y</code> as a fraction of pay or
-output value.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+</div>
+<div class="section level3">
+<h3 id="proportional-rules">Proportional rules<a class="anchor" aria-label="anchor" href="#proportional-rules"></a>
+</h3>
+<p>Schmidt, Hunter, and Pearlman (1982) proposed proportional rules
+tying
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><msub><mi>D</mi><mi>y</mi></msub></mrow><annotation encoding="application/x-tex">SD_y</annotation></semantics></math>
+to mean salary: approximately
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>40</mn><mi>%</mi></mrow><annotation encoding="application/x-tex">40\%</annotation></semantics></math>
+of mean pay for jobs of low to medium complexity, and approximately
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>70</mn><mi>%</mi></mrow><annotation encoding="application/x-tex">70\%</annotation></semantics></math>
+for jobs of high complexity or when output value is the relevant
+criterion. Raju, Burke, and Normand (1990) reformulated the model in
+terms of the coefficient of variation of performance ratings, which is
+implemented in <code><a href="../reference/sdy_rbn.html">sdy_rbn()</a></code>.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/sdy_proportional.html">sdy_proportional</a></span><span class="op">(</span>mean_pay <span class="op">=</span> <span class="fl">80000</span>, multiplier <span class="op">=</span> <span class="fl">.40</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 32000</span></span>
 <span><span class="fu"><a href="../reference/sdy_proportional.html">sdy_proportional</a></span><span class="op">(</span>mean_pay <span class="op">=</span> <span class="fl">80000</span>, multiplier <span class="op">=</span> <span class="fl">.70</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 56000</span></span></code></pre></div>
-<p>Observed monetary criterion data can be used directly.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/sdy_rbn.html">sdy_rbn</a></span><span class="op">(</span>mean_pay <span class="op">=</span> <span class="fl">80000</span>, coefficient_variation <span class="op">=</span> <span class="fl">.20</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 16000</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="individualised-methods">Individualised methods<a class="anchor" aria-label="anchor" href="#individualised-methods"></a>
+</h3>
+<p>CREPID (Cascio &amp; Ramos, 1986) decomposes the job into weighted
+activities and estimates the dollar value of each, summing across
+activities to obtain
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><msub><mi>D</mi><mi>y</mi></msub></mrow><annotation encoding="application/x-tex">SD_y</annotation></semantics></math>.
+Variants appear in Janz and Dunnette (1977), Edwards, Frederick, and
+Burke (1988), and the superior-equivalents technique of Eaton, Wing, and
+Mitchell (1985) and Burke and Frederick (1984, 1986).</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># CREPID weights activities by time/frequency and importance, distributes the</span></span>
+<span><span class="co"># average salary across activities, and computes individual-level monetary value.</span></span>
+<span><span class="va">activities</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
+<span>  activity        <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Strategic planning"</span>, <span class="st">"Team supervision"</span>, <span class="st">"Reporting"</span><span class="op">)</span>,</span>
+<span>  time_frequency  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.40</span>, <span class="fl">.35</span>, <span class="fl">.25</span><span class="op">)</span>,</span>
+<span>  importance      <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">ratings</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>  <span class="fl">4</span>, <span class="fl">3</span>, <span class="fl">3</span>,</span>
+<span>  <span class="fl">5</span>, <span class="fl">4</span>, <span class="fl">4</span>,</span>
+<span>  <span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">3</span>,</span>
+<span>  <span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">4</span>,</span>
+<span>  <span class="fl">5</span>, <span class="fl">5</span>, <span class="fl">5</span></span>
+<span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">5</span>, byrow <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/sdy_crepid.html">sdy_crepid</a></span><span class="op">(</span><span class="va">activities</span>, <span class="va">ratings</span>, salary <span class="op">=</span> <span class="fl">80000</span><span class="op">)</span></span>
+<span><span class="co">#&gt; $activity_weights</span></span>
+<span><span class="co">#&gt;     activity time_frequency importance raw_weight final_weight dollar_value</span></span>
+<span><span class="co">#&gt; 1 activity_1           0.40          3        1.2    0.5000000     40000.00</span></span>
+<span><span class="co">#&gt; 2 activity_2           0.35          2        0.7    0.2916667     23333.33</span></span>
+<span><span class="co">#&gt; 3 activity_3           0.25          2        0.5    0.2083333     16666.67</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $y</span></span>
+<span><span class="co">#&gt; [1] 280000.0 360000.0 263333.3 343333.3 400000.0</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $sdy</span></span>
+<span><span class="co">#&gt; [1] 56833.09</span></span>
+<span></span>
+<span><span class="co"># Superior-equivalents: SDy = (superior - typical) / z_difference, with z_difference</span></span>
+<span><span class="co"># the standardised distance the analyst assumes separates the two anchors.</span></span>
+<span><span class="fu"><a href="../reference/sdy_superior_equivalents.html">sdy_superior_equivalents</a></span><span class="op">(</span>superior_value <span class="op">=</span> <span class="fl">140000</span>, typical_value <span class="op">=</span> <span class="fl">100000</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 40000</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="triangulation">Triangulation<a class="anchor" aria-label="anchor" href="#triangulation"></a>
+</h3>
+<p>The empirical comparisons of Bobko, Karren, and Parkington (1983),
+Becker and Huselid (1992), and Hakstian, Wooley, Woolsey, and Kryger
+(1991) indicate that CREPID and the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>40</mn><mi>%</mi></mrow><annotation encoding="application/x-tex">40\%</annotation></semantics></math>
+rule converge to broadly similar values, while the global percentile
+method tends to produce values approximately
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1.8</mn><annotation encoding="application/x-tex">1.8</annotation></semantics></math>
+times larger. Triangulation across at least two methods is the practice
+supported by these comparisons, and the analyst should report a
+sensitivity range rather than a single value. Direct estimation from
+observed monetary criterion data, when available, is the most defensible
+anchor.</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/sdy_observed.html">sdy_observed</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">90000</span>, <span class="fl">110000</span>, <span class="fl">85000</span>, <span class="fl">150000</span>, <span class="fl">125000</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 26598.87</span></span></code></pre></div>
+</div>
+</div>
+<div class="section level2">
+<h2 id="schmidt-hunter-pearlman-intervention-utility">Schmidt-Hunter-Pearlman intervention utility<a class="anchor" aria-label="anchor" href="#schmidt-hunter-pearlman-intervention-utility"></a>
+</h2>
+<p>A common conceptual error is to apply Brogden-Cronbach-Gleser to
+evaluation problems for which it is not designed. Schmidt, Hunter, and
+Pearlman (1982) developed the parallel utility model for
+<em>interventions</em> such as training programmes, where the
+appropriate effect size is Cohen’s
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>d</mi><annotation encoding="application/x-tex">d</annotation></semantics></math>
+between treated and control groups rather than a validity
+coefficient:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Δ</mi><msub><mi>U</mi><mrow><mi>S</mi><mi>H</mi><mi>P</mi></mrow></msub><mspace width="0.278em"></mspace><mo>=</mo><mspace width="0.278em"></mspace><mi>N</mi><mo>⋅</mo><mi>T</mi><mo>⋅</mo><mi>d</mi><mo>⋅</mo><mi>S</mi><msub><mi>D</mi><mi>y</mi></msub><mspace width="0.278em"></mspace><mo>−</mo><mspace width="0.278em"></mspace><mi>C</mi><mo>,</mo><mspace width="2.0em"></mspace><mi>d</mi><mspace width="0.278em"></mspace><mo>=</mo><mspace width="0.278em"></mspace><mfrac><mrow><msub><mover><mi>Y</mi><mo accent="true">‾</mo></mover><mtext mathvariant="normal">treated</mtext></msub><mo>−</mo><msub><mover><mi>Y</mi><mo accent="true">‾</mo></mover><mtext mathvariant="normal">control</mtext></msub></mrow><mrow><mi>S</mi><msub><mi>D</mi><mtext mathvariant="normal">pooled</mtext></msub></mrow></mfrac><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\Delta U_{SHP} \;=\; N \cdot T \cdot d \cdot SD_y \;-\; C, \qquad d \;=\; \frac{\bar{Y}_{\text{treated}} - \bar{Y}_{\text{control}}}{SD_{\text{pooled}}}.
+</annotation></semantics></math></p>
+<p>The function <code><a href="../reference/shp_utility.html">shp_utility()</a></code> implements this
+formulation.</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/shp_utility.html">shp_utility</a></span><span class="op">(</span></span>
+<span>  effect_size_d <span class="op">=</span> <span class="fl">.50</span>,</span>
+<span>  sdy           <span class="op">=</span> <span class="fl">50000</span>,</span>
+<span>  n_treated     <span class="op">=</span> <span class="fl">100</span>,</span>
+<span>  tenure        <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>  cost          <span class="op">=</span> <span class="fl">25000</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; &lt;psu_shp&gt;</span></span>
+<span><span class="co">#&gt;   effect_size_d: 0.5</span></span>
+<span><span class="co">#&gt;   approximate_r: 0.242536</span></span>
+<span><span class="co">#&gt;   sdy: 50000</span></span>
+<span><span class="co">#&gt;   n_treated: 100</span></span>
+<span><span class="co">#&gt;   tenure: 3</span></span>
+<span><span class="co">#&gt;   cost: 25000</span></span>
+<span><span class="co">#&gt;   gross_utility: 7500000</span></span>
+<span><span class="co">#&gt;   net_utility: 7475000</span></span></code></pre></div>
+<p>The conversion between
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>d</mi><annotation encoding="application/x-tex">d</annotation></semantics></math>
+under the equal-variance binormal assumption is provided by
+<code><a href="../reference/cor_to_d.html">cor_to_d()</a></code> and <code><a href="../reference/d_to_cor.html">d_to_cor()</a></code>. Mathieu and Leonard
+(1987) and Cascio (1989) document representative applications to
+training programmes, while Burke and Day (1986) and Morrow, Jarrett, and
+Rupinski (1997) provide cumulative meta-analytic and longitudinal
+estimates respectively. The substantive point is that selection utility
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math>-based)
+and intervention utility
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>d</mi><annotation encoding="application/x-tex">d</annotation></semantics></math>-based)
+require different inputs and different study designs, even when the
+outcome metric
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Δ</mi><mi>U</mi></mrow><annotation encoding="application/x-tex">\Delta U</annotation></semantics></math>
+in dollars) is identical.</p>
 </div>
 <div class="section level2">
 <h2 id="boudreau-style-extensions">Boudreau-style extensions<a class="anchor" aria-label="anchor" href="#boudreau-style-extensions"></a>
 </h2>
-<p>Boudreau (1983, 1991) extends the basic model by adding discounting,
-taxes, value multipliers, and employee flows. In
-<code>personnelSelectionUtility</code>, the preferred argument names are
-<code>n_by_period</code> and <code>cost_by_period</code>.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<p>Boudreau (1983, 1991) extended the basic monetary utility model along
+several economically relevant dimensions: discounting future benefits to
+net present value, separating fixed from variable costs, applying tax
+rates, incorporating contribution margins, and modelling employee flows
+over multiple periods. Per period, the discounted incremental utility
+is</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Δ</mi><msub><mi>U</mi><mi>t</mi></msub><mspace width="0.278em"></mspace><mo>=</mo><mspace width="0.278em"></mspace><mfrac><mrow><msub><mi>N</mi><mi>t</mi></msub><mo>⋅</mo><mi mathvariant="normal">Δ</mi><msub><mover><mi>Z</mi><mo accent="true">‾</mo></mover><mi>y</mi></msub><mo>⋅</mo><mi>S</mi><msub><mi>D</mi><mi>y</mi></msub><mo>⋅</mo><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>+</mo><mi>V</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>−</mo><mi>T</mi><mi>A</mi><mi>X</mi><mo stretchy="false" form="postfix">)</mo></mrow><mrow><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>+</mo><mi>i</mi><msup><mo stretchy="false" form="postfix">)</mo><mi>t</mi></msup></mrow></mfrac><mspace width="0.278em"></mspace><mo>−</mo><mspace width="0.278em"></mspace><msub><mi>C</mi><mi>t</mi></msub><mo>,</mo></mrow><annotation encoding="application/x-tex">
+\Delta U_t \;=\; \frac{N_t \cdot \Delta\bar{Z}_y \cdot SD_y \cdot (1 + V)(1 - TAX)}{(1 + i)^t} \;-\; C_t,
+</annotation></semantics></math></p>
+<p>with
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>N</mi><mi>t</mi></msub><annotation encoding="application/x-tex">N_t</annotation></semantics></math>
+the active headcount in period
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>V</mi><annotation encoding="application/x-tex">V</annotation></semantics></math>
+the variable-value (or contribution-margin) multiplier,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi><mi>A</mi><mi>X</mi></mrow><annotation encoding="application/x-tex">TAX</annotation></semantics></math>
+the tax rate,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+the discount rate, and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>C</mi><mi>t</mi></msub><annotation encoding="application/x-tex">C_t</annotation></semantics></math>
+the period cost. Total utility is the sum of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Δ</mi><msub><mi>U</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">\Delta U_t</annotation></semantics></math>
+over the horizon. The function <code><a href="../reference/boudreau_utility.html">boudreau_utility()</a></code> accepts
+these inputs through the arguments <code>n_by_period</code>,
+<code>cost_by_period</code>, <code>contribution_margin</code>,
+<code>tax_rate</code>, and <code>discount_rate</code>.</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/boudreau_utility.html">boudreau_utility</a></span><span class="op">(</span></span>
 <span>  validity <span class="op">=</span> <span class="fl">.35</span>,</span>
 <span>  baseline_validity <span class="op">=</span> <span class="fl">.20</span>,</span>
@@ -225,9 +503,11 @@ taxes, value multipliers, and employee flows. In
 <span><span class="co">#&gt;   tax_rate: 0.25</span></span>
 <span><span class="co">#&gt;   discount_rate: 0.08</span></span>
 <span><span class="co">#&gt;   net_present_value: 579234</span></span></code></pre></div>
-<p>If the expected incremental standardized gain comes from an external
-model, pass it directly through <code>delta_z_y</code>.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<p>If the expected incremental standardised gain comes from an external
+model, it can be passed directly through <code>delta_z_y</code>,
+bypassing the internal computation from <code>validity</code>,
+<code>baseline_validity</code>, and <code>selection_ratio</code>.</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/boudreau_utility.html">boudreau_utility</a></span><span class="op">(</span></span>
 <span>  delta_z_y <span class="op">=</span> <span class="fl">.25</span>,</span>
 <span>  sdy <span class="op">=</span> <span class="fl">50000</span>,</span>
@@ -243,16 +523,162 @@ model, pass it directly through <code>delta_z_y</code>.</p>
 <span><span class="co">#&gt;   tax_rate: 0</span></span>
 <span><span class="co">#&gt;   discount_rate: 0.08</span></span>
 <span><span class="co">#&gt;   net_present_value: 2829790</span></span></code></pre></div>
+<p>When inflation is non-trivial, the discount rate should be adjusted
+accordingly. Tziner, Meir, Dahan, and Birati (1994) show that the
+inflation-adjusted rate is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>i</mi><mi>a</mi></msub><mo>=</mo><mi>i</mi><mo>+</mo><mi>f</mi><mo>+</mo><mi>i</mi><mo>⋅</mo><mi>f</mi></mrow><annotation encoding="application/x-tex">i_a = i + f + i \cdot f</annotation></semantics></math>,
+where
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+is the nominal discount rate and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>f</mi><annotation encoding="application/x-tex">f</annotation></semantics></math>
+is the inflation rate. The package exposes this transformation as
+<code><a href="../reference/inflation_adjusted_rate.html">inflation_adjusted_rate()</a></code>.</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/inflation_adjusted_rate.html">inflation_adjusted_rate</a></span><span class="op">(</span>discount_rate <span class="op">=</span> <span class="fl">.08</span>, inflation_rate <span class="op">=</span> <span class="fl">.025</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 0.107</span></span></code></pre></div>
+<p>The combined <code><a href="../reference/boudreau_utility.html">boudreau_utility()</a></code> framework is closer to
+the standard capital-budgeting practice of corporate finance, but it
+inherits the well-documented difficulties that Hunter, Schmidt, and
+Coggin (1988) identified from inside the Schmidt-Hunter programme:
+discount-rate selection, period definition, and the boundary between
+fixed and variable costs are all decisions that materially affect the
+estimate and that admit no purely statistical resolution.</p>
 </div>
 <div class="section level2">
-<h2 id="multiple-predictors-and-multiple-outcomes">Multiple predictors and multiple outcomes<a class="anchor" aria-label="anchor" href="#multiple-predictors-and-multiple-outcomes"></a>
+<h2 id="composite-formation">Composite formation<a class="anchor" aria-label="anchor" href="#composite-formation"></a>
 </h2>
-<p>Sturman (2001) generalizes utility analysis to multiple selection
-devices and multiple outcomes. The key move is to evaluate the
-incremental validity of a new predictor system over the current system,
-while allowing the criterion to be a weighted composite of several
-outcomes.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<p>When multiple predictors are combined into a single composite score,
+the validity, reliability, and intercorrelation of the composite follow
+from the well-known formulae in Lord and Novick (1968). The package
+implements these as the <code>fuse_*</code> family.</p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">weights</span>            <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.5</span>, <span class="fl">.3</span>, <span class="fl">.2</span><span class="op">)</span></span>
+<span><span class="va">item_validities</span>    <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.40</span>, <span class="fl">.30</span>, <span class="fl">.25</span><span class="op">)</span></span>
+<span><span class="va">item_reliabilities</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.85</span>, <span class="fl">.80</span>, <span class="fl">.75</span><span class="op">)</span></span>
+<span><span class="va">item_cor</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>  <span class="fl">1.00</span>, <span class="fl">.30</span>, <span class="fl">.20</span>,</span>
+<span>  <span class="fl">.30</span>, <span class="fl">1.00</span>, <span class="fl">.25</span>,</span>
+<span>  <span class="fl">.20</span>, <span class="fl">.25</span>, <span class="fl">1.00</span></span>
+<span><span class="op">)</span>, <span class="fl">3</span>, <span class="fl">3</span>, byrow <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/fuse_validity.html">fuse_validity</a></span><span class="op">(</span><span class="va">weights</span>, <span class="va">item_cor</span>, <span class="va">item_validities</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 0.4626814</span></span>
+<span><span class="fu"><a href="../reference/fuse_reliability.html">fuse_reliability</a></span><span class="op">(</span><span class="va">weights</span>, <span class="va">item_cor</span>, <span class="va">item_reliabilities</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 0.8787037</span></span>
+<span></span>
+<span><span class="co"># fuse_composite_cor() returns the correlation matrix between several composites</span></span>
+<span><span class="co"># whose weights are stacked column-wise. The example below contrasts a unit-weighted</span></span>
+<span><span class="co"># composite with a validity-weighted composite of the same items.</span></span>
+<span><span class="va">W</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span>unit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>, validity_weighted <span class="op">=</span> <span class="va">item_validities</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/fuse_composite_cor.html">fuse_composite_cor</a></span><span class="op">(</span>weights_matrix <span class="op">=</span> <span class="va">W</span>, item_cor <span class="op">=</span> <span class="va">item_cor</span><span class="op">)</span></span>
+<span><span class="co">#&gt;                        unit validity_weighted</span></span>
+<span><span class="co">#&gt; unit              1.0000000         0.9900312</span></span>
+<span><span class="co">#&gt; validity_weighted 0.9900312         1.0000000</span></span></code></pre></div>
+<p>The composite validity is generally smaller than the largest
+single-predictor validity unless the predictors carry independent
+variance with respect to the criterion, which connects directly to the
+incremental-validity reasoning developed below. Disattenuation of the
+observed correlation for measurement error in the criterion is provided
+by <code><a href="../reference/disattenuate_correlation.html">disattenuate_correlation()</a></code>.</p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/disattenuate_correlation.html">disattenuate_correlation</a></span><span class="op">(</span>r_observed <span class="op">=</span> <span class="fl">.35</span>, reliability_x <span class="op">=</span> <span class="fl">.85</span>, reliability_y <span class="op">=</span> <span class="fl">.70</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 0.4537426</span></span></code></pre></div>
+<p>Disattenuation moves the analysis from the observed-score metric to
+the true-score metric, which is the appropriate input for
+population-level utility statements but should be reported alongside the
+observed-score estimate (Schmidt &amp; Hunter, 2015).</p>
+</div>
+<div class="section level2">
+<h2 id="range-restriction-corrections">Range-restriction corrections<a class="anchor" aria-label="anchor" href="#range-restriction-corrections"></a>
+</h2>
+<p>A second standard correction is for range restriction. Sackett,
+Laczo, and Arvey (2002) and Sackett, Lievens, Berry, and Landers (2007)
+distinguish <em>direct</em> range restriction, which operates on the
+predictor that was used as the selection variable, from
+<em>incidental</em> range restriction, which operates on variables
+correlated with the selected variable. The Thorndike Case II correction
+handles direct restriction; the Lawley (1943) multivariate correction
+handles incidental restriction in correlated predictors.</p>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/correct_r_direct_range_restriction.html">correct_r_direct_range_restriction</a></span><span class="op">(</span></span>
+<span>  r_restricted            <span class="op">=</span> <span class="fl">.25</span>,</span>
+<span>  range_restriction_ratio <span class="op">=</span> <span class="fl">1.40</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 0.3399501</span></span></code></pre></div>
+<p>The Lawley multivariate correction is more general and covers the
+case in which selection occurs on a composite or on a different variable
+than the one being corrected.</p>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Three-variable example: selection on X1 (cognitive ability, the predictor used as</span></span>
+<span><span class="co"># the selection variable); incidental restriction on X2 (interview) and Y (criterion).</span></span>
+<span><span class="va">sigma_star</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>  <span class="fl">1.00</span>, <span class="fl">.30</span>, <span class="fl">.25</span>,</span>
+<span>  <span class="fl">.30</span>, <span class="fl">1.00</span>, <span class="fl">.20</span>,</span>
+<span>  <span class="fl">.25</span>, <span class="fl">.20</span>, <span class="fl">1.00</span></span>
+<span><span class="op">)</span>, <span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span></span>
+<span><span class="co"># Unrestricted SD of X1 is 1/.6 times the restricted SD; variance increases by 1/.6^2.</span></span>
+<span><span class="va">sigma_ss_unrestricted</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">/</span> <span class="fl">0.6</span><span class="op">^</span><span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/correct_r_lawley.html">correct_r_lawley</a></span><span class="op">(</span></span>
+<span>  sigma_restricted      <span class="op">=</span> <span class="va">sigma_star</span>,</span>
+<span>  selection_indices     <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  sigma_ss_unrestricted <span class="op">=</span> <span class="va">sigma_ss_unrestricted</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; $sigma_corrected</span></span>
+<span><span class="co">#&gt;           [,1]      [,2]      [,3]</span></span>
+<span><span class="co">#&gt; [1,] 1.0000000 0.4642383 0.3952847</span></span>
+<span><span class="co">#&gt; [2,] 0.4642383 1.0000000 0.2936101</span></span>
+<span><span class="co">#&gt; [3,] 0.3952847 0.2936101 1.0000000</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $sigma_restricted</span></span>
+<span><span class="co">#&gt;      [,1] [,2] [,3]</span></span>
+<span><span class="co">#&gt; [1,] 1.00  0.3 0.25</span></span>
+<span><span class="co">#&gt; [2,] 0.30  1.0 0.20</span></span>
+<span><span class="co">#&gt; [3,] 0.25  0.2 1.00</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $selection_indices</span></span>
+<span><span class="co">#&gt; [1] 1</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $incidental_indices</span></span>
+<span><span class="co">#&gt; [1] 2 3</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $u</span></span>
+<span><span class="co">#&gt; [1] 0.6</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $sign_changes</span></span>
+<span><span class="co">#&gt; [1] 0</span></span></code></pre></div>
+<p>Ree, Carretta, Earles, and Albert (1994) document that multivariate
+range-restriction corrections can occasionally produce sign changes when
+the unrestricted covariance structure is poorly estimated, which is a
+strong argument for reporting both corrected and uncorrected values and
+for inspecting the implied unrestricted matrix for plausibility.</p>
+</div>
+<div class="section level2">
+<h2 id="incremental-validity-and-predictor-importance">Incremental validity and predictor importance<a class="anchor" aria-label="anchor" href="#incremental-validity-and-predictor-importance"></a>
+</h2>
+<p>When a battery already exists and a candidate predictor is being
+considered for addition, the relevant quantity is not the marginal
+correlation of the new predictor with the criterion but the
+<em>incremental validity</em> of the augmented battery over the existing
+one. Sturman (2001) developed the matrix formulation of this problem as
+a <em>restricted canonical correlation</em>, in which the predictor-side
+weights are optimised given a fixed criterion-side composite weighting.
+With predictor correlation matrix
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝚺</mi><mn>11</mn></msub><annotation encoding="application/x-tex">\boldsymbol{\Sigma}_{11}</annotation></semantics></math>,
+predictor-criterion correlation matrix
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝚺</mi><mn>12</mn></msub><annotation encoding="application/x-tex">\boldsymbol{\Sigma}_{12}</annotation></semantics></math>,
+criterion correlation matrix
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝚺</mi><mn>22</mn></msub><annotation encoding="application/x-tex">\boldsymbol{\Sigma}_{22}</annotation></semantics></math>,
+fixed criterion weights
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐛</mi><annotation encoding="application/x-tex">\mathbf{b}</annotation></semantics></math>,
+and predictor weights
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐚</mi><annotation encoding="application/x-tex">\mathbf{a}</annotation></semantics></math>
+to be determined,</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>r</mi><mrow><mi>u</mi><mi>v</mi></mrow></msub><mspace width="0.278em"></mspace><mo>=</mo><mspace width="0.278em"></mspace><mfrac><mrow><msup><mi>𝐚</mi><mi>⊤</mi></msup><msub><mi>𝚺</mi><mn>12</mn></msub><mi>𝐛</mi></mrow><mrow><msqrt><mrow><msup><mi>𝐚</mi><mi>⊤</mi></msup><msub><mi>𝚺</mi><mn>11</mn></msub><mi>𝐚</mi></mrow></msqrt><mo>⋅</mo><msqrt><mrow><msup><mi>𝐛</mi><mi>⊤</mi></msup><msub><mi>𝚺</mi><mn>22</mn></msub><mi>𝐛</mi></mrow></msqrt></mrow></mfrac><mo>,</mo></mrow><annotation encoding="application/x-tex">
+r_{uv} \;=\; \frac{\mathbf{a}^{\top} \boldsymbol{\Sigma}_{12} \mathbf{b}}{\sqrt{\mathbf{a}^{\top} \boldsymbol{\Sigma}_{11} \mathbf{a}} \cdot \sqrt{\mathbf{b}^{\top} \boldsymbol{\Sigma}_{22} \mathbf{b}}},
+</annotation></semantics></math></p>
+<p>with the optimal predictor-side weights given by
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐚</mi><mo>∝</mo><msubsup><mi>𝚺</mi><mn>11</mn><mrow><mi>−</mi><mn>1</mn></mrow></msubsup><msub><mi>𝚺</mi><mn>12</mn></msub><mi>𝐛</mi></mrow><annotation encoding="application/x-tex">\mathbf{a} \propto \boldsymbol{\Sigma}_{11}^{-1} \boldsymbol{\Sigma}_{12} \mathbf{b}</annotation></semantics></math>.</p>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">S11</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">.30</span>, <span class="fl">.30</span>, <span class="fl">1</span><span class="op">)</span>, <span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="va">S12</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.30</span>, <span class="fl">.20</span>, <span class="fl">.25</span>, <span class="fl">.15</span><span class="op">)</span>, <span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="va">S22</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">.40</span>, <span class="fl">.40</span>, <span class="fl">1</span><span class="op">)</span>, <span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span></span>
@@ -260,10 +686,9 @@ outcomes.</p>
 <span><span class="fu"><a href="../reference/restricted_canonical_validity.html">restricted_canonical_validity</a></span><span class="op">(</span><span class="va">S11</span>, <span class="va">S12</span>, <span class="va">S22</span>, criterion_weights <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.6</span>, <span class="fl">.4</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; &lt;psu_incremental_validity&gt;</span></span>
 <span><span class="co">#&gt;   validity: 0.352614</span></span></code></pre></div>
-<p>To evaluate whether adding a predictor is worthwhile, use
-<code><a href="../reference/incremental_validity.html">incremental_validity()</a></code> and then feed the resulting
-increment into a utility model.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<p>The function <code><a href="../reference/incremental_validity.html">incremental_validity()</a></code> evaluates the gain
+from adding new predictors to an existing baseline.</p>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Rxx</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">.30</span>, <span class="fl">.20</span>,</span>
 <span>                <span class="fl">.30</span>, <span class="fl">1</span>, <span class="fl">.25</span>,</span>
 <span>                <span class="fl">.20</span>, <span class="fl">.25</span>, <span class="fl">1</span><span class="op">)</span>, <span class="fl">3</span>, <span class="fl">3</span>, byrow <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
@@ -285,58 +710,277 @@ increment into a utility model.</p>
 <span><span class="co">#&gt;   expanded_validity: 0.379438</span></span>
 <span><span class="co">#&gt;   incremental_validity: 0.0303873</span></span>
 <span><span class="co">#&gt;   added_predictors: 3</span></span></code></pre></div>
+<p>Two contemporary methods for quantifying the relative importance of
+predictors complement this matrix formulation. Johnson’s (2000)
+relative-weights method decomposes the model
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>R</mi><mn>2</mn></msup><annotation encoding="application/x-tex">R^2</annotation></semantics></math>
+into approximately uncorrelated contributions, and Budescu’s (1993)
+dominance analysis evaluates each predictor across all subsets of the
+other predictors.</p>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># For predictor-importance methods, the criterion side collapses to a single</span></span>
+<span><span class="co"># criterion (e.g., overall job performance):</span></span>
+<span><span class="va">rxy_single</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.30</span>, <span class="fl">.25</span>, <span class="fl">.35</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/relative_weights.html">relative_weights</a></span><span class="op">(</span>predictor_cor <span class="op">=</span> <span class="va">Rxx</span>, criterion_cor <span class="op">=</span> <span class="va">rxy_single</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   predictor raw_weight rescaled_weight percent_of_r2</span></span>
+<span><span class="co">#&gt; 1         1 0.06156283      0.06156283      32.45758</span></span>
+<span><span class="co">#&gt; 2         2 0.03381629      0.03381629      17.82886</span></span>
+<span><span class="co">#&gt; 3         3 0.09429252      0.09429252      49.71356</span></span>
+<span><span class="fu"><a href="../reference/dominance_analysis.html">dominance_analysis</a></span><span class="op">(</span>predictor_cor <span class="op">=</span> <span class="va">Rxx</span>, predictor_criterion_cor <span class="op">=</span> <span class="va">rxy_single</span><span class="op">)</span></span>
+<span><span class="co">#&gt; &lt;psu_dominance&gt;</span></span>
+<span><span class="co">#&gt;   r_squared_full: 0.189672</span></span></code></pre></div>
+<p>The substantive lesson, formalised by Sturman (2001), is that a
+predictor with high marginal correlation can have negligible or even
+negative incremental validity if it is highly redundant with predictors
+already in the battery, and conversely a predictor with low marginal
+correlation can have high incremental validity through suppression
+effects. Reporting both relative weights and dominance results,
+alongside the matrix-restricted canonical validity, provides a
+multi-method check on the importance of any candidate predictor.</p>
+</div>
+<div class="section level2">
+<h2 id="the-integrated-sturman-comprehensive-model">The integrated Sturman comprehensive model<a class="anchor" aria-label="anchor" href="#the-integrated-sturman-comprehensive-model"></a>
+</h2>
+<p>Sturman (2001) integrates several of the corrections developed above
+into a single comprehensive utility model: incremental validity over the
+operating baseline, multidimensional criterion through restricted
+canonical reweighting, multi-period employee flows, taxes and
+discounting, probationary survival, and offer rejection. The function
+<code><a href="../reference/sturman_comprehensive.html">sturman_comprehensive()</a></code> composes these adjustments and
+returns both the integrated estimate and the cumulative cascade.</p>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">S11</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">.30</span>, <span class="fl">.30</span>, <span class="fl">1</span><span class="op">)</span>, <span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="va">S12</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.30</span>, <span class="fl">.10</span>, <span class="fl">.15</span>, <span class="fl">.25</span><span class="op">)</span>, <span class="fl">2</span>, <span class="fl">2</span>, byrow <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">S22</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">.40</span>, <span class="fl">.40</span>, <span class="fl">1</span><span class="op">)</span>, <span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sturman_comprehensive.html">sturman_comprehensive</a></span><span class="op">(</span></span>
+<span>  validity                       <span class="op">=</span> <span class="fl">.35</span>,</span>
+<span>  baseline_validity              <span class="op">=</span> <span class="fl">.20</span>,</span>
+<span>  selection_ratio                <span class="op">=</span> <span class="fl">.20</span>,</span>
+<span>  sdy                            <span class="op">=</span> <span class="fl">50000</span>,</span>
+<span>  n_year_one                     <span class="op">=</span> <span class="fl">100</span>,</span>
+<span>  tenure                         <span class="op">=</span> <span class="fl">5</span>,</span>
+<span>  fixed_cost                     <span class="op">=</span> <span class="fl">75000</span>,</span>
+<span>  hires_per_period               <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">15</span>, <span class="fl">15</span>, <span class="fl">15</span>, <span class="fl">15</span><span class="op">)</span>,</span>
+<span>  losses_per_period              <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">15</span>, <span class="fl">15</span>, <span class="fl">15</span>, <span class="fl">15</span><span class="op">)</span>,</span>
+<span>  tax_rate                       <span class="op">=</span> <span class="fl">.25</span>,</span>
+<span>  discount_rate                  <span class="op">=</span> <span class="fl">.08</span>,</span>
+<span>  predictor_cor                  <span class="op">=</span> <span class="va">S11</span>,</span>
+<span>  predictor_criterion_cor        <span class="op">=</span> <span class="va">S12</span>,</span>
+<span>  criterion_cor                  <span class="op">=</span> <span class="va">S22</span>,</span>
+<span>  criterion_weights              <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.7</span>, <span class="fl">.3</span><span class="op">)</span>,</span>
+<span>  probation_cutoff_z             <span class="op">=</span> <span class="op">-</span><span class="fl">1</span>,</span>
+<span>  acceptance_rate                <span class="op">=</span> <span class="fl">.70</span>,</span>
+<span>  quality_acceptance_correlation <span class="op">=</span> <span class="op">-</span><span class="fl">0.20</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">s</span></span>
+<span><span class="co">#&gt; &lt;psu_sturman: Sturman (2001) comprehensive utility&gt;</span></span>
+<span><span class="co">#&gt;   Comprehensive net utility: 3759820 </span></span>
+<span><span class="co">#&gt;   Effective validity: 0.3068  (baseline: 0.2 )</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   Cascade:</span></span>
+<span><span class="co">#&gt;                            step net_utility pct_of_naive</span></span>
+<span><span class="co">#&gt;  1. Naive BCG (random baseline)    12173334    100.00000</span></span>
+<span><span class="co">#&gt;         2. + operating baseline     5174286     42.50509</span></span>
+<span><span class="co">#&gt;  3. + multidim. criterion (RCV)     3663342     30.09317</span></span>
+<span><span class="co">#&gt;     4. + flows + tax + discount     2169473     17.82152</span></span>
+<span><span class="co">#&gt;                  5. + probation     5476999     44.99178</span></span>
+<span><span class="co">#&gt;            6. + offer rejection     3759816     30.88567</span></span></code></pre></div>
+<p>The cumulative cascade is available in <code>s$cascade</code>, the
+effective validity actually used for the calculations after restricted
+canonical reweighting in <code>s$effective_validity</code>, and the
+active headcount per period after employee flows in
+<code>s$n_active_by_period</code>. The applied reproduction of Sturman’s
+(2001) cascade, including the published shrinkage to approximately
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>8</mn><mi>%</mi></mrow><annotation encoding="application/x-tex">8\%</annotation></semantics></math>
+of the naive Brogden-Cronbach-Gleser estimate, is developed in the
+<em>Reproducing canonical examples</em> vignette.</p>
 </div>
 <div class="section level2">
 <h2 id="how-to-proceed-in-applied-work">How to proceed in applied work<a class="anchor" aria-label="anchor" href="#how-to-proceed-in-applied-work"></a>
 </h2>
 <ol style="list-style-type: decimal">
-<li>Start with <code><a href="../reference/naylor_shine.html">naylor_shine()</a></code> if you only need expected
-criterion gain.</li>
+<li>Start with <code><a href="../reference/naylor_shine.html">naylor_shine()</a></code> if the analysis stops at
+expected criterion gain in standard-deviation units; do not introduce
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><msub><mi>D</mi><mi>y</mi></msub></mrow><annotation encoding="application/x-tex">SD_y</annotation></semantics></math>
+unless the decision genuinely requires monetary translation.</li>
 <li>Use <code><a href="../reference/bcg_utility.html">bcg_utility()</a></code> for transparent monetary utility, but
-do not stop there.</li>
+treat it as a starting point and not as an endpoint.</li>
 <li>Replace random selection with the actual operating baseline whenever
-possible.</li>
-<li>Estimate <code>SD_y</code> using more than one method and report a
-sensitivity range.</li>
-<li>Use <code><a href="../reference/boudreau_utility.html">boudreau_utility()</a></code> when utility spans several
-periods or when costs/returns occur at different times.</li>
-<li>Use <code><a href="../reference/restricted_canonical_validity.html">restricted_canonical_validity()</a></code> and
-<code><a href="../reference/incremental_validity.html">incremental_validity()</a></code> when the current selection system
-already includes predictors.</li>
-<li>Report the input assumptions; utility estimates are only as credible
-as the validity, <code>SD_y</code>, cost, and tenure assumptions.</li>
+it is identifiable; report the random-baseline result as an upper bound
+only.</li>
+<li>Estimate
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><msub><mi>D</mi><mi>y</mi></msub></mrow><annotation encoding="application/x-tex">SD_y</annotation></semantics></math>
+using at least two methods and report a sensitivity range; a single
+point estimate of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><msub><mi>D</mi><mi>y</mi></msub></mrow><annotation encoding="application/x-tex">SD_y</annotation></semantics></math>
+understates the uncertainty in the final utility figure (Holling,
+1998).</li>
+<li>Use <code><a href="../reference/boudreau_utility.html">boudreau_utility()</a></code> when the analysis spans several
+periods, when costs and returns occur at different times, or when taxes
+and contribution margins are non-negligible.</li>
+<li>Distinguish selection utility
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math>-based,
+<code><a href="../reference/bcg_utility.html">bcg_utility()</a></code>) from intervention utility
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>d</mi><annotation encoding="application/x-tex">d</annotation></semantics></math>-based,
+<code><a href="../reference/shp_utility.html">shp_utility()</a></code>); they are calibrated for different study
+designs.</li>
+<li>Disattenuate validities with <code><a href="../reference/disattenuate_correlation.html">disattenuate_correlation()</a></code>
+and correct for range restriction with <code><a href="../reference/correct_r_lawley.html">correct_r_lawley()</a></code>
+or <code><a href="../reference/correct_r_direct_range_restriction.html">correct_r_direct_range_restriction()</a></code> <em>before</em>
+utility calculation; report both corrected and uncorrected values.</li>
+<li>When the battery has multiple predictors, use
+<code><a href="../reference/restricted_canonical_validity.html">restricted_canonical_validity()</a></code> and
+<code><a href="../reference/incremental_validity.html">incremental_validity()</a></code>, complemented by
+<code><a href="../reference/relative_weights.html">relative_weights()</a></code> and <code><a href="../reference/dominance_analysis.html">dominance_analysis()</a></code>
+for predictor-importance triangulation.</li>
+<li>Use <code><a href="../reference/sturman_comprehensive.html">sturman_comprehensive()</a></code> as the integrated reporting
+standard for continuous-monetary, compensatory-selection problems; the
+cascade output makes the contribution of each adjustment auditable.</li>
+<li>Report inputs in full; utility estimates are only as credible as the
+validity,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><msub><mi>D</mi><mi>y</mi></msub></mrow><annotation encoding="application/x-tex">SD_y</annotation></semantics></math>,
+cost, baseline, tenure, and discount-rate assumptions on which they
+rest.</li>
 </ol>
 </div>
 <div class="section level2">
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
+<p>Becker, B. E., &amp; Huselid, M. A. (1992). Direct estimates of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><msub><mi>D</mi><mi>y</mi></msub></mrow><annotation encoding="application/x-tex">SD_y</annotation></semantics></math>
+and the implications for utility analysis. <em>Journal of Applied
+Psychology</em>, <em>77</em>, 227–233.</p>
+<p>Bobko, P., Karren, R., &amp; Parkington, J. J. (1983). Estimation of
+standard deviations in utility analyses: An empirical test. <em>Journal
+of Applied Psychology</em>, <em>68</em>, 170–176.</p>
+<p>Borman, W. C., &amp; Motowidlo, S. J. (1993). Expanding the criterion
+domain to include elements of contextual performance. In N. Schmitt, W.
+C. Borman, &amp; Associates (Eds.), <em>Personnel selection in
+organizations</em> (pp. 71–98). Jossey-Bass.</p>
 <p>Boudreau, J. W. (1983). Economic considerations in estimating the
 utility of human resource productivity improvement programs.
-<em>Personnel Psychology</em>, 36, 551–576.</p>
+<em>Personnel Psychology</em>, <em>36</em>, 551–576.</p>
 <p>Boudreau, J. W. (1991). Utility analysis for decisions in human
 resource management. In M. D. Dunnette &amp; L. M. Hough (Eds.),
 <em>Handbook of industrial and organizational psychology</em> (Vol. 2,
 pp. 621–745). Consulting Psychologists Press.</p>
 <p>Brogden, H. E. (1946). On the interpretation of the correlation
 coefficient as a measure of predictive efficiency. <em>Journal of
-Educational Psychology</em>, 37, 65–76.</p>
+Educational Psychology</em>, <em>37</em>, 65–76.</p>
 <p>Brogden, H. E. (1949). When testing pays off. <em>Personnel
-Psychology</em>, 2, 171–183.</p>
+Psychology</em>, <em>2</em>, 171–183.</p>
+<p>Budescu, D. V. (1993). Dominance analysis: A new approach to the
+problem of relative importance of predictors in multiple regression.
+<em>Psychological Bulletin</em>, <em>114</em>, 542–551.</p>
+<p>Burke, M. J., &amp; Day, R. R. (1986). A cumulative study of the
+effectiveness of managerial training. <em>Journal of Applied
+Psychology</em>, <em>71</em>, 232–245.</p>
+<p>Burke, M. J., &amp; Frederick, J. T. (1984). Two modified procedures
+for estimating standard deviations in utility analyses. <em>Journal of
+Applied Psychology</em>, <em>69</em>, 482–489.</p>
+<p>Burke, M. J., &amp; Frederick, J. T. (1986). A comparison of economic
+utility estimates for alternative
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><msub><mi>D</mi><mi>y</mi></msub></mrow><annotation encoding="application/x-tex">SD_y</annotation></semantics></math>
+estimation procedures. <em>Journal of Applied Psychology</em>,
+<em>71</em>, 334–339.</p>
+<p>Campbell, J. P. (1990). Modeling the performance prediction problem
+in industrial and organizational psychology. In M. D. Dunnette &amp; L.
+M. Hough (Eds.), <em>Handbook of industrial and organizational
+psychology</em> (Vol. 1, pp. 687–732). Consulting Psychologists
+Press.</p>
+<p>Cascio, W. F. (1989). Using utility analysis to assess training
+outcomes. In I. L. Goldstein (Ed.), <em>Training and development in
+organizations</em> (pp. 63–88). Jossey-Bass.</p>
+<p>Cascio, W. F., &amp; Ramos, R. A. (1986). Development and application
+of a new method for assessing job performance in behavioral/economic
+terms. <em>Journal of Applied Psychology</em>, <em>71</em>, 20–28.</p>
 <p>Cronbach, L. J., &amp; Gleser, G. C. (1965). <em>Psychological tests
 and personnel decisions</em> (2nd ed.). University of Illinois
 Press.</p>
+<p>Eaton, N. K., Wing, H., &amp; Mitchell, K. J. (1985). Alternate
+methods of estimating the dollar value of performance. <em>Personnel
+Psychology</em>, <em>38</em>, 27–40.</p>
+<p>Edwards, J. E., Frederick, J. T., &amp; Burke, M. J. (1988). Efficacy
+of modified CREPID
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><msub><mi>D</mi><mi>y</mi></msub></mrow><annotation encoding="application/x-tex">SD_y</annotation></semantics></math>s
+on the basis of archival organizational data. <em>Journal of Applied
+Psychology</em>, <em>73</em>, 529–535.</p>
+<p>Gatewood, R. D., &amp; Feild, H. S. (2001). <em>Human resource
+selection</em> (5th ed.). Dryden Press.</p>
+<p>Hakstian, A. R., Wooley, R. M., Woolsey, L. K., &amp; Kryger, B. R.
+(1991). Management selection by multiple-domain assessment: II. Utility
+to the organisation. <em>Educational and Psychological Measurement</em>,
+<em>51</em>, 899–911.</p>
 <p>Holling, H. (1998). Utility analysis of personnel selection: An
 overview and empirical study based on objective performance measures.
-<em>Methods of Psychological Research Online</em>, 3(1), 5–24.</p>
+<em>Methods of Psychological Research Online</em>, <em>3</em>(1),
+5–24.</p>
+<p>Hunter, J. E., Schmidt, F. L., &amp; Coggin, T. D. (1988). Problems
+and pitfalls in using capital budgeting and financial accounting
+techniques in assessing the utility of personnel programs. <em>Journal
+of Applied Psychology</em>, <em>73</em>, 522–528.</p>
+<p>Janz, T., &amp; Dunnette, M. D. (1977). Development and application
+of a method for examining managerial work performance through analyses
+of resource allocations and contingent outcomes. <em>Personnel
+Psychology</em>, <em>30</em>, 519–544.</p>
+<p>Johnson, J. W. (2000). A heuristic method for estimating the relative
+weight of predictor variables in multiple regression. <em>Multivariate
+Behavioral Research</em>, <em>35</em>, 1–19.</p>
+<p>Lawley, D. N. (1943). A note on Karl Pearson’s selection formulae.
+<em>Proceedings of the Royal Society of Edinburgh, Section A</em>,
+<em>62</em>, 28–30.</p>
+<p>Lord, F. M., &amp; Novick, M. R. (1968). <em>Statistical theories of
+mental test scores</em>. Addison-Wesley.</p>
+<p>Mathieu, J. E., &amp; Leonard, R. L. (1987). Applying utility
+concepts to a training program in supervisory skills: A time-based
+approach. <em>Academy of Management Journal</em>, <em>30</em>,
+316–335.</p>
+<p>Morrow, C. C., Jarrett, M. Q., &amp; Rupinski, M. T. (1997). An
+investigation of the effect and economic utility of corporate-wide
+training. <em>Personnel Psychology</em>, <em>50</em>, 91–119.</p>
 <p>Naylor, J. C., &amp; Shine, L. C. (1965). A table for determining the
 increase in mean criterion score obtained by using a selection device.
-<em>Journal of Industrial Psychology</em>, 3, 33–42.</p>
+<em>Journal of Industrial Psychology</em>, <em>3</em>, 33–42.</p>
+<p>Raju, N. S., Burke, M. J., &amp; Normand, J. (1990). A new approach
+for utility analysis. <em>Journal of Applied Psychology</em>,
+<em>75</em>, 3–12.</p>
+<p>Ree, M. J., Carretta, T. R., Earles, J. A., &amp; Albert, W. (1994).
+Sign changes when correcting for range restriction: A note on Pearson’s
+and Lawley’s selection formulas. <em>Journal of Applied Psychology</em>,
+<em>79</em>, 298–301.</p>
+<p>Rotundo, M., &amp; Sackett, P. R. (2002). The relative importance of
+task, citizenship, and counterproductive performance to global ratings
+of job performance: A policy-capturing approach. <em>Journal of Applied
+Psychology</em>, <em>87</em>, 66–80.</p>
+<p>Sackett, P. R., Laczo, R. M., &amp; Arvey, R. D. (2002). The effects
+of range restriction on estimates of criterion interrater reliability:
+Implications for validation research. <em>Personnel Psychology</em>,
+<em>55</em>, 807–825.</p>
+<p>Sackett, P. R., Lievens, F., Berry, C. M., &amp; Landers, R. N.
+(2007). A cautionary note on the effects of range restriction on
+predictor intercorrelations. <em>Journal of Applied Psychology</em>,
+<em>92</em>, 538–544.</p>
+<p>Schmidt, F. L., &amp; Hunter, J. E. (2015). <em>Methods of
+meta-analysis: Correcting error and bias in research findings</em> (3rd
+ed.). Sage.</p>
 <p>Schmidt, F. L., Hunter, J. E., McKenzie, R. C., &amp; Muldrow, T. W.
 (1979). Impact of valid selection procedures on work-force productivity.
-<em>Journal of Applied Psychology</em>, 64, 609–626.</p>
+<em>Journal of Applied Psychology</em>, <em>64</em>, 609–626.</p>
+<p>Schmidt, F. L., Hunter, J. E., &amp; Pearlman, K. (1982). Assessing
+the economic impact of personnel programs on workforce productivity.
+<em>Personnel Psychology</em>, <em>35</em>, 333–347.</p>
+<p>Sturman, M. C. (2000). Implications of utility analysis adjustments
+for estimates of human resource intervention value. <em>Journal of
+Management</em>, <em>26</em>, 281–299.</p>
 <p>Sturman, M. C. (2001). Utility analysis for multiple selection
 devices and multiple outcomes. <em>Journal of Human Resource Costing and
-Accounting</em>, 6(2), 9–28.</p>
+Accounting</em>, <em>6</em>(2), 9–28.</p>
+<p>Tziner, A., Meir, E. I., Dahan, M., &amp; Birati, A. (1994). An
+investigation of the predictive validity and economic utility of the
+assessment center for the high-management level. <em>Canadian Journal of
+Behavioural Science</em>, <em>26</em>, 228–245.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>

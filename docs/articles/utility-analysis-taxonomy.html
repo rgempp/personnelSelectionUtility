@@ -15,8 +15,7 @@
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
-<meta property="og:title" content="Utility-analysis taxonomy for personnel selection">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Utility-analysis taxonomy for personnel selection">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -26,7 +25,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">personnelSelectionUtility</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.18</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,12 +43,13 @@
     <li><a class="dropdown-item" href="../articles/taylor-russell-and-thomas-owen-gunst.html">Taylor-Russell and Thomas-Owen-Gunst</a></li>
     <li><a class="dropdown-item" href="../articles/continuous-monetary-utility-bcg-boudreau-sturman.html">Continuous and monetary utility</a></li>
     <li><a class="dropdown-item" href="../articles/compensatory-vs-multiple-hurdle-simulation.html">Compensatory versus multiple-hurdle simulation</a></li>
+    <li><a class="dropdown-item" href="../articles/reproductions.html">Reproducing canonical examples</a></li>
   </ul>
 </li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">News</a></li>
       </ul>
 <ul class="navbar-nav">
-<li class="nav-item"><a class="external-link nav-link" href="https://github.com/rgempp/personnel-selection-utility" aria-label="GitHub"><span class="fa fa-github fa-lg"></span></a></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/rgempp/personnelSelectionUtility" aria-label="GitHub"><span class="fa fa-github fa-lg"></span></a></li>
       </ul>
 </div>
 
@@ -65,7 +65,7 @@
       <img src="../logo.svg" class="logo" alt=""><h1>Utility-analysis taxonomy for personnel selection</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/rgempp/personnel-selection-utility/blob/HEAD/vignettes/utility-analysis-taxonomy.Rmd" class="external-link"><code>vignettes/utility-analysis-taxonomy.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/rgempp/personnelSelectionUtility/blob/HEAD/vignettes/utility-analysis-taxonomy.Rmd" class="external-link"><code>vignettes/utility-analysis-taxonomy.Rmd</code></a></small>
       <div class="d-none name"><code>utility-analysis-taxonomy.Rmd</code></div>
     </div>
 
@@ -74,29 +74,37 @@
 <div class="section level2">
 <h2 id="purpose">Purpose<a class="anchor" aria-label="anchor" href="#purpose"></a>
 </h2>
-<p>The package is organized around a diagnostic question: <strong>what
-kind of selection problem are you analyzing?</strong> Many disagreements
-in utility analysis arise because a method designed for one type of
-problem is used for another. Taylor and Russell (1939) framed utility as
-a classificatory success-ratio problem. Naylor and Shine (1965) moved
-the focus to expected criterion gain in standard-deviation units.
-Brogden (1946, 1949) and Cronbach and Gleser (1965) developed the
-decision-theoretic monetary formulation. Boudreau (1983, 1991), Holling
-(1998), Sturman (2001), Thomas, Owen, and Gunst (1977), and Ock and
-Oswald (2018) each added important corrections or extensions.</p>
-<p>The taxonomy used here crosses two dimensions:</p>
+<p>The package is organised around a diagnostic question: <strong>what
+kind of selection problem are you analysing?</strong> Many disagreements
+in the utility-analysis literature arise because a method designed for
+one type of problem is applied to another. Taylor and Russell (1939)
+framed utility as a classificatory success-ratio problem. Naylor and
+Shine (1965) moved the focus to expected criterion gain in
+standard-deviation units. Brogden (1946, 1949) and Cronbach and Gleser
+(1965) developed the decision-theoretic monetary formulation. Boudreau
+(1983, 1991) added economic realism through discounting, taxes, and
+employee flows. Holling (1998), Sturman (2000, 2001), Thomas, Owen, and
+Gunst (1977), and Ock and Oswald (2018) each contributed substantive
+corrections or extensions. The taxonomy used here is intended to make
+the model-problem match explicit before any number is reported.</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rgempp/personnelSelectionUtility" class="external-link">personnelSelectionUtility</a></span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="the-two-by-two-taxonomy">The two-by-two taxonomy<a class="anchor" aria-label="anchor" href="#the-two-by-two-taxonomy"></a>
+</h2>
+<p>The taxonomy crosses two dimensions:</p>
 <ol style="list-style-type: decimal">
 <li>
 <strong>Criterion scale</strong>: is the criterion treated as
-continuous/monetary, or dichotomized into success/failure?</li>
+continuous/monetary, or dichotomised into success/failure?</li>
 <li>
 <strong>Selection structure</strong>: is selection compensatory,
 based on a composite score, or conjunctive/multiple-hurdle, based on
 passing multiple cutoffs or stages?</li>
 </ol>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://gempp.cl" class="external-link">personnelSelectionUtility</a></span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/model_taxonomy.html">model_taxonomy</a></span><span class="op">(</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/model_taxonomy.html">model_taxonomy</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt;               criterion_scale</span></span>
 <span><span class="co">#&gt; 1 classification/dichotomized</span></span>
 <span><span class="co">#&gt; 2 classification/dichotomized</span></span>
@@ -147,43 +155,64 @@ passing multiple cutoffs or stages?</li>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td>Dichotomized / classificatory</td>
+<td>Dichotomised / classificatory</td>
 <td>Taylor-Russell on one predictor or a composite</td>
 <td>Thomas-Owen-Gunst multivariate Taylor-Russell</td>
 </tr>
 <tr class="even">
 <td>Continuous / monetary</td>
-<td>Naylor-Shine, BCG, Boudreau, Sturman incremental validity</td>
-<td>Simulation or stage-wise utility calculations</td>
+<td>Naylor-Shine, Brogden-Cronbach-Gleser, Boudreau, Sturman incremental
+validity</td>
+<td>Stage-wise utility or simulation-based comparisons</td>
 </tr>
 </tbody>
 </table>
+<p>The four cells are not interchangeable. A selection system can have
+the same predictors but a different appropriate utility model depending
+on the decision rule. If cognitive ability, conscientiousness, biodata,
+and interview ratings are added into one composite and applicants are
+selected top-down, the system is compensatory. If applicants must first
+pass a cheap screening composite and only then a more expensive
+interview stage, the system is staged multiple-hurdle. The distinction
+is not cosmetic. Ock and Oswald (2018) emphasise the cost-reliability
+trade-off: a compensatory composite typically uses more information and
+yields higher expected criterion performance, whereas a multiple-hurdle
+system can be cheaper because expensive stages are administered only to
+applicants who survive earlier screens.</p>
 </div>
 <div class="section level2">
-<h2 id="why-this-matters">Why this matters<a class="anchor" aria-label="anchor" href="#why-this-matters"></a>
+<h2 id="why-the-choice-of-cell-matters">Why the choice of cell matters<a class="anchor" aria-label="anchor" href="#why-the-choice-of-cell-matters"></a>
 </h2>
-<p>A selection system can have the same predictors but a different
-utility model depending on the decision rule. If cognitive ability,
-conscientiousness, biodata, and interview ratings are added into one
-composite and applicants are selected top-down, the model is
-compensatory. If applicants must first pass a cheap screening composite
-and only then pass an interview stage, the model is staged
-multiple-hurdle.</p>
-<p>The distinction is not cosmetic. Ock and Oswald (2018) emphasize the
-cost-reliability trade-off: a compensatory composite often uses more
-information and yields higher expected criterion performance, whereas a
-multiple-hurdle system can be cheaper because expensive stages are
-administered only to applicants who survive earlier screens. Sturman
-(2001) adds a second major warning: classical utility analyses often
-compare a new procedure to random selection, even though the realistic
-baseline is usually an existing selection system.</p>
+<p>A simple thought experiment makes the point. Suppose two predictors
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>X</mi><mn>1</mn></msub><annotation encoding="application/x-tex">X_1</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>X</mi><mn>2</mn></msub><annotation encoding="application/x-tex">X_2</annotation></semantics></math>
+correlate
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>.30</mn><annotation encoding="application/x-tex">.30</annotation></semantics></math>
+with each other and have validities of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>.40</mn><annotation encoding="application/x-tex">.40</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>.30</mn><annotation encoding="application/x-tex">.30</annotation></semantics></math>
+against a job-performance criterion. If selection is compensatory and
+applicants are ranked on the equally weighted sum, the implied composite
+validity follows the canonical correction for predictor
+intercorrelation. If selection is conjunctive on the same two predictors
+with marginal cutoffs at the top
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>50</mn><mi>%</mi></mrow><annotation encoding="application/x-tex">50\%</annotation></semantics></math>
+each, the operative quantity is the <em>joint</em> selection ratio,
+which is materially smaller than
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>.50</mn><annotation encoding="application/x-tex">.50</annotation></semantics></math>
+and has a different positive predictive value. Reporting one number when
+the other is operationally relevant misrepresents the system. The
+package therefore encourages the analyst to specify the cell first and
+choose the function second.</p>
 </div>
 <div class="section level2">
-<h2 id="argument-naming">Argument naming<a class="anchor" aria-label="anchor" href="#argument-naming"></a>
+<h2 id="argument-naming-and-conventions">Argument naming and conventions<a class="anchor" aria-label="anchor" href="#argument-naming-and-conventions"></a>
 </h2>
-<p>The package uses readable R argument names while keeping close
+<p>The package uses readable R argument names while preserving close
 correspondence with the notation used in the literature.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="../reference/argument_glossary.html">argument_glossary</a></span><span class="op">(</span><span class="op">)</span>, <span class="fl">12</span><span class="op">)</span></span>
 <span><span class="co">#&gt;                 argument               notation</span></span>
 <span><span class="co">#&gt; 1              base_rate              BR or phi</span></span>
@@ -224,24 +253,32 @@ correspondence with the notation used in the literature.</p>
 <span><span class="co">#&gt; 10                               Avoid N when the role of the count is ambiguous.</span></span>
 <span><span class="co">#&gt; 11                          Used in Schmidt-Hunter-Pearlman intervention utility.</span></span>
 <span><span class="co">#&gt; 12           Preferred name in v0.4.0; applicant_n is accepted as a legacy alias.</span></span></code></pre></div>
-<p>The most important names are:</p>
+<p>The most frequent names are:</p>
 <p><code>base_rate</code>: population proportion successful before
-selection; Taylor-Russell notation often uses <code>BR</code>.</p>
+selection; classical Taylor-Russell notation often uses
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi><mi>R</mi></mrow><annotation encoding="application/x-tex">BR</annotation></semantics></math>
+or
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>ϕ</mi><annotation encoding="application/x-tex">\phi</annotation></semantics></math>.</p>
 <p><code>selection_ratio</code>: proportion selected by a single cutoff
-or composite; classical notation uses <code>SR</code>.</p>
+or composite; classical notation uses
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mi>R</mi></mrow><annotation encoding="application/x-tex">SR</annotation></semantics></math>.</p>
 <p><code>selection_ratios</code>: vector of marginal selection ratios in
 multiple-predictor or multiple-stage models.</p>
 <p><code>joint_selection_ratio</code>: overall conjunctive selection
 ratio after all cutoffs.</p>
 <p><code>validity</code>: predictor-criterion validity coefficient,
-usually <code>r_xy</code>.</p>
+usually
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>r</mi><mrow><mi>x</mi><mi>y</mi></mrow></msub><annotation encoding="application/x-tex">r_{xy}</annotation></semantics></math>.</p>
 <p><code>validities</code>: vector of predictor-criterion
 correlations.</p>
 <p><code>sdy</code>: standard deviation of job performance in monetary
-or criterion units, usually <code>SD_y</code>.</p>
-<p><code>n_applicants</code>: number of applicants assessed by a
-system.</p>
-<p><code>n_selected</code>: number selected or treated.</p>
+or criterion units, usually
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><msub><mi>D</mi><mi>y</mi></msub></mrow><annotation encoding="application/x-tex">SD_y</annotation></semantics></math>.</p>
+<p><code>baseline_validity</code>: validity of the operating system that
+the focal procedure is being compared against (Sturman, 2000, 2001).</p>
+<p><code>n_applicants</code>, <code>n_selected</code>: sample sizes of
+assessed and selected groups.</p>
+<p><code>tenure</code>: time horizon, usually in years.</p>
 </div>
 <div class="section level2">
 <h2 id="recommended-workflow">Recommended workflow<a class="anchor" aria-label="anchor" href="#recommended-workflow"></a>
@@ -251,39 +288,69 @@ system.</p>
 </h3>
 <p>Start by writing down the rule used in practice. Is selection based
 on a single test, a composite, several simultaneous cutoffs, or a staged
-process? Do not choose a utility formula before specifying the rule.</p>
+process? Do not choose a utility formula before specifying the rule. A
+common error is to apply Brogden-Cronbach-Gleser to a problem that is
+operationally a multiple-hurdle decision, which masks both the joint
+selection ratio and the cost differential between stages.</p>
 </div>
 <div class="section level3">
 <h3 id="step-2-specify-the-criterion-scale">Step 2: Specify the criterion scale<a class="anchor" aria-label="anchor" href="#step-2-specify-the-criterion-scale"></a>
 </h3>
-<p>If the criterion is success/failure, use Taylor-Russell style
-functions. If the criterion is continuous or monetary, use Naylor-Shine,
-BCG, Boudreau, or simulation functions.</p>
+<p>If the criterion is success/failure, use Taylor-Russell-style
+functions: <code><a href="../reference/tr_classic.html">tr_classic()</a></code>, <code><a href="../reference/tr_multivariate.html">tr_multivariate()</a></code>, or
+<code><a href="../reference/tr_multivariate_equal_cutoff.html">tr_multivariate_equal_cutoff()</a></code>. If the criterion is
+continuous or monetary, use <code><a href="../reference/naylor_shine.html">naylor_shine()</a></code>,
+<code><a href="../reference/bcg_utility.html">bcg_utility()</a></code>, or <code><a href="../reference/boudreau_utility.html">boudreau_utility()</a></code>. The
+choice should be driven by how the organisation actually evaluates job
+performance, not by computational convenience.</p>
 </div>
 <div class="section level3">
 <h3 id="step-3-specify-the-baseline">Step 3: Specify the baseline<a class="anchor" aria-label="anchor" href="#step-3-specify-the-baseline"></a>
 </h3>
-<p>Following Sturman (2001), avoid treating random selection as the
-default comparator unless it is genuinely the decision alternative. Use
-<code>baseline_validity</code> in <code><a href="../reference/bcg_utility.html">bcg_utility()</a></code> or
-<code><a href="../reference/boudreau_utility.html">boudreau_utility()</a></code> when the organization already has an
-operating procedure.</p>
+<p>Following Sturman (2000, 2001), the realistic comparator is rarely
+random selection. Almost every organisation already operates with some
+procedure: reference checks, unstructured interviews, biodata. Treating
+random selection as the implicit baseline inflates the estimated utility
+of a new procedure by approximately
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>60</mn><mi>%</mi></mrow><annotation encoding="application/x-tex">60\%</annotation></semantics></math>
+on average (Sturman, 2000, 2001). Use <code>baseline_validity</code> in
+<code><a href="../reference/bcg_utility.html">bcg_utility()</a></code> and <code><a href="../reference/boudreau_utility.html">boudreau_utility()</a></code> whenever
+the operating procedure is identifiable.</p>
 </div>
 <div class="section level3">
-<h3 id="step-4-estimate-or-triangulate-sd_y">Step 4: Estimate or triangulate <code>SD_y</code><a class="anchor" aria-label="anchor" href="#step-4-estimate-or-triangulate-sd_y"></a>
+<h3 id="step-4-estimate-or-triangulate-sd_y">Step 4: Estimate or triangulate
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><msub><mi>D</mi><mi>y</mi></msub></mrow><annotation encoding="application/x-tex">SD_y</annotation></semantics></math><a class="anchor" aria-label="anchor" href="#step-4-estimate-or-triangulate-sd_y"></a>
 </h3>
-<p>Holling (1998) highlights that <code>SD_y</code> is often the weakest
-link in monetary utility analysis. Use multiple estimates when possible:
-observed criterion data, percentile judgments, proportional rules, or
-job-analysis-based estimates.</p>
+<p>Holling (1998) shows that
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><msub><mi>D</mi><mi>y</mi></msub></mrow><annotation encoding="application/x-tex">SD_y</annotation></semantics></math>
+is the central vulnerability of monetary utility analysis. The package
+implements the four families documented by Holling: cost accounting
+(<code><a href="../reference/sdy_cost_accounting.html">sdy_cost_accounting()</a></code>), global percentile judgements
+(<code><a href="../reference/sdy_percentile.html">sdy_percentile()</a></code>), proportional rules
+(<code><a href="../reference/sdy_proportional.html">sdy_proportional()</a></code>, <code><a href="../reference/sdy_rbn.html">sdy_rbn()</a></code>), and
+individualised job-analysis methods (<code><a href="../reference/sdy_crepid.html">sdy_crepid()</a></code>,
+<code><a href="../reference/sdy_superior_equivalents.html">sdy_superior_equivalents()</a></code>). Triangulating two or three of
+these, rather than relying on a single estimate, is the practice
+supported by the empirical comparisons reported in Bobko, Karren, and
+Parkington (1983), Becker and Huselid (1992), and Hakstian, Wooley,
+Woolsey, and Kryger (1991).</p>
 </div>
 <div class="section level3">
 <h3 id="step-5-report-uncertainty-and-sensitivity">Step 5: Report uncertainty and sensitivity<a class="anchor" aria-label="anchor" href="#step-5-report-uncertainty-and-sensitivity"></a>
 </h3>
-<p>Ock and Oswald (2018) show that utility estimates can vary
-substantially across samples. Use <code><a href="../reference/utility_monte_carlo.html">utility_monte_carlo()</a></code>,
-<code><a href="../reference/sensitivity_grid.html">sensitivity_grid()</a></code>, and <code><a href="../reference/break_even_validity.html">break_even_validity()</a></code>
-to avoid reporting a single deterministic point estimate.</p>
+<p>Ock and Oswald (2018) demonstrate via Monte Carlo simulation that
+utility estimates exhibit sample-to-sample variability of the same order
+of magnitude as the mean effect. A point estimate without an interval is
+therefore not a complete report. The package includes
+<code><a href="../reference/utility_monte_carlo.html">utility_monte_carlo()</a></code> for full uncertainty propagation,
+<code><a href="../reference/sensitivity_grid.html">sensitivity_grid()</a></code> for exploring how the estimate varies
+under perturbations of the inputs, and
+<code><a href="../reference/break_even_validity.html">break_even_validity()</a></code> for computing the validity required
+to break even at given costs. Cronshaw, Alexander, Wiesner, and Barrick
+(1987) introduced sensitivity and break-even analysis to selection
+utility precisely because point estimates of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Δ</mi><mi>U</mi></mrow><annotation encoding="application/x-tex">\Delta U</annotation></semantics></math>
+tend to be reported with implausible precision.</p>
 </div>
 </div>
 <div class="section level2">
@@ -292,9 +359,9 @@ to avoid reporting a single deterministic point estimate.</p>
 <div class="section level3">
 <h3 id="dichotomous-success-criterion">Dichotomous success criterion<a class="anchor" aria-label="anchor" href="#dichotomous-success-criterion"></a>
 </h3>
-<p>For a single predictor or a composite summarized by one validity
-coefficient, use <code><a href="../reference/tr_classic.html">tr_classic()</a></code>.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<p>For a single predictor or a composite that has already collapsed
+several predictors into one score, use <code><a href="../reference/tr_classic.html">tr_classic()</a></code>.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/tr_classic.html">tr_classic</a></span><span class="op">(</span>base_rate <span class="op">=</span> <span class="fl">.50</span>, selection_ratio <span class="op">=</span> <span class="fl">.20</span>, validity <span class="op">=</span> <span class="fl">.35</span><span class="op">)</span></span>
 <span><span class="co">#&gt; &lt;psu_tr&gt;</span></span>
 <span><span class="co">#&gt;   base_rate: 0.5</span></span>
@@ -312,9 +379,13 @@ coefficient, use <code><a href="../reference/tr_classic.html">tr_classic()</a></
 <span><span class="co">#&gt;   sensitivity: 0.278621</span></span>
 <span><span class="co">#&gt;   specificity: 0.878621</span></span>
 <span><span class="co">#&gt;   digits: 3</span></span></code></pre></div>
-<p>For multiple simultaneous cutoffs, use
-<code><a href="../reference/tr_multivariate.html">tr_multivariate()</a></code>.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<p>The output includes the full
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mo>×</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">2 \times 2</annotation></semantics></math>
+table (true positives, false positives, true negatives, false
+negatives), the positive predictive value, sensitivity, and specificity.
+For multiple simultaneous cutoffs, use <code><a href="../reference/tr_multivariate.html">tr_multivariate()</a></code>
+with the predictor-criterion correlation matrix.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">R</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>  <span class="fl">1.00</span>, <span class="fl">.30</span>, <span class="fl">.40</span>,</span>
 <span>  <span class="fl">.30</span>, <span class="fl">1.00</span>, <span class="fl">.35</span>,</span>
@@ -337,39 +408,9 @@ coefficient, use <code><a href="../reference/tr_classic.html">tr_classic()</a></
 <span><span class="co">#&gt;   digits: 3</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="auc-and-effect-size-conversions">AUC and effect-size conversions<a class="anchor" aria-label="anchor" href="#auc-and-effect-size-conversions"></a>
+<h3 id="continuous-criterion">Continuous criterion<a class="anchor" aria-label="anchor" href="#continuous-criterion"></a>
 </h3>
-<p>In contemporary selection research, especially when using algorithmic
-or classification models, predictive performance may be reported as AUC
-rather than as a validity coefficient. The package therefore separates
-three conceptually distinct conversions. First,
-<code><a href="../reference/auc_to_rank_biserial.html">auc_to_rank_biserial()</a></code> returns the dominance or
-rank-biserial summary <code>2 * AUC - 1</code>, which follows from the
-interpretation of AUC as the probability of a favorable ordering of one
-positive and one negative case (Hanley &amp; McNeil, 1982; Kerby, 2014).
-Second, <code><a href="../reference/auc_to_d_equal_variance.html">auc_to_d_equal_variance()</a></code> converts AUC to Cohen’s
-<code>d</code> under the equal-variance binormal model (Rice &amp;
-Harris, 2005; Salgado, 2018). Third,
-<code><a href="../reference/auc_to_point_biserial.html">auc_to_point_biserial()</a></code> converts that <code>d</code> to a
-point-biserial correlation for a specified <code>base_rate</code>,
-making the base-rate dependence explicit.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/auc_to_rank_biserial.html">auc_to_rank_biserial</a></span><span class="op">(</span><span class="fl">.75</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.5</span></span>
-<span><span class="fu"><a href="../reference/auc_to_d_equal_variance.html">auc_to_d_equal_variance</a></span><span class="op">(</span><span class="fl">.75</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.9538726</span></span>
-<span><span class="fu"><a href="../reference/auc_to_point_biserial.html">auc_to_point_biserial</a></span><span class="op">(</span><span class="fl">.75</span>, base_rate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.50</span>, <span class="fl">.30</span>, <span class="fl">.20</span>, <span class="fl">.10</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.4304822 0.4005260 0.3564821 0.2751188</span></span></code></pre></div>
-<p>Use these conversions as bridges between reported classification
-performance and utility-analysis inputs, not as assumption-free
-substitutes for validation studies. If the selection criterion is binary
-and the available evidence is AUC, report which conversion was used and
-whether a base rate was assumed.</p>
-</div>
-<div class="section level3">
-<h3 id="continuous-or-monetary-criterion">Continuous or monetary criterion<a class="anchor" aria-label="anchor" href="#continuous-or-monetary-criterion"></a>
-</h3>
-<p>For expected standardized criterion gain without money, use
+<p>For expected standardised criterion gain without a monetary unit, use
 <code><a href="../reference/naylor_shine.html">naylor_shine()</a></code>.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/naylor_shine.html">naylor_shine</a></span><span class="op">(</span>validity <span class="op">=</span> <span class="fl">.35</span>, selection_ratio <span class="op">=</span> <span class="fl">.20</span><span class="op">)</span></span>
@@ -384,8 +425,8 @@ whether a base rate was assumed.</p>
 <span><span class="co">#&gt;   cost: 0</span></span>
 <span><span class="co">#&gt;   gross_utility: 0.489933</span></span>
 <span><span class="co">#&gt;   net_utility: 0.489933</span></span></code></pre></div>
-<p>For monetary utility, use <code><a href="../reference/bcg_utility.html">bcg_utility()</a></code> as a transparent
-baseline model.</p>
+<p>For monetary utility, <code><a href="../reference/bcg_utility.html">bcg_utility()</a></code> provides a
+transparent baseline model.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/bcg_utility.html">bcg_utility</a></span><span class="op">(</span></span>
 <span>  validity <span class="op">=</span> <span class="fl">.35</span>,</span>
@@ -411,8 +452,9 @@ baseline model.</p>
 <span><span class="co">#&gt;   cost: 75000</span></span>
 <span><span class="co">#&gt;   gross_utility: 7349000</span></span>
 <span><span class="co">#&gt;   net_utility: 7274000</span></span></code></pre></div>
-<p>If you need discounting, costs by period, taxes, contribution margin,
-or employee flows, use <code><a href="../reference/boudreau_utility.html">boudreau_utility()</a></code>.</p>
+<p>If the analysis spans several periods or requires discounting, taxes,
+contribution margins, or employee flows, use
+<code><a href="../reference/boudreau_utility.html">boudreau_utility()</a></code>.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/boudreau_utility.html">boudreau_utility</a></span><span class="op">(</span></span>
 <span>  validity <span class="op">=</span> <span class="fl">.35</span>,</span>
@@ -435,67 +477,175 @@ or employee flows, use <code><a href="../reference/boudreau_utility.html">boudre
 <span><span class="co">#&gt;   discount_rate: 0.08</span></span>
 <span><span class="co">#&gt;   net_present_value: 465045</span></span></code></pre></div>
 </div>
+<div class="section level3">
+<h3 id="effect-size-conversions">Effect-size conversions<a class="anchor" aria-label="anchor" href="#effect-size-conversions"></a>
+</h3>
+<p>In contemporary selection research, particularly when classification
+or algorithmic models are involved, predictive performance is sometimes
+reported as the area under the ROC curve (AUC) rather than as a validity
+coefficient. The package separates three conceptually distinct
+conversions, following Hanley and McNeil (1982), Rice and Harris (2005),
+and Salgado (2018). First, <code><a href="../reference/auc_to_rank_biserial.html">auc_to_rank_biserial()</a></code> returns
+the dominance summary
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mo>⋅</mo><mi>A</mi><mi>U</mi><mi>C</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">2 \cdot AUC - 1</annotation></semantics></math>,
+which follows from interpreting AUC as the probability of a favourable
+ordering of one positive and one negative case (Hanley &amp; McNeil,
+1982; Kerby, 2014). Second, <code><a href="../reference/auc_to_d_equal_variance.html">auc_to_d_equal_variance()</a></code>
+converts AUC to Cohen’s
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>d</mi><annotation encoding="application/x-tex">d</annotation></semantics></math>
+under the equal-variance binormal model (Rice &amp; Harris, 2005;
+Salgado, 2018). Third, <code><a href="../reference/auc_to_point_biserial.html">auc_to_point_biserial()</a></code> converts
+that
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>d</mi><annotation encoding="application/x-tex">d</annotation></semantics></math>
+to a point-biserial correlation for a specified base rate, making the
+base-rate dependence explicit.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/auc_to_rank_biserial.html">auc_to_rank_biserial</a></span><span class="op">(</span><span class="fl">.75</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 0.5</span></span>
+<span><span class="fu"><a href="../reference/auc_to_d_equal_variance.html">auc_to_d_equal_variance</a></span><span class="op">(</span><span class="fl">.75</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 0.9538726</span></span>
+<span><span class="fu"><a href="../reference/auc_to_point_biserial.html">auc_to_point_biserial</a></span><span class="op">(</span><span class="fl">.75</span>, base_rate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.50</span>, <span class="fl">.30</span>, <span class="fl">.20</span>, <span class="fl">.10</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 0.4304822 0.4005260 0.3564821 0.2751188</span></span></code></pre></div>
+<p>These conversions should be used as bridges between reported
+classification performance and utility-analysis inputs, not as
+assumption-free substitutes for validation studies. If the selection
+criterion is binary and the available evidence is AUC, the reporting
+analyst should state which conversion was used and whether a base rate
+was assumed.</p>
+</div>
 </div>
 <div class="section level2">
 <h2 id="reporting-checklist">Reporting checklist<a class="anchor" aria-label="anchor" href="#reporting-checklist"></a>
 </h2>
-<p>A complete utility analysis should report: the selection rule, the
-criterion scale, the base rate if a classificatory model is used, the
-selection ratio, all validity coefficients and their sources, how
-<code>SD_y</code> was estimated, whether validity and <code>SD_y</code>
-were corrected or not, the baseline comparator, costs, time horizon,
-discounting, uncertainty intervals, and sensitivity analyses.</p>
+<p>A complete utility analysis should report: (i) the selection rule,
+(ii) the criterion scale, (iii) the base rate when a classificatory
+model is used, (iv) the selection ratio, (v) all validity coefficients
+and their sources, (vi) how
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><msub><mi>D</mi><mi>y</mi></msub></mrow><annotation encoding="application/x-tex">SD_y</annotation></semantics></math>
+was estimated and whether it was triangulated, (vii) whether validity
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><msub><mi>D</mi><mi>y</mi></msub></mrow><annotation encoding="application/x-tex">SD_y</annotation></semantics></math>
+were corrected for unreliability or range restriction and which
+corrections were applied, (viii) the baseline comparator (random or
+operating procedure), (ix) costs disaggregated by period and stage when
+relevant, (x) the time horizon and discount rate, (xi) uncertainty
+intervals through Monte Carlo or bootstrap, and (xii) sensitivity and
+break-even analyses for the most uncertain inputs. Items (viii) and (xi)
+are the two most frequently omitted in the empirical literature, and
+their omission is the principal source of the practitioner scepticism
+documented by Latham and Whyte (1994), Whyte and Latham (1997), and
+König, Bösch, Reshef, and Winkler (2013).</p>
+</div>
+<div class="section level2">
+<h2 id="how-to-proceed-in-applied-work">How to proceed in applied work<a class="anchor" aria-label="anchor" href="#how-to-proceed-in-applied-work"></a>
+</h2>
+<ol style="list-style-type: decimal">
+<li>Specify the selection rule before opening the package: single test,
+composite, simultaneous cutoffs, or staged process.</li>
+<li>Locate your problem in the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mo>×</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">2 \times 2</annotation></semantics></math>
+taxonomy and use <code><a href="../reference/model_taxonomy.html">model_taxonomy()</a></code> as a checklist.</li>
+<li>Use <code><a href="../reference/argument_glossary.html">argument_glossary()</a></code> to map your existing notation
+to the package argument names before writing code.</li>
+<li>Specify the operating baseline; if it cannot be identified, report
+this limitation explicitly and treat random-selection results as upper
+bounds.</li>
+<li>Triangulate
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><msub><mi>D</mi><mi>y</mi></msub></mrow><annotation encoding="application/x-tex">SD_y</annotation></semantics></math>
+across at least two methods; report the range, not a single value.</li>
+<li>Propagate uncertainty using <code><a href="../reference/utility_monte_carlo.html">utility_monte_carlo()</a></code> or
+<code><a href="../reference/sensitivity_grid.html">sensitivity_grid()</a></code>; do not report a deterministic point
+estimate.</li>
+<li>Use <code><a href="../reference/break_even_validity.html">break_even_validity()</a></code> to identify the validity
+floor at which the new procedure breaks even, and compare it to the
+lower bound of the validity confidence interval.</li>
+</ol>
 </div>
 <div class="section level2">
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
+<p>Becker, B. E., &amp; Huselid, M. A. (1992). Direct estimates of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><msub><mi>D</mi><mi>y</mi></msub></mrow><annotation encoding="application/x-tex">SD_y</annotation></semantics></math>
+and the implications for utility analysis. <em>Journal of Applied
+Psychology</em>, <em>77</em>, 227–233.</p>
+<p>Bobko, P., Karren, R., &amp; Parkington, J. J. (1983). Estimation of
+standard deviations in utility analyses: An empirical test. <em>Journal
+of Applied Psychology</em>, <em>68</em>, 170–176.</p>
 <p>Boudreau, J. W. (1983). Economic considerations in estimating the
 utility of human resource productivity improvement programs.
-<em>Personnel Psychology</em>, 36, 551–576.</p>
+<em>Personnel Psychology</em>, <em>36</em>, 551–576.</p>
 <p>Boudreau, J. W. (1991). Utility analysis for decisions in human
 resource management. In M. D. Dunnette &amp; L. M. Hough (Eds.),
 <em>Handbook of industrial and organizational psychology</em> (Vol. 2,
 pp. 621–745). Consulting Psychologists Press.</p>
 <p>Brogden, H. E. (1946). On the interpretation of the correlation
 coefficient as a measure of predictive efficiency. <em>Journal of
-Educational Psychology</em>, 37, 65–76.</p>
+Educational Psychology</em>, <em>37</em>, 65–76.</p>
 <p>Brogden, H. E. (1949). When testing pays off. <em>Personnel
-Psychology</em>, 2, 171–183.</p>
+Psychology</em>, <em>2</em>, 171–183.</p>
 <p>Cronbach, L. J., &amp; Gleser, G. C. (1965). <em>Psychological tests
 and personnel decisions</em> (2nd ed.). University of Illinois
 Press.</p>
+<p>Cronshaw, S. F., Alexander, R. A., Wiesner, W. H., &amp; Barrick, M.
+R. (1987). Incorporating risk into selection utility: Two models for
+sensitivity analysis and risk simulation. <em>Organizational Behavior
+and Human Decision Processes</em>, <em>40</em>, 270–286.</p>
+<p>Hakstian, A. R., Wooley, R. M., Woolsey, L. K., &amp; Kryger, B. R.
+(1991). Management selection by multiple-domain assessment: II. Utility
+to the organisation. <em>Educational and Psychological Measurement</em>,
+<em>51</em>, 899–911.</p>
 <p>Hanley, J. A., &amp; McNeil, B. J. (1982). The meaning and use of the
 area under a receiver operating characteristic (ROC) curve.
-<em>Radiology</em>, 143(1), 29–36.</p>
-<p>Kerby, D. S. (2014). The simple difference formula: An approach to
-teaching nonparametric correlation. <em>Comprehensive Psychology</em>,
-3, 11.IT.3.1.</p>
-<p>Rice, M. E., &amp; Harris, G. T. (2005). Comparing effect sizes in
-follow-up studies: ROC area, Cohen’s d, and r. <em>Law and Human
-Behavior</em>, 29(5), 615–620.</p>
-<p>Salgado, J. F. (2018). Transforming the area under the normal curve
-(AUC) into Cohen’s d, Pearson’s r_pb, odds-ratio, and natural log
-odds-ratio: Two conversion tables. <em>The European Journal of
-Psychology Applied to Legal Context</em>, 10(1), 35–47.</p>
+<em>Radiology</em>, <em>143</em>(1), 29–36.</p>
 <p>Holling, H. (1998). Utility analysis of personnel selection: An
 overview and empirical study based on objective performance measures.
-<em>Methods of Psychological Research Online</em>, 3(1), 5–24.</p>
+<em>Methods of Psychological Research Online</em>, <em>3</em>(1),
+5–24.</p>
+<p>Kerby, D. S. (2014). The simple difference formula: An approach to
+teaching nonparametric correlation. <em>Comprehensive Psychology</em>,
+<em>3</em>, 11.IT.3.1.</p>
+<p>König, C. J., Bösch, F., Reshef, A., &amp; Winkler, S. (2013). Human
+resource managers’ attitudes toward utility analysis. <em>Journal of
+Personnel Psychology</em>, <em>12</em>, 152–156.</p>
+<p>Latham, G. P., &amp; Whyte, G. (1994). The futility of utility
+analysis. <em>Personnel Psychology</em>, <em>47</em>, 31–46.</p>
 <p>Naylor, J. C., &amp; Shine, L. C. (1965). A table for determining the
 increase in mean criterion score obtained by using a selection device.
-<em>Journal of Industrial Psychology</em>, 3, 33–42.</p>
+<em>Journal of Industrial Psychology</em>, <em>3</em>, 33–42.</p>
 <p>Ock, J., &amp; Oswald, F. L. (2018). The utility of personnel
 selection decisions: Comparing compensatory and multiple-hurdle
-selection models. <em>Journal of Personnel Psychology</em>, 17(4),
-172–182.</p>
+selection models. <em>Journal of Personnel Psychology</em>,
+<em>17</em>(4), 172–182.</p>
+<p>Rice, M. E., &amp; Harris, G. T. (2005). Comparing effect sizes in
+follow-up studies: ROC area, Cohen’s
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>d</mi><annotation encoding="application/x-tex">d</annotation></semantics></math>,
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math>.
+<em>Law and Human Behavior</em>, <em>29</em>(5), 615–620.</p>
+<p>Salgado, J. F. (2018). Transforming the area under the normal curve
+(AUC) into Cohen’s
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>d</mi><annotation encoding="application/x-tex">d</annotation></semantics></math>,
+Pearson’s
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>r</mi><mrow><mi>p</mi><mi>b</mi></mrow></msub><annotation encoding="application/x-tex">r_{pb}</annotation></semantics></math>,
+odds-ratio, and natural log odds-ratio: Two conversion tables. <em>The
+European Journal of Psychology Applied to Legal Context</em>,
+<em>10</em>(1), 35–47.</p>
+<p>Sturman, M. C. (2000). Implications of utility analysis adjustments
+for estimates of human resource intervention value. <em>Journal of
+Management</em>, <em>26</em>, 281–299.</p>
 <p>Sturman, M. C. (2001). Utility analysis for multiple selection
 devices and multiple outcomes. <em>Journal of Human Resource Costing and
-Accounting</em>, 6(2), 9–28.</p>
+Accounting</em>, <em>6</em>(2), 9–28.</p>
 <p>Taylor, H. C., &amp; Russell, J. T. (1939). The relationship of
 validity coefficients to the practical effectiveness of tests in
-selection. <em>Journal of Applied Psychology</em>, 23, 565–578.</p>
+selection. <em>Journal of Applied Psychology</em>, <em>23</em>,
+565–578.</p>
 <p>Thomas, J. G., Owen, D. B., &amp; Gunst, R. F. (1977). Improving the
 use of educational tests as selection tools. <em>Journal of Educational
-Statistics</em>, 2(1), 55–77.</p>
+Statistics</em>, <em>2</em>(1), 55–77.</p>
+<p>Whyte, G., &amp; Latham, G. P. (1997). The futility of utility
+analysis revisited: When even an expert fails. <em>Personnel
+Psychology</em>, <em>50</em>, 601–610.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>

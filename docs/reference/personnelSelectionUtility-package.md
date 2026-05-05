@@ -13,9 +13,9 @@ The package is organized around two core decisions: the scale of the
 criterion (classification versus continuous/monetary outcomes) and the
 structure of the selection rule (compensatory versus conjunctive or
 staged multiple-hurdle systems). Start with
-[`model_taxonomy()`](https://rgempp.github.io/personnel-selection-utility/reference/model_taxonomy.md)
+[`model_taxonomy()`](https://rgempp.github.io/personnelSelectionUtility/reference/model_taxonomy.md)
 and
-[`argument_glossary()`](https://rgempp.github.io/personnel-selection-utility/reference/argument_glossary.md)
+[`argument_glossary()`](https://rgempp.github.io/personnelSelectionUtility/reference/argument_glossary.md)
 to choose the appropriate family of functions. Use the AUC conversion
 helpers only when evidence is reported as AUC and a correlation-like
 effect-size input is needed.
@@ -73,25 +73,21 @@ Statistics*, 2(1), 55-77.
 
 ## See also
 
-[`model_taxonomy()`](https://rgempp.github.io/personnel-selection-utility/reference/model_taxonomy.md),
-[`argument_glossary()`](https://rgempp.github.io/personnel-selection-utility/reference/argument_glossary.md),
-[`tr_classic()`](https://rgempp.github.io/personnel-selection-utility/reference/tr_classic.md),
-[`tr_multivariate()`](https://rgempp.github.io/personnel-selection-utility/reference/tr_multivariate.md),
-[`bcg_utility()`](https://rgempp.github.io/personnel-selection-utility/reference/bcg_utility.md),
-[`boudreau_utility()`](https://rgempp.github.io/personnel-selection-utility/reference/boudreau_utility.md),
-[`compare_selection_systems_staged()`](https://rgempp.github.io/personnel-selection-utility/reference/compare_selection_systems_staged.md),
-[`auc_to_point_biserial()`](https://rgempp.github.io/personnel-selection-utility/reference/auc_to_point_biserial.md).
+[`model_taxonomy()`](https://rgempp.github.io/personnelSelectionUtility/reference/model_taxonomy.md),
+[`argument_glossary()`](https://rgempp.github.io/personnelSelectionUtility/reference/argument_glossary.md),
+[`tr_classic()`](https://rgempp.github.io/personnelSelectionUtility/reference/tr_classic.md),
+[`tr_multivariate()`](https://rgempp.github.io/personnelSelectionUtility/reference/tr_multivariate.md),
+[`bcg_utility()`](https://rgempp.github.io/personnelSelectionUtility/reference/bcg_utility.md),
+[`boudreau_utility()`](https://rgempp.github.io/personnelSelectionUtility/reference/boudreau_utility.md),
+[`compare_selection_systems_staged()`](https://rgempp.github.io/personnelSelectionUtility/reference/compare_selection_systems_staged.md),
+[`auc_to_point_biserial()`](https://rgempp.github.io/personnelSelectionUtility/reference/auc_to_point_biserial.md).
 
 ## Author
 
 **Maintainer**: René Gempp <rene.gempp@udp.cl>
-([ORCID](https://orcid.org/0000-0002-0427-6894)) (affiliation: Facultad
-de Administración y Economía, Universidad Diego Portales, web:
-https://gempp.cl) \[copyright holder\]
+([ORCID](https://orcid.org/0000-0002-0427-6894)) \[copyright holder\]
 
 Authors:
 
 - René Gempp <rene.gempp@udp.cl>
-  ([ORCID](https://orcid.org/0000-0002-0427-6894)) (affiliation:
-  Facultad de Administración y Economía, Universidad Diego Portales,
-  web: https://gempp.cl) \[copyright holder\]
+  ([ORCID](https://orcid.org/0000-0002-0427-6894)) \[copyright holder\]

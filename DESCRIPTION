@@ -15,7 +15,7 @@ Description: Implements classical and contemporary utility-analysis methods for
     conversions, and Monte Carlo uncertainty propagation.
 License: MIT + file LICENSE
 URL: https://github.com/rgempp/personnelSelectionUtility,
-    https://rgempp.github.io/personnelSelectionUtility/
+    https://gempp.cl/personnelSelectionUtility/
 BugReports: https://github.com/rgempp/personnelSelectionUtility/issues
 Depends: R (>= 4.1.0)
 Imports:

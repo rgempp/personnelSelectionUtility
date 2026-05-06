@@ -272,7 +272,7 @@ utility_regression_diagnostics(x = x, y = y)
 #> [1] 66292.6
 #> 
 #> $mean_residual
-#> [1] 3.687717e-14
+#> [1] -3.0421e-13
 #> 
 #> $residual_sd
 #> [1] 26328.22

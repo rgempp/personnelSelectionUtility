@@ -51,7 +51,7 @@ utility_regression_diagnostics(1:10, c(2, 3, 3, 5, 4, 6, 7, 8, 8, 10))
 #> [1] 0.9333333
 #> 
 #> $mean_residual
-#> [1] -2.150515e-17
+#> [1] 2.428613e-17
 #> 
 #> $residual_sd
 #> [1] 0.5779332

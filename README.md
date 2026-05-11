@@ -1,8 +1,3 @@
-```{=html}
-<!-- Pkgdown index page. Render via pkgdown; the same content can be used as
-README.md by copying this file and adjusting badges/links as needed. -->
-```
-
 # personnelSelectionUtility
 
 `personnelSelectionUtility` systematizes classical and contemporary utility-analysis methods for personnel selection under consistent notation, organised by criterion scale (classification or continuous/monetary) and selection structure (compensatory or multiple-hurdle).

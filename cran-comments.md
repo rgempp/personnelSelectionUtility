@@ -24,9 +24,9 @@ from Benjamin Altmann's review of version 1.0.0:
 
 The remaining NOTE concerns:
 * "New submission" — expected for a first-time package on CRAN.
-* "Possibly misspelled words in DESCRIPTION": Boudreau, Brogden, 
-  Cronbach, Gleser, Gunst, Sturman. These are surnames of authors 
-  cited in the package description.
+* "Possibly misspelled words in DESCRIPTION": Brogden, Cronbach,
+   Gleser, Gunst, Ock, Pearlman, Salgado, Sturman.These are 
+   surnames of authors cited in the package description.
 
 ## Reverse dependencies
 

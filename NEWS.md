@@ -1,3 +1,12 @@
+# personnelSelectionUtility 1.0.1
+
+## CRAN review resubmission
+
+* Added DOI references in the Description field of DESCRIPTION as
+  requested by the CRAN reviewer.
+* Added explicit `\value{}` documentation to `print.psu_utility()` and
+  its subclass aliases.
+
 # personnelSelectionUtility 1.0.0
 
 First stable release.

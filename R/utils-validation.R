@@ -124,20 +124,23 @@ print.psu_utility <- function(x, ...) {
   invisible(x)
 }
 
-#' @export
-print.psu_tr <- print.psu_utility
-#' @export
-print.psu_bcg <- print.psu_utility
-#' @export
-print.psu_ns <- print.psu_utility
-#' @export
-print.psu_shp <- print.psu_utility
-#' @export
-print.psu_boudreau <- print.psu_utility
-#' @export
-print.psu_incremental_validity <- print.psu_utility
-#' @export
-print.psu_monte_carlo <- print.psu_utility
+#' Print personnel-selection utility objects
+#'
+#' Formats and prints utility-analysis result objects of class
+#' `psu_utility` and its subclasses (e.g., `psu_tr`, `psu_bcg`, `psu_ns`,
+#' `psu_shp`, `psu_boudreau`, `psu_incremental_validity`,
+#' `psu_monte_carlo`). Provides a concise textual summary of the computed
+#' quantities.
+#'
+#' @param x An object returned by one of the package's main analysis
+#'   functions, with class `psu_utility` or a subclass thereof.
+#' @param ... Currently ignored; reserved for compatibility with the
+#'   `print()` generic.
+#'
+#' @return No return value, called for side effects (prints a formatted
+#'   summary to the console). The input object `x` is returned invisibly.
+#'
+#' @keywords internal
 #' @export
 print.psu_comparison <- function(x, ...) {
   cls <- class(x)[1L]

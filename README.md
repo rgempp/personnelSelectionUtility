@@ -159,3 +159,4 @@ Sturman, M. C. (2001). Utility analysis for multiple selection devices and multi
 Taylor, H. C., & Russell, J. T. (1939). The relationship of validity coefficients to the practical effectiveness of tests in selection. *Journal of Applied Psychology*, 23, 565-578.
 
 Thomas, J. G., Owen, D. B., & Gunst, R. F. (1977). Improving the use of educational tests as selection tools. *Journal of Educational Statistics*, 2(1), 55-77.
+

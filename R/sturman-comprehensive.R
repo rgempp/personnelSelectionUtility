@@ -236,6 +236,7 @@ sturman_comprehensive <- function(validity, baseline_validity = 0,
   out
 }
 
+#' @rdname print.psu_utility
 #' @export
 print.psu_sturman <- function(x, ...) {
   cat("<psu_sturman: Sturman (2001) comprehensive utility>\n")

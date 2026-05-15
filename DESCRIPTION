@@ -1,6 +1,6 @@
 Package: personnelSelectionUtility
 Title: Utility Analysis Methods for Personnel Selection
-Version: 1.0.1
+Version: 1.0.2
 Authors@R:
     person(given = "René", family = "Gempp", email = "rene.gempp@udp.cl",
            role = c("aut", "cre", "cph"),

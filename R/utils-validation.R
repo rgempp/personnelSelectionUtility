@@ -109,8 +109,20 @@ contribution_multiplier <- function(variable_value = 0, contribution_margin = NU
 
 #' Print personnel-selection utility objects
 #'
-#' @param x An object returned by one of the package functions.
-#' @param ... Ignored.
+#' Formats and prints utility-analysis result objects of class
+#' `psu_utility` and its subclasses (e.g., `psu_tr`, `psu_bcg`, `psu_ns`,
+#' `psu_shp`, `psu_boudreau`, `psu_incremental_validity`,
+#' `psu_monte_carlo`). Provides a concise textual summary of the computed
+#' quantities.
+#'
+#' @param x An object returned by one of the package's main analysis
+#'   functions, with class `psu_utility` or a subclass thereof.
+#' @param ... Currently ignored; reserved for compatibility with the
+#'   `print()` generic.
+#'
+#' @return No return value, called for side effects (prints a formatted
+#'   summary to the console). The input object `x` is returned invisibly.
+#'
 #' @keywords internal
 #' @export
 print.psu_utility <- function(x, ...) {
@@ -124,16 +136,43 @@ print.psu_utility <- function(x, ...) {
   invisible(x)
 }
 
-#' Print personnel-selection utility objects
+#' @rdname print.psu_utility
+#' @export
+print.psu_tr <- print.psu_utility
+
+#' @rdname print.psu_utility
+#' @export
+print.psu_bcg <- print.psu_utility
+
+#' @rdname print.psu_utility
+#' @export
+print.psu_ns <- print.psu_utility
+
+#' @rdname print.psu_utility
+#' @export
+print.psu_shp <- print.psu_utility
+
+#' @rdname print.psu_utility
+#' @export
+print.psu_boudreau <- print.psu_utility
+
+#' @rdname print.psu_utility
+#' @export
+print.psu_incremental_validity <- print.psu_utility
+
+#' @rdname print.psu_utility
+#' @export
+print.psu_monte_carlo <- print.psu_utility
+
+#' Print personnel-selection model comparison objects
 #'
-#' Formats and prints utility-analysis result objects of class
-#' `psu_utility` and its subclasses (e.g., `psu_tr`, `psu_bcg`, `psu_ns`,
-#' `psu_shp`, `psu_boudreau`, `psu_incremental_validity`,
-#' `psu_monte_carlo`). Provides a concise textual summary of the computed
-#' quantities.
+#' Formats and prints model-comparison result objects of class
+#' `psu_comparison`. Displays the top-level scalar quantities and, when
+#' present, the per-subsystem summaries (compensatory and
+#' multiple-hurdle).
 #'
-#' @param x An object returned by one of the package's main analysis
-#'   functions, with class `psu_utility` or a subclass thereof.
+#' @param x An object of class `psu_comparison`, typically returned by
+#'   `compare_selection_systems()` or related functions.
 #' @param ... Currently ignored; reserved for compatibility with the
 #'   `print()` generic.
 #'

@@ -1,17 +1,22 @@
-## Resubmission
+## Resubmission (second)
 
-This is a resubmission of personnelSelectionUtility (version 1.0.1)
-addressing the comments from the CRAN review of version 1.0.0
-(Benjamin Altmann, May 2026):
+This is a second resubmission of personnelSelectionUtility (version 1.0.2)
+addressing the comment from the CRAN review of version 1.0.1 (Benjamin
+Altmann, May 12, 2026):
 
-* Added DOI references in the Description field of DESCRIPTION using the
-  format `Authors (Year) <doi:...>` for Taylor and Russell (1939),
-  Brogden (1949), Schmidt et al. (1979), Sturman (2001), Thomas et al.
-  (1977), Ock and Oswald (2018), and Salgado (2018).
-* Added explicit `\value{}` documentation to `print.psu_utility()`,
-  clarifying that it is called for side effects (prints to console) and
-  returns the input invisibly.
-
+* Added explicit `\value{}` documentation to the `print.psu_utility()`
+  S3 method documentation, following the CRAN cookbook recommendation
+  to add the `@return` tag in the corresponding `.R` file and
+  re-roxygenize. The previous resubmission (1.0.1) included the fix
+  for the related `print.psu_comparison` method but, due to an
+  editing error, the roxygen block intended for `print.psu_utility`
+  was placed above `print.psu_comparison` instead. The fix is now
+  applied to `print.psu_utility` and all its subclass aliases
+  (`print.psu_tr`, `print.psu_bcg`, `print.psu_ns`, `print.psu_shp`,
+  `print.psu_boudreau`, `print.psu_incremental_validity`,
+  `print.psu_monte_carlo`, `print.psu_sturman`), which are now all
+  documented under the same `.Rd` via `@rdname`.
+  
 ## Test environments
 
 * Local: Windows 11, R 4.6.0 — 0 errors, 0 warnings, 0 notes

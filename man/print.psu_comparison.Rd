@@ -2,13 +2,13 @@
 % Please edit documentation in R/utils-validation.R
 \name{print.psu_comparison}
 \alias{print.psu_comparison}
-\title{Print personnel-selection utility objects}
+\title{Print personnel-selection model comparison objects}
 \usage{
 \method{print}{psu_comparison}(x, ...)
 }
 \arguments{
-\item{x}{An object returned by one of the package's main analysis
-functions, with class \code{psu_utility} or a subclass thereof.}
+\item{x}{An object of class \code{psu_comparison}, typically returned by
+\code{compare_selection_systems()} or related functions.}
 
 \item{...}{Currently ignored; reserved for compatibility with the
 \code{print()} generic.}
@@ -18,10 +18,9 @@ No return value, called for side effects (prints a formatted
 summary to the console). The input object \code{x} is returned invisibly.
 }
 \description{
-Formats and prints utility-analysis result objects of class
-\code{psu_utility} and its subclasses (e.g., \code{psu_tr}, \code{psu_bcg}, \code{psu_ns},
-\code{psu_shp}, \code{psu_boudreau}, \code{psu_incremental_validity},
-\code{psu_monte_carlo}). Provides a concise textual summary of the computed
-quantities.
+Formats and prints model-comparison result objects of class
+\code{psu_comparison}. Displays the top-level scalar quantities and, when
+present, the per-subsystem summaries (compensatory and
+multiple-hurdle).
 }
 \keyword{internal}

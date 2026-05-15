@@ -1,3 +1,13 @@
+# personnelSelectionUtility 1.0.2
+
+## Second CRAN review resubmission
+
+* Added explicit `\value{}` documentation for the `print.psu_utility()`
+  S3 method (and its subclass aliases including `print.psu_sturman()`
+  and `print.psu_comparison()`), following the CRAN reviewer's request.
+  The previous resubmission missed the value tag in the regenerated Rd
+  file due to a stale roxygen block; this has been corrected.
+  
 # personnelSelectionUtility 1.0.1
 
 ## CRAN review resubmission

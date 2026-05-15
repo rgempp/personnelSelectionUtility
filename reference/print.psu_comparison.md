@@ -1,10 +1,8 @@
-# Print personnel-selection utility objects
+# Print personnel-selection model comparison objects
 
-Formats and prints utility-analysis result objects of class
-`psu_utility` and its subclasses (e.g., `psu_tr`, `psu_bcg`, `psu_ns`,
-`psu_shp`, `psu_boudreau`, `psu_incremental_validity`,
-`psu_monte_carlo`). Provides a concise textual summary of the computed
-quantities.
+Formats and prints model-comparison result objects of class
+`psu_comparison`. Displays the top-level scalar quantities and, when
+present, the per-subsystem summaries (compensatory and multiple-hurdle).
 
 ## Usage
 
@@ -17,8 +15,9 @@ print(x, ...)
 
 - x:
 
-  An object returned by one of the package's main analysis functions,
-  with class `psu_utility` or a subclass thereof.
+  An object of class `psu_comparison`, typically returned by
+  [`compare_selection_systems()`](https://rgempp.github.io/personnelSelectionUtility/reference/compare_selection_systems.md)
+  or related functions.
 
 - ...:
 

@@ -8,7 +8,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/rgempp/personnelSelectionUtility/blob/master/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/rgempp/personnelSelectionUtility/blob/v1.0.2/DESCRIPTION)
 
 Gempp R (2026). *personnelSelectionUtility: Utility Analysis Methods for
 Personnel Selection*. R package version 1.0.2,

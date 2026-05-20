@@ -2,6 +2,8 @@
 
 ## personnelSelectionUtility 1.0.2
 
+CRAN release: 2026-05-20
+
 ### Second CRAN review resubmission
 
 - Added explicit `\value{}` documentation for the
